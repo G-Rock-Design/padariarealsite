@@ -127,7 +127,12 @@
         /* Utility Classes */
         .text-transparent-outline {
             color: transparent;
-            -webkit-text-stroke: 1px var(--real-brown-dark);
+            -webkit-text-stroke: 1px var(--real-white);
+        }
+        @media (min-width: 1024px) {
+            .text-transparent-outline {
+                -webkit-text-stroke: 1px var(--real-brown-dark);
+            }
         }
         .glass-dark {
             background: rgba(61, 35, 23, 0.9);
@@ -273,28 +278,36 @@
 
     <!-- 1ª Dobra - Hero -->
     <section id="hero" class="relative h-[100vh] min-h-[600px] max-h-[850px] pt-20 pb-8 flex items-center overflow-hidden">
+        <!-- Mobile Background -->
+        <div class="absolute inset-0 z-0 lg:hidden">
+            <img src="ref/Captura%20de%20tela%202026-09-15%20211330.png" class="w-full h-full object-cover">
+            <!-- Overlay escuro -->
+            <div class="absolute inset-0 bg-brand-900/85 mix-blend-multiply"></div>
+            <div class="absolute inset-0 bg-brand-900/60"></div>
+        </div>
+
         <!-- Blobs decorativos sutis -->
-        <div class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-brand-200/40 rounded-full blur-[100px] -z-10 translate-x-1/3 -translate-y-1/3"></div>
-        <div class="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-brand-300/20 rounded-full blur-[80px] -z-10 -translate-x-1/3 translate-y-1/3"></div>
+        <div class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-brand-200/40 rounded-full blur-[100px] -z-10 translate-x-1/3 -translate-y-1/3 hidden lg:block"></div>
+        <div class="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-brand-300/20 rounded-full blur-[80px] -z-10 -translate-x-1/3 translate-y-1/3 hidden lg:block"></div>
 
         <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full grid lg:grid-cols-2 gap-12 items-center">
             
             <!-- Left: Typography -->
             <div class="relative z-10 hero-reveal-left">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-400/50 bg-white/50 text-brand-900 text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-6">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-400/50 bg-white/10 lg:bg-white/50 text-white lg:text-brand-900 text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
                     <iconify-icon icon="lucide:crown" class="text-brand-400"></iconify-icon>
                     Padaria • Confeitaria • Restaurante
                 </div>
                 
-                <h1 class="text-4xl md:text-6xl lg:text-[4.5rem] leading-[1.05] font-display text-brand-900 mb-4">
+                <h1 class="text-4xl md:text-6xl lg:text-[4.5rem] leading-[1.05] font-display text-white lg:text-brand-900 mb-4">
                     POR UMA VIDA <br>
                     <span class="text-transparent-outline block mt-1 italic pr-2">MAIS</span>
                     <span class="text-brand-400 block mt-1">SABOROSA.</span>
                 </h1>
 
-                <p class="text-lg textBase font-body mb-2 italic font-medium">Bonito é ser Real.</p>
+                <p class="text-lg text-brand-200 lg:text-brand-900 font-body mb-2 italic font-medium">Bonito é ser Real.</p>
                 
-                <p class="textBase font-body max-w-md mb-6 leading-relaxed opacity-90 text-sm md:text-base">
+                <p class="text-brand-50 lg:text-brand-900 font-body max-w-md mb-6 leading-relaxed opacity-90 text-sm md:text-base">
                     Do pão quentinho ao almoço, dos doces às comemorações: sabores preparados para acompanhar todos os momentos do seu dia.
                 </p>
 
@@ -309,7 +322,7 @@
                     </a>
                 </div>
                 
-                <p class="text-xs text-brand-700 font-semibold tracking-wide uppercase opacity-80">
+                <p class="text-xs text-brand-300 lg:text-brand-700 font-semibold tracking-wide uppercase opacity-80">
                     Café da manhã • Almoço • Encomendas • Delivery
                 </p>
             </div>
