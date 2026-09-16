@@ -1,0 +1,915 @@
+@charset "utf-8";
+
+/* Corpo do editor TinyMCE (".tinymce-editor-body", ver body_class em admin/assets/js/admin.js) -
+antes tinha as classes "section section--custom-01" do tema, que trazem 70px de padding em cima/
+baixo (pensado para uma seccao de pagina inteira, nao uma caixa de edicao de 320px de altura - dava
+um vazio enorme antes do texto sequer comecar) e 0px nos lados (no site publico o espacamento
+lateral vem do ".container"/".row"/".col-*" a volta, que o editor nao tem - texto ficava colado a
+borda) - sem trazer mais nada de util (fundo/cor/tipo de letra ja vem de outro lado). Um padding
+proprio, pensado para uma caixa de edicao pequena, resolve os dois problemas (Pedro, 2026-08-28:
+"espaço vazio em cima. texto colado a esquerda."). ".rich-content" (tipografia de ul/li/p) continua
+uma classe a parte - sao duas preocupacoes diferentes. */
+.tinymce-editor-body {
+	padding: 20px 24px;
+}
+
+/* Select "placeholder" (ex: "Escolher loja *", "Selecione o motivo *" - render_bloco_formulario /
+render_bloco_formulario_denuncia em blocos.php): um <select> nativo nao tem ::placeholder como os
+<input>/<textarea> (form .textfield::-webkit-input-placeholder, critical.min.css, cor #ccc) - por
+isso a opcao vazia aparecia com a cor de texto normal do campo (#666, mais escura), destacando-se
+das outras legendas mais claras ao lado (Pedro, 2026-08-27). A classe ".has-value" (js/jactions.js,
+alternada no load e no "change") replica o mesmo contraste: cinza claro enquanto nada esta
+escolhido, cor normal assim que o utilizador escolhe uma opcao real. */
+select.textfield {
+	color: #ccc;
+}
+select.textfield.has-value {
+	color: #666;
+}
+
+/* Menu mobile: o overlay (".top-bar.is-expanded .top-bar__inner", position:fixed a ecra inteiro)
+herdava o z-index:5 do ".top-bar" - o botao flutuante do WhatsApp (z-index:1000, position:fixed,
+fora do #top-bar) ficava por cima do menu aberto em vez de ficar escondido por baixo. Cada item do
+menu tambem so tinha a largura do proprio texto (~35% do ecra) - aqui passa a ocupar a largura toda
+ate 80%, e o logo fica escondido enquanto o menu esta aberto (so os itens interessam nesse estado). */
+@media (max-width: 991.98px) {
+	.top-bar.is-expanded {
+		z-index: 1100;
+	}
+	.top-bar.is-expanded .top-bar__logo {
+		display: none;
+	}
+	/* O tema centra verticalmente o conteudo do menu mobile com um truque antigo (".top-bar__inner:before"
+	com height:100% + inline-block + vertical-align:middle no proprio conteudo) - isto so funciona
+	enquanto o conteudo tambem for inline-block. Quando o tornamos "display:block" (linha abaixo, preciso
+	para a largura em % dos itens funcionar - ver #top-bar__navigation li), deixa de ficar "ao lado" do
+	":before" na mesma linha e o browser empurra-o para depois de toda a altura do ":before" (quase o
+	fundo do ecrã) - foi exatamente o bug reportado ("é preciso descer a página para ver o menu").
+	Troca-se o truque antigo por flexbox, que centra verticalmente sem depender do filho ser inline. */
+	.top-bar.is-expanded .top-bar__inner {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		/* align-items fica no valor por omissão (stretch) de propósito: os itens do menu (li, largura
+		em %) precisam que este container ocupe a largura toda - "center" encolhia-o ao conteúdo. */
+	}
+	.top-bar.is-expanded .top-bar__inner:before {
+		display: none;
+	}
+	.top-bar.is-expanded .top-bar__inner > div:first-child {
+		display: block;
+	}
+	#top-bar__navigation {
+		display: block;
+		width: 100%;
+	}
+	/* !important porque o critical.min.css tem "li:first-child{margin-left:0!important}" (herdado
+	do menu desktop, onde faz sentido) - sem isto o 1o item do menu ficava encostado a esquerda em
+	vez de centrado como os restantes. */
+	#top-bar__navigation li {
+		width: 100%;
+		max-width: 80%;
+		margin-left: auto !important;
+		margin-right: auto;
+		/* O indicador ativo (".navigation li a:after" em critical.min.css) fica a "top:140%" do link -
+		pensado para tabs horizontais lado a lado, onde nao ha nada por baixo. Nesta lista vertical do
+		menu mobile, sem espaço extra, essa barra ficava quase em cima do item seguinte (mesma correção
+		já feita para a lista de Lojas do rodapé, mais abaixo neste ficheiro). */
+		margin-bottom: 14px;
+	}
+	#top-bar__navigation li a {
+		display: block;
+		width: 100%;
+	}
+}
+
+/* O hero (".start-screen", pagina Home) usa sempre 75vh (critical.min.css, sem media query) - pensado
+para ecrãs largos com uma imagem de fundo real. Em telemóvel isso deixava um vazio enorme por baixo do
+título/subtítulo (sem imagem, só a cor de fundo), empurrando a galeria de fotos bem mais para baixo do
+que precisava. */
+@media (max-width: 767.98px) {
+	.start-screen {
+		/* 50vh (ver nota acima) acabou por ficar demasiado curto - o titulo passava a aparecer
+		"colado" a galeria de fotos logo a seguir. 60vh fica a meio caminho entre os dois extremos. */
+		height: 60vh;
+	}
+	/* O titulo (".start-screen__content__item" tem "align-items:center") ficava perfeitamente
+	centrado na vertical - pedido para descer ligeiramente: mais respiração entre o logo/topbar e o
+	titulo, menos respiração entre o titulo e a galeria de fotos logo a seguir. Um margin-top no
+	".container" interno desloca o bloco centrado para baixo (tira espaço a meio, nao ao ecra todo). */
+	.start-screen__content__item .container {
+		margin-top: 20px;
+	}
+}
+
+/* H1 da home (".start-screen--style-2 .__title"): o tema fixa 8rem (80px, root font-size=10px)
+para qualquer ecrã <576px, sem mais nenhuma quebra abaixo disso. Num iPhone (viewport ~390-430px)
+cabe bem, mas num Android mais estreito (ex: Samsung S25 base, ~360px) ou com o tamanho de letra do
+sistema aumentado (comum em Android, "Definições > Ecrã > Tamanho do texto"), a mesma largura fixa em
+rem já não cabe e o título fica cortado (Pedro, 2026-08-27). clamp() com vw torna o tamanho
+proporcional à largura real do ecrã (imune ao tamanho de letra do sistema, ao contrário de rem) -
+adapta-se continuamente a qualquer telemóvel em vez de saltar entre 2-3 tamanhos fixos. Acima de
+~444px o clamp já atinge o teto de 8rem, ficando idêntico ao valor original do tema nesse ponto. */
+@media (max-width: 575.98px) {
+	.start-screen--style-2 .start-screen__content-container .__title {
+		font-size: clamp(4.8rem, 18vw, 8rem);
+		overflow-wrap: break-word;
+	}
+}
+
+/* Rodapé: lista de Lojas fica vertical (uma loja por linha) em vez do padrao horizontal tipo
+"tabs" que ".navigation li" usa no resto do site (menu do topo, etc.) - so a partir do momento em
+que a lista de lojas ficou no rodape junto ao logo/redes sociais, precisa de ler bem numa coluna
+estreita, em vez de ocupar a largura toda como texto corrido. O seletor repete ".footer--style-3"
+(classe do próprio <footer>) para igualar a especificidade da regra equivalente em style.min.css
+("display:inline") - mas style.min.css carrega DEPOIS deste ficheiro (default.css) no <head>, por
+isso com especificidade igual ganhava sempre a deles; so o !important desempata a nosso favor. */
+.footer--style-3 #footer__navigation li {
+	display: block !important;
+	/* O indicador ativo (".navigation li a:after" em critical.min.css) fica a "top:140%" do link -
+	pensado para tabs horizontais lado a lado, onde nao ha nada por baixo. Em lista vertical, sem
+	espaço extra, essa barra ficava sobreposta ao item seguinte ("esconde a linha inferior"). */
+	margin-bottom: 14px;
+}
+
+/* Rodapé: os 6 blocos (Lojas, Logo, Segue-nos+Idioma, Endereço, Legais, Financiamento) + o
+divisor vivem todos no mesmo ".row" (flex, ver critical.min.css) - a ordem visual muda por
+breakpoint via "order", sem duplicar markup. Desktop: 2 linhas de 3 (Lojas|Logo|Segue-nos+Idioma,
+depois Endereço|Legais|Financiamento). Mobile: Lojas, Endereço, Segue-nos+Idioma, Legais,
+Financiamento - o Logo e o divisor ficam escondidos (já aparece no topo da página; o divisor não
+faz sentido visual quando os dois "grupos" ficam intercalados). */
+.footer-block--lojas { order: 1; }
+.footer-block--logo { order: 2; }
+.footer-block--social-lang { order: 3; }
+.footer-block--divider { order: 4; }
+.footer-block--address { order: 5; }
+.footer-block--legal { order: 6; }
+.footer-block--financing { order: 7; }
+
+@media (max-width: 767px) {
+	.footer-block--lojas { order: 1; }
+	.footer-block--address { order: 2; }
+	.footer-block--social-lang { order: 3; }
+	.footer-block--legal { order: 4; }
+	.footer-block--financing { order: 5; }
+	.footer-block--logo,
+	.footer-block--divider {
+		display: none;
+	}
+}
+
+.footer__label {
+	display: block;
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: .06em;
+	color: #8a8a8a;
+	margin-bottom: 8px;
+}
+
+.footer__label--normal {
+	text-transform: none;
+}
+
+/* Segue-nos em / Idioma / Também disponível em (rodape) - espacamento mais apertado que o resto do
+   rodape (que usa .footer__item{margin-bottom:40px} por omissao), pedido do Pedro apos o bloco
+   "Também disponível em" ter ficado com demasiado espaco em branco a volta (2026-08-28). */
+#footer .footer-block--social-lang .footer__item {
+	margin-bottom: 15px;
+}
+#footer .footer-block--social-lang .footer__item:last-child {
+	margin-bottom: 0;
+}
+.footer-block--social-lang .footer__item .footer__label {
+	margin-bottom: 4px;
+}
+#footer .footer-block--social-lang .footer__item .__copy {
+	font-size: 13px;
+}
+
+/* Rodape (Pedro, 2026-08-28): tudo a 13px - o bloco de morada (address) herdava o tamanho base do
+   body (14px), diferente do resto do rodape. */
+#footer .footer-block--address {
+	font-size: 13px;
+}
+
+.lang-switch a {
+	display: inline-block;
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: .03em;
+	padding: 6px 16px;
+	margin-right: 8px;
+	border: 1.5px solid rgba(255,255,255,.3);
+	border-radius: 4px;
+	color: #ccc;
+	text-decoration: none !important;
+	transition: none;
+}
+.lang-switch a:last-child { margin-right: 0; }
+.lang-switch a.active {
+	background: #A46310;
+	border-color: #A46310;
+	color: #fff !important;
+}
+.lang-switch a:hover {
+	border-color: #A46310;
+	color: #fff !important;
+}
+
+.footer-divider {
+	border: none;
+	border-top: 1px solid rgba(255,255,255,.1);
+	margin: 24px 0;
+}
+
+#footer__navigation.toggle-address ul li.active > a,
+#footer__navigation.toggle-address ul li.active a {
+	color: #fff;
+	font-weight: 700;
+}
+
+#footer address {
+	margin-top: 12px;
+}
+
+.player-banner {
+	position: relative;
+	width: 100%;
+	height: 650px;
+	overflow: hidden;
+}
+@media (max-width: 768px) {
+	.player-banner {
+		height: 300px;
+	}
+	.homepage .top-bar__logo {
+		margin-left: 50% !important;
+		transform:translate(-45%,0);
+	}
+}
+
+.player-banner video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center center;
+}
+
+.player-banner iframe {
+	width: 100vw;
+	height: 56.25vw;
+	min-height: 100vh;
+	min-width: 177.77vh;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* Legenda opcional sobre o bloco de Vídeo (título/subtítulo do bloco).
+Sombra de texto em vez de fundo sólido para não tapar o vídeo por baixo. */
+.player-banner__caption {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	text-align: center;
+	color: #fff;
+	width: 90%;
+	max-width: 800px;
+	text-shadow: 0 2px 12px rgba(0, 0, 0, .6);
+	pointer-events: none;
+}
+/* Alinhamento da legenda e' uma definicao do bloco ($dados['alinhamento']) - por defeito mantem-se
+centrada (regra acima), estas duas so entram quando "esquerda"/"direita" e escolhido explicitamente
+no admin. */
+.player-banner__caption--left {
+	left: 5%;
+	transform: translateY(-50%);
+	text-align: left;
+}
+.player-banner__caption--right {
+	left: auto;
+	right: 5%;
+	transform: translateY(-50%);
+	text-align: right;
+}
+.player-banner__caption .__title {
+	color: #fff;
+	margin-bottom: 10px;
+}
+.player-banner__caption p {
+	font-size: 1.6rem;
+	margin: 0;
+}
+
+/* O tema limita ".products-list .__content" a max-width:470px (pensado para texto de descrição de
+produto) - nesta reutilização (mapa de cada loja, em Contactos) isso deixava o mapa (100% do seu pai)
+bem mais estreito do que a foto ao lado, que não tem essa limitação. Sem efeito no resto do site -
+".products-list" só é usado aqui (embed_lojas, blocos.php). O !important é preciso porque
+style.min.css carrega DEPOIS deste ficheiro e tem a mesma especificidade (ver nota equivalente mais
+acima, sobre o footer). */
+.products-list .__content {
+	max-width: none !important;
+	/* O tema também dá margin-left:10%/15% às linhas ímpares (".__item:nth-of-type(2n+1) .__content")
+	e margin-right:10%/15% às pares (".__item:nth-of-type(2n) .__content"), consoante o ecrã - pensado
+	para a grelha original de produtos, aqui desalinhava o texto da coluna (col-lg-5) e do espaçador
+	ao lado da foto. Os dois lados têm de ser zerados, não só o que a linha em causa usa. */
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+.js-map {
+	width: 100%;
+	height: 200px;
+}
+/* Mais espaço entre cada loja (Porto (Baixa), Porto (Foz), ...) - o tema só dava 30px de
+margin-top a cada uma. A partir da 2ª loja o espaçamento já vem do ".products-list__divisor" abaixo
+(40px de cada lado da linha), por isso aqui só a primeira precisa de margem própria. */
+.products-list .__item:first-child {
+	margin-top: 30px !important;
+}
+/* Da 2ª loja em diante o espaçamento vem só do ".products-list__divisor" (40px de cada lado) - sem
+isto, o margin-top:30px por omissão do tema "ganhava" ao colapsar com a margem do divisor (o maior
+dos dois vence, nunca somam), e o espaço abaixo da linha ficava 30px em vez do valor do divisor. */
+.products-list .__item:not(:first-child) {
+	margin-top: 0 !important;
+}
+/* Linha muito clara a separar cada loja - à largura do conteúdo (".container", ver blocos.php), não
+à largura toda do ".container-fluid" onde o resto do bloco vive. 40px de respiração de cada lado
+(subido de 20px - lojas ficavam demasiado coladas umas às outras). */
+.products-list__divisor {
+	margin: 40px 0;
+	border: 0;
+	border-top: 1px solid #eee;
+}
+/* Linhas pares (2ª loja, 4ª, ...) em zig-zag: foto e texto trocam de lado, e o texto alinha para o
+lado da foto (direita) - nas ímpares o texto já fica à esquerda, por ser o lado da foto aí. */
+@media (min-width: 992px) {
+	.products-list .__item--reverse .row {
+		flex-direction: row-reverse;
+	}
+	.products-list .__item--reverse .__content {
+		text-align: right;
+	}
+}
+/* O tema recorta a foto num quadrado (".__image{padding-top:100%}", altura = largura, imagem
+posicionada em absoluto por cima) - aqui a foto fica maior e à largura natural, sem recorte forçado. */
+.products-list .__image {
+	position: static;
+	width: 100%;
+	height: auto;
+	padding-top: 0;
+}
+.products-list .__image img {
+	position: static;
+	width: 100%;
+	height: auto;
+	max-height: none;
+	object-fit: cover;
+}
+
+.text-color-primary {
+	color: #A46310;
+}
+
+.text-color-white {
+	color: #fff;
+}
+
+.gallery .__content .icon-kg {
+	position: absolute;
+	top: 18px;
+	left: 100%;
+	height: 50px;
+	width: auto; 
+	margin-left: -50px;
+}
+
+.gallery .__content i {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	font-size: 3em;
+	color:#fff;
+	opacity:.8;
+	transform:translate(-50%,-50%);
+}
+
+.slick-arrow {
+	position: absolute;
+	top: 50%;
+	background: rgba(30,30,30,.6);
+	color: rgba(255,255,255,.7);
+	padding: 5px 8px;
+	font-size: 16px;
+	transition: all .3s;
+	transform:translateY(-50%);
+}
+
+.slick-arrow:hover {
+	color: rgba(255,255,255,1);
+}
+
+.slick-prev {
+	left: 30px;
+}
+
+.slick-next {
+	right: 30px;
+}
+
+/* Galeria de fotos do Catering (".js-slick", unico slider sem sufixo -2/-3 - ver blocos.php): as
+setas ficavam a 30px DENTRO do bloco de imagens (regra generica acima), sobrepostas ao rebordo da
+1a/ultima foto. So aqui empurramos para fora, para o espaço em branco a volta do bloco - so a partir
+de ecrãs largos, onde esse espaço existe mesmo (em mobile/tablet o .container ocupa quase tudo, por
+isso mantem-se o comportamento por defeito para as setas nao saírem da pagina). */
+@media (min-width: 992px) {
+	.js-slick .slick-prev { left: -50px; }
+	.js-slick .slick-next { right: -50px; }
+}
+@media (min-width: 1300px) {
+	.js-slick .slick-prev { left: -70px; }
+	.js-slick .slick-next { right: -70px; }
+}
+
+.slim {
+	min-height: 175px !important;
+	padding: 0 !important;
+}
+
+.fancybox-caption p {
+	color: #999;
+	padding: 0 25%;
+}
+
+.fancybox-caption img {
+	margin: 25px 12px 0 12px;
+	vertical-align: baseline;
+	opacity: .4;
+}
+
+.fancybox-caption img.active {
+	opacity: 1;
+}
+
+.apo-checkbox {
+	/* Era "inline-block" - margin:auto só centra elementos "block" (num inline-block, quem centra é o
+	text-align do pai, que aqui não ajudava porque o próprio label tem width:100%). Trocado para "block"
+	precisamente para o max-width + margin:auto abaixo funcionar. Não afeta o "position:absolute" do
+	checkmark lá dentro, que é sempre relativo à própria caixa do label, não ao facto de ser inline ou não. */
+    display: block;
+    position: relative;
+	width: 100%;
+    padding-left: 25px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	font-size: 10px;
+	font-weight: 400;
+	letter-spacing: .5px;
+	line-height: 18px;
+	text-transform: uppercase;
+	margin-top: 15px;
+	/* Antes disto, centrar dependia de offset-2/offset-md-4 na coluna do formulário (blocos.php) - só
+	calhava certo num intervalo estreito de larguras de ecrã (o texto muda de tamanho em cada
+	idioma/breakpoint), ficando visivelmente descentrado no resto. Com max-width + margin:auto aqui,
+	fica sempre centrado, seja qual for o comprimento do texto. */
+	max-width: 460px;
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+.apo-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #eee;
+}
+
+.apo-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.apo-checkbox input:checked ~ .checkmark {
+    background-color: #A46310;;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.apo-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.apo-checkbox .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+h2 {
+	font-weight: 100;
+}
+
+h2 b, h2 strong {
+	font-weight: 900;
+}
+
+.hidden {
+	display: none;
+}
+
+.fpreloader, .form-result {
+	margin: 15px 0 -20px 0;
+}
+
+.plugin-whatsapp {
+	position: fixed;
+	width: 60px;
+	height: 60px;
+	bottom: 95px;
+	right: 25px;
+	background-color: #25d366;
+	color: #fff;
+	border-radius: 50px;
+	border: none;
+	text-align: center;
+	font-size: 40px;
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 12px 0px;
+	z-index: 1000;
+}
+
+.plugin-whatsapp:hover, .plugin-whatsapp:focus {
+	color: #fff;
+}
+
+.plugin-whatsapp i {
+	margin-top: 10px;
+	display: block;
+}
+
+.gallery--style-3 .__inner, .gallery--style-3 .__item {
+	margin-bottom: -6px !important;
+}
+
+.js-slick .slick-slide {
+    margin: 0 10px;
+}
+
+.js-slick .slick-list {
+    margin: 0 -10px;
+}
+
+/* Filtro de categorias dos Produtos: mesma aparencia que o vendor dava a #gallery-set (ver
+style.min.css), mas com id proprio - o vendor tem um handler JS ligado ao id "gallery-set" que
+colide com o filtro real (ver jactions.js), por isso a marcacao passou a usar "produtos-filtro". */
+#produtos-filtro {
+	line-height: 0;
+	font-size: 0;
+	letter-spacing: -1px;
+	margin-left: -10px;
+	margin-bottom: 35px;
+}
+#produtos-filtro a,
+#produtos-filtro li {
+	display: inline-block;
+	vertical-align: top;
+}
+#produtos-filtro li {
+	margin-left: 10px;
+	margin-bottom: 10px;
+	line-height: 1;
+}
+#produtos-filtro a {
+	padding: 5px;
+	font-size: 1.4rem;
+	font-weight: 700;
+	font-family: Raleway, sans-serif;
+	text-decoration: none;
+	letter-spacing: 0;
+	color: #b3b3b3;
+	cursor: pointer;
+}
+#produtos-filtro a.selected,
+#produtos-filtro a:hover {
+	color: #333;
+}
+
+@media (max-width: 768px) {
+	.product-promo .__title {
+		font-size: 1.9rem !important;
+	}
+}
+
+/* Cabeçalho de página (#hero, pagina.php): título passa a ficar sempre no estilo "negrito grande"
+que antes só se aplicava à parte do texto dentro de <strong> - o subtítulo (h2 .__subtitle) passa a
+usar o estilo que o título tinha antes disso, criando dois níveis (título grande+negrito, subtítulo
+grande+fino), em vez de depender de o admin lembrar-se de marcar parte do título a negrito. */
+#hero .__title {
+	font-size: 6rem;
+	font-weight: 900;
+	/* Subtítulo vem por omissão do tema com 20px de intervalo em relação ao título (margin-bottom em
+	h1) - aproximados, mantendo alguma respiração mínima. */
+	margin-bottom: 0.3rem;
+	/* Rede de segurança: uma única palavra comprida (ex: "Privacidade") em maiúsculas não tem onde
+	quebrar sozinha num ecrã estreito - sem isto, o texto simplesmente ultrapassava a largura do ecrã
+	em vez de passar à linha seguinte. Continua útil mesmo com a redução de tamanho abaixo (media
+	query) - protege qualquer título que ainda assim não caiba numa única linha. */
+	overflow-wrap: break-word;
+}
+#hero .__subtitle {
+	line-height: 1.1;
+	color: inherit;
+	font-weight: 100;
+	font-size: 4rem;
+	/* h2 vem por omissão do tema com margem em cima e em baixo (20px cada) - aqui não faz sentido,
+	a caixa ficava maior do que o texto que lá está. */
+	margin: 0;
+}
+@media (max-width: 767.98px) {
+	/* 6rem/4rem (pensados para desktop) faziam títulos de uma só palavra (ex: "CONTACTOS") partir
+	para 2 linhas num ecrã de telemóvel, mesmo com o overflow-wrap acima. Reduzidos para caberem
+	numa única linha na generalidade dos títulos existentes; o subtítulo desce na mesma proporção. */
+	#hero .__title {
+		font-size: 4rem;
+	}
+	#hero .__subtitle {
+		font-size: 2.5rem;
+	}
+}
+/* O texto de introdução (intro) do cabeçalho de página colava-se diretamente ao
+título/subtítulo (margens todas a 0 por omissão do tema dentro de #hero) - !important porque
+style.min.css carrega depois de default.css e tem uma regra "#hero p" à mesma especificidade. */
+#hero p {
+	margin-top: 1.75rem !important;
+}
+
+/* Cabeçalho (menu Template > Cabeçalho): alinhamento do logo e do menu, só em desktop - em
+mobile o menu vira sempre um overlay a ecrã inteiro (ver regras acima), onde "alinhamento" não se
+aplica. Por omissão (sem classe extra) o comportamento é o de sempre: logo à esquerda, menu à direita. */
+@media (min-width: 992px) {
+	.top-bar--logo-direita .row.justify-content-between {
+		flex-direction: row-reverse;
+	}
+	.top-bar--logo-centro .row.justify-content-between {
+		justify-content: center !important;
+		gap: 50px;
+	}
+	.top-bar--menu-esquerda #top-bar__inner {
+		flex-grow: 0;
+	}
+	.top-bar--menu-esquerda .top-bar__navigation {
+		margin-left: 40px;
+	}
+}
+
+/* Seletor de data (flatpickr, js/vendor/flatpickr/) nos formulários de recolha/evento - a biblioteca
+vem com o seu próprio visual por omissão, isto só o aproxima do resto do site (cor de destaque, tipo
+de letra, cantos arredondados a condizer com os outros campos ".textfield"). */
+.flatpickr-calendar {
+	font-family: Raleway, sans-serif;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+	border-radius: 4px;
+}
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover,
+.flatpickr-day.selected:focus {
+	background: #A46310;
+	border-color: #A46310;
+}
+.flatpickr-day.today {
+	border-color: #A46310;
+}
+.flatpickr-day.today:hover,
+.flatpickr-day.today:focus {
+	background: #A46310;
+	border-color: #A46310;
+	color: #fff;
+}
+.flatpickr-day:hover {
+	background: rgba(164, 99, 16, .12);
+}
+.flatpickr-months .flatpickr-month,
+.flatpickr-current-month .flatpickr-monthDropdown-months,
+span.flatpickr-weekday {
+	color: #333;
+}
+.flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-months .flatpickr-next-month:hover svg {
+	fill: #A46310;
+}
+
+/* Botão "Estilo 1" (contorno, fundo transparente) - ao passar o rato o tema preenche o fundo a laranja
+mas nunca troca a cor do texto (fica sempre #4f4a37, o cinza-acastanhado escuro da base), pouco legível
+sobre o laranja sólido. */
+.custom-btn.custom-btn--style-1:hover,
+.custom-btn.custom-btn--style-1:focus {
+	color: #fff !important;
+}
+
+/* Texto rico vindo do TinyMCE (".rich-content" - render_bloco_texto/parallax em blocos.php,
+descricao de oportunidade.php): o tema nunca estilizou p/ul/ol/li dentro de conteudo administrado -
+paragrafos alinhados a esquerda em vez de "texto corrido" (justificado), e listas sem marcador nem
+indentacao nenhuma (list-style/padding vinham a 0 de um reset global), tudo colado uns aos outros
+sem respiração (Pedro, 2026-08-27: "não tem design para ul. li... texto aparece todo encostado").
+Usado em varios sitios (Termos, Privacidade, banner com texto, ficha de Oportunidade) - por isso e'
+uma classe partilhada em vez de repetir estas regras em cada bloco. */
+.rich-content p {
+	text-align: justify;
+	line-height: 1.8;
+	margin-bottom: 20px;
+}
+.rich-content p:last-child {
+	margin-bottom: 0;
+}
+.rich-content ul,
+.rich-content ol {
+	margin: 0 0 20px;
+	padding-left: 22px;
+}
+.rich-content ul {
+	list-style: disc;
+}
+.rich-content ol {
+	list-style: decimal;
+}
+.rich-content li {
+	margin-bottom: 8px;
+	line-height: 1.7;
+	text-align: justify;
+}
+.rich-content li:last-child {
+	margin-bottom: 0;
+}
+.rich-content li > ul,
+.rich-content li > ol {
+	margin-top: 8px;
+	margin-bottom: 0;
+}
+.rich-content h1, .rich-content h2, .rich-content h3,
+.rich-content h4, .rich-content h5, .rich-content h6 {
+	margin: 30px 0 15px;
+}
+.rich-content > *:first-child {
+	margin-top: 0;
+}
+.rich-content a {
+	color: #A46310;
+	text-decoration: underline;
+}
+
+/* Oportunidades (listagem, embed_oportunidades em blocos.php): as ofertas nao tem imagem, por isso
+o card generico ".posts--style-1" (pensado para imprensa, sempre com foto) ficava demasiado vazio -
+selo do regime + titulo maior + seta ao passar o rato do' mais peso visual sem imagem nenhuma. */
+.oportunidade-card {
+	display: block;
+	height: 100%;
+	padding: 28px 24px;
+	/* margin-bottom (nao so' padding) e' de proposito: a grelha (js-isotope-2, fitRows) calcula a
+	altura de cada linha a partir da altura TOTAL de ".js-isotope__item" (incl. margin) - isto da'
+	uma margem de seguranca extra a esse calculo, para o caso de o texto ainda mudar ligeiramente de
+	tamanho depois do layout inicial (troca de webfont, etc: ver WebFontConfig.active em
+	jactions.js) e a 2a linha ficar por cima da 1a (Pedro, 2026-08-27 - reportado em produção,
+	nunca reproduzido em local). */
+	margin-bottom: 20px;
+	border: 1px solid #eee;
+	border-radius: 6px;
+	text-decoration: none !important;
+	transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.oportunidade-card:hover {
+	border-color: #A46310;
+	box-shadow: 0 6px 20px rgba(0,0,0,.08);
+	transform: translateY(-3px);
+}
+.oportunidade-card--espontanea {
+	background: #faf6f0;
+	border-color: #e8d9c3;
+}
+.oportunidade-card__badge {
+	display: inline-block;
+	background: #A46310;
+	color: #fff;
+	font-size: 1.1rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: .03em;
+	padding: 3px 10px;
+	border-radius: 3px;
+	margin-bottom: 12px;
+}
+.oportunidade-card__local {
+	color: #999;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	letter-spacing: .03em;
+	margin-bottom: 6px;
+}
+.oportunidade-card__titulo {
+	font-size: 2rem;
+	font-weight: 700;
+	color: #222;
+	margin-bottom: 10px;
+}
+.oportunidade-card__desc {
+	color: #777;
+	font-size: 1.4rem;
+	margin-bottom: 0;
+}
+.oportunidade-card__cta {
+	display: inline-block;
+	margin-top: 14px;
+	color: #A46310;
+	font-weight: 700;
+	font-size: 1.3rem;
+	transition: transform .2s;
+}
+.oportunidade-card:hover .oportunidade-card__cta {
+	transform: translateX(4px);
+}
+
+/* Ficha de uma oferta (oportunidade.php): H1 generico ("Oportunidade em Aberto") funciona como
+etiqueta pequena por cima do titulo real da vaga - inverso do resto do site (onde H1 e sempre a
+maior), por isso tem a sua propria classe em vez de ".__title"/".__subtitle" (essas ficam disponiveis
+para o titulo da vaga, que e' quem deve dominar visualmente aqui). */
+#hero .oportunidade-eyebrow {
+	display: block;
+	font-size: 1.5rem;
+	font-weight: 700;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	color: #d9a866;
+	margin-bottom: 10px;
+}
+
+/* Bloco de texto rico (render_bloco_texto, TinyMCE): a regra global ".h6, h6" (critical.min.css) e'
+so' 1.6rem/16px - so' 2px acima do paragrafo (1.4rem/14px) e, sendo maiuscula, parece visualmente
+MAIS pequena que o texto normal, nao maior (Pedro, 2026-08-25 - "isso nao faz sentido"). Aqui dentro,
+onde o H6 e' o unico nivel de subtitulo disponivel ao editor (Termos, Privacidade, Canal de
+Denuncias), sobe-se para o tamanho do H4 - so' neste bloco, sem tocar na regra global usada noutros
+sitios do site (cartoes de produto, etc.). */
+.section--custom-01 h6 {
+	font-size: 2rem;
+}
+
+/* Padrao standard "screen-reader only" (Bootstrap ".visually-hidden") - o site publico nao usa
+Bootstrap, so' o admin, por isso nao existia ainda. Usado no H1 da home (ver render_bloco_hero_home)
+para dar ao H1 palavras-chave de SEO/acessibilidade sem mudar nada visualmente - sugestao do Gemini,
+Pedro 2026-08-27: o H1 manuscrito "Tradição desde 1878" fica visualmente intacto, mas o texto real do
+H1 (o que o Google e leitores de ecra veem) passa a incluir tambem "Padaria e Pastelaria Tradicional
+no Porto". */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+/* Grelha do bloco "Promoção de Categorias" (home). Substitui o Isotope (masonry por JavaScript), que
+reposicionava os tiles depois da página já estar desenhada e era responsável, sozinho, por ~0.44 de
+CLS - medido com a Layout Instability API: desativar só esta grelha levava a home de 0.4448 para
+0.0066. Ali o Isotope não dava nada em troca (a grelha nunca filtra nem reordena, ao contrário de
+Produtos/Oportunidades, que usam ".js-isotope-2" mesmo para filtrar).
+As alturas continuam a vir do tema (".product-promo--style-2 .__image": 320px, e 640px no tile com
+data-y="2"), por isso aqui só é preciso distribuir as colunas e dar duas linhas ao tile alto - o que
+reproduz exatamente a mesma disposição que o Isotope produzia: 2 colunas até 768px, 3 acima. */
+.product-promo__grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+.product-promo__grid > .__item[data-y="2"] {
+	grid-row: span 2;
+}
+@media (min-width: 768px) {
+	.product-promo__grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}

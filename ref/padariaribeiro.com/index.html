@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html class="js desktop landscape no-touch" lang="pt-PT"><head><script data-offline-esm="1">(function(){
+if (location.protocol === 'file:') {
+  // SPA router needs '/' — give it a <base> equal to this doc.
+  try {
+    var bs = document.createElement('base');
+    bs.href = location.href;
+    var h0 = document.head || document.documentElement;
+    h0.insertBefore(bs, h0.firstChild);
+  } catch(e){}
+  // pushState/replaceState throw on a null origin — swallow it.
+  ['pushState','replaceState'].forEach(function(m){
+    var orig = history[m];
+    history[m] = function(){
+      try { return orig.apply(this, arguments); } catch(e){}
+    };
+  });
+}
+var D = {"sources": {"08c4fd72f9d96a7a_v31edd6df95cf4e85bb4c19e7a9bdb.js": "(()=>{var t={116:(t,e)=>{\"use strict\";Object.defineProperty(e,\"__esModule\",{value:!0}),e.cleanLocation=function(t){if(!t)return t;try{const e=new URL(t);return e.username=\"\",e.password=\"\",e.hash=\"\",e.search=\"\",e.toString()}catch(e){let n=t.split(\"?\")[0].split(\"#\")[0];if(n.includes(\"@\")){const t=n.split(\"://\"),e=t[1];if(e){const i=e.split(\"@\")[1];i&&(n=t[0]+\"://\"+i)}}return n}},e.roundWebVitalValue=function(t,e){return\"cls\"===t?e:Math.ceil(e)}},173:function(t,e){!function(t){\"use strict\";class e{t;o=0;i=[];l(t){if(t.hadRecentInput)return;const e=this.i[0],n=this.i.at(-1);this.o&&e&&n&&t.startTime-n.startTime<1e3&&t.startTime-e.startTime<5e3?(this.o+=t.value,this.i.push(t)):(this.o=t.value,this.i=[t]),this.t?.(t)}}const n=()=>{const t=performance.getEntriesByType(\"navigation\")[0];if(t&&t.responseStart>0&&t.responseStart<performance.now())return t},i=t=>{if(\"loading\"===document.readyState)return\"loading\";const e=n();if(e){if(t<e.domInteractive)return\"loading\";if(0===e.domContentLoadedEventStart||t<e.domContentLoadedEventStart)return\"dom-interactive\";if(0===e.domComplete||t<e.domComplete)return\"dom-content-loaded\"}return\"complete\"},o=t=>{const e=t.nodeName;return 1===t.nodeType?e.toLowerCase():e.toUpperCase().replace(/^#/,\"\")},r=t=>{let e=\"\";try{for(;9!==t?.nodeType;){const n=t,i=n.id?\"#\"+n.id:[o(n),...Array.from(n.classList??[]).sort()].join(\".\");if(e.length+i.length>99)return e||i;if(e=e?i+\">\"+e:i,n.id)break;t=n.parentNode}}catch{}return e},a=new WeakMap;function s(t,e){let n=a.get(e);return n||(n=new WeakMap,a.set(e,n)),n.get(t)||n.set(t,new e),n.get(t)}let c=-1;const l=()=>c,d=t=>{addEventListener(\"pageshow\",e=>{e.persisted&&(c=e.timeStamp,t(e))},!0)},u=(t,e,n,i)=>{let o,r;return a=>{e.value>=0&&(a||i)&&(r=e.value-(o??0),(r||void 0===o)&&(o=e.value,e.delta=r,e.rating=((t,e)=>t>e[1]?\"poor\":t>e[0]?\"needs-improvement\":\"good\")(e.value,n),t(e)))}},f=t=>{requestAnimationFrame(()=>requestAnimationFrame(()=>t()))},g=()=>n()?.activationStart??0;let p=-1;const v=new Set,m=()=>\"hidden\"!==document.visibilityState||document.prerendering?1/0:0,y=t=>{if(\"hidden\"===document.visibilityState){if(\"visibilitychange\"===t.type)for(const t of v)t();isFinite(p)||(p=\"visibilitychange\"===t.type?t.timeStamp:0,removeEventListener(\"prerenderingchange\",y,!0))}},h=(t=!1)=>{if(t&&(p=1/0),p<0){const t=g(),e=document.prerendering?void 0:globalThis.performance.getEntriesByType(\"visibility-state\").find(e=>\"hidden\"===e.name&&e.startTime>=t)?.startTime;p=e??m(),addEventListener(\"visibilitychange\",y,!0),addEventListener(\"prerenderingchange\",y,!0),d(()=>{setTimeout(()=>{p=m()})})}return{get firstHiddenTime(){return p},onHidden(t){v.add(t)}}},T=(t,e=-1,i,o=0,r,a,s)=>{const c=n(),d=c?.navigationId||0;let u=\"navigate\";return i?u=i:l()>=0?u=\"back-forward-cache\":c&&(document.prerendering||g()>0?u=\"prerender\":document.wasDiscarded?u=\"restore\":c.type&&(u=c.type.replace(/_/g,\"-\"))),{name:t,value:e,rating:\"good\",delta:0,entries:[],id:`v6-${Date.now()}-${Math.floor(8999999999999*Math.random())+1e12}`,navigationType:u,navigationId:o||d,navigationInteractionId:r,navigationURL:a||c?.name,navigationStartTime:s||0}},S=(t,e,n={})=>{try{const i=t.filter(t=>PerformanceObserver.supportedEntryTypes.includes(t));if(i.length>0){const t=new PerformanceObserver(t=>{queueMicrotask(()=>{const n=t.getEntries();i.length>1&&n.sort((t,e)=>t.startTime+t.duration-(e.startTime+e.duration)),e(n)})});for(const e of i)t.observe({type:e,buffered:!0,...n});return t}}catch{}},b=t=>globalThis.PerformanceObserver?.supportedEntryTypes?.includes(\"soft-navigation\")&&\"function\"==typeof globalThis.PerformanceSoftNavigation?.prototype?.getLargestInteractionContentfulPaint&&t&&t.reportSoftNavs,w=(t,e)=>{if(t.set(e.navigationId,e),t.size>2){const e=t.keys().next().value;void 0!==e&&t.delete(e)}},E=t=>{let e=!1;return()=>{e||(t(),e=!0)}};class I{u}const P=t=>{document.prerendering?addEventListener(\"prerenderingchange\",t,!0):t()},x=[1800,3e3],L=(t,e={})=>{const n=b(e);P(()=>{const i=s(e,I),o=h();let r,a=T(\"FCP\");const c=S([\"paint\"],t=>{for(const e of t)\"first-contentful-paint\"===e.name&&(c.disconnect(),e.startTime<o.firstHiddenTime&&(a.value=Math.max(e.startTime-g(),0),a.entries.push(e),a.navigationId=e.navigationId||a.navigationId,r(!0)))});c&&(r=u(t,a,x,e.reportAllChanges),d(n=>{a=T(\"FCP\",-1,\"back-forward-cache\",a.navigationId,a.navigationInteractionId,a.navigationURL,l()),r=u(t,a,x,e.reportAllChanges),f(()=>{a.value=performance.now()-n.timeStamp,r(!0)})})),n&&S([\"soft-navigation\"],n=>{n.forEach(n=>{i.u&&n.navigationId&&w(i.u,n);const o=Math.max((n.presentationTime||n.paintTime||0)-n.startTime,0);a=T(\"FCP\",o,\"soft-navigation\",n.navigationId,n.interactionId,n.name,n.startTime),r=u(t,a,x,e.reportAllChanges),r(!0)})},e)})},C=[.1,.25],M=t=>t.find(t=>1===t.node?.nodeType)||t[0];let A=0,O=1/0,k=0;const N=t=>{for(const e of t)e.interactionId&&(O=Math.min(O,e.interactionId),k=Math.max(k,e.interactionId),A=k?(k-O)/7+1:0)};let D;const R=()=>D?A:performance.interactionCount??0;class B{h=0;p=[];v=new Map;m;T;M(){return R()-this.h}D(){this.h=R(),this.p.length=0,this.v.clear()}S(t){const e=this.M(),n=Math.min(this.p.length-1,Math.floor(e/50));return!e||-1!==n||\"soft-navigation\"!==t&&\"back-forward-cache\"!==t?this.p[n]:{k:8,id:-1,entries:[]}}l(t){if(this.m?.(t),!t.interactionId)return;const e=this.p.at(-1);let n=this.v.get(t.interactionId);if(n||this.p.length<10||t.duration>e.k){if(n?t.duration>n.k?(n.entries=[t],n.k=t.duration):t.duration===n.k&&t.startTime===n.entries[0].startTime&&n.entries.push(t):(n={id:t.interactionId,entries:[t],k:t.duration},this.v.set(n.id,n),this.p.push(n)),this.p.sort((t,e)=>e.k-t.k),this.p.length>10){const t=this.p.splice(10);for(const e of t)this.v.delete(e.id)}this.T?.(n)}}}const F=t=>{const e=\"requestIdleCallback\"in globalThis?1e3:0,n=globalThis.requestIdleCallback||setTimeout,i=globalThis.cancelIdleCallback||clearTimeout;if(\"hidden\"===document.visibilityState)t();else{const o=E(t);let r=-1;const a=()=>{i(r),o()};addEventListener(\"visibilitychange\",a,{once:!0,capture:!0}),r=n(()=>{removeEventListener(\"visibilitychange\",a,{capture:!0}),o()},{timeout:e})}},j=[200,500];class _{m;u;l(t){this.m?.(t)}}const H=[2500,4e3];let V=50;const U=[];S([\"resource\"],t=>{for(const e of t)U.push(e),U.length>V&&U.shift()});const W=[800,1800],q=t=>{document.prerendering?P(()=>q(t)):\"complete\"!==document.readyState?addEventListener(\"load\",()=>q(t),!0):setTimeout(t)};t.CLSThresholds=C,t.FCPThresholds=x,t.INPThresholds=j,t.LCPThresholds=H,t.TTFBThresholds=W,t.onCLS=(t,n={})=>{const o=s(n=Object.assign({},n),e),a=new WeakMap;o.t=t=>{if(t?.sources?.length){const e=M(t.sources),i=e?.node;if(i){const t=n.generateTarget?.(i)??r(i);a.set(e,t)}}},((t,n={})=>{const i=h();L(E(()=>{let o,r=T(\"CLS\",0);const a=s(n,e),c=(e,i,s,c,l)=>{r=T(\"CLS\",0,e,i,s,c,l),a.o=0,o=u(t,r,C,n.reportAllChanges)},g=(t=!1)=>{a.o>r.value&&(r.value=a.o,r.entries=a.i),o(t)},p=t=>{g(!0),c(\"soft-navigation\",t.navigationId,t.interactionId,t.name,t.startTime)},v=t=>{for(const e of t)\"soft-navigation\"!==e.entryType?a.l(e):p(e);g()},m=[\"layout-shift\"];b(n)&&m.push(\"soft-navigation\");const y=S(m,v);y&&(o=u(t,r,C,n.reportAllChanges),i.onHidden(()=>{v(y.takeRecords()),o(!0)}),d(()=>{c(\"back-forward-cache\",r.navigationId,r.navigationInteractionId,r.navigationURL,l()),f(o)}),setTimeout(o))}))})(e=>{t((t=>{let e={};if(t.entries.length){const n=t.entries.reduce((t,e)=>t.value>e.value?t:e);if(n?.sources?.length){const t=M(n.sources);t&&(e={largestShiftTarget:a.get(t),largestShiftTime:n.startTime,largestShiftValue:n.value,largestShiftSource:t,largestShiftEntry:n,loadState:i(n.startTime)})}}return Object.assign(t,{attribution:e})})(e))},n)},t.onFCP=(t,e={})=>{const o=s(e=Object.assign({},e),I);b(e)&&(o.u=new Map),L(e=>{t((t=>{let e={timeToFirstByte:0,firstByteToFCP:t.value,loadState:i(l())};if(\"soft-navigation\"!==t.navigationType){if(t.entries.length){const o=n(),r=t.entries.at(-1);if(o){const n=o.responseStart,a=o.activationStart||0,s=Math.max(0,n-a);e={timeToFirstByte:s,firstByteToFCP:t.value-s,loadState:i(t.entries[0].startTime),navigationEntry:o,fcpEntry:r}}}}else{const n=o.u?.get(t.navigationId);n&&(e={timeToFirstByte:0,firstByteToFCP:t.value,loadState:\"complete\",navigationEntry:n})}return Object.assign(t,{attribution:e})})(e))},e)},t.onINP=(t,e={})=>{const n=s(e=Object.assign({},e),B);let o=[],a=[],c=0;const f=new WeakMap,g=new WeakMap;let p=!1;const v=()=>{p||(F(m),p=!0)},m=()=>{const t=new Set(n.p.map(t=>f.get(t.entries[0]))),e=a.length-10;a=a.filter((n,i)=>i>=e||t.has(n));const i=new Set;for(const t of a){const e=y(t.startTime,t.processingEnd);for(const t of e)i.add(t)}o=o.filter(t=>t.startTime>c||i.has(t)),p=!1};n.m=t=>{const n=t.startTime+t.duration;let i;c=Math.max(c,t.processingEnd);for(let o=a.length-1;o>=0;o--){const r=a[o];if(Math.abs(n-r.renderTime)<=8){i=r,i.startTime=Math.min(t.startTime,i.startTime),i.processingStart=Math.min(t.processingStart,i.processingStart),i.processingEnd=Math.max(t.processingEnd,i.processingEnd),e.includeProcessedEventEntries&&i.entries.push(t);break}}i||(i={startTime:t.startTime,processingStart:t.processingStart,processingEnd:t.processingEnd,renderTime:n,entries:e.includeProcessedEventEntries?[t]:[]},a.push(i)),t.interactionId&&f.set(t,i),v()},n.T=t=>{if(!g.get(t)){const n=t.entries.find(t=>t.target)?.target;if(n){const i=e.generateTarget?.(n)??r(n);g.set(t,i)}else{const e=t.entries.find(t=>t.targetSelector)?.targetSelector;e&&g.set(t,e)}}};const y=(t,e)=>{const n=[];for(const i of o)if(!(i.startTime+i.duration<t)){if(i.startTime>e)break;n.push(i)}return n};S([\"long-animation-frame\"],t=>{o=o.concat(t),v()},e),((t,e={})=>{if(!globalThis.PerformanceEventTiming||!(\"interactionId\"in PerformanceEventTiming.prototype))return;const n=h();P(()=>{\"interactionCount\"in performance||D||(D=S([\"event\"],N,{durationThreshold:0}));let i,o=T(\"INP\");const r=s(e,B),a=(n,a,s,c,l)=>{r.D(),o=T(\"INP\",-1,n,a,s,c,l),i=u(t,o,j,e.reportAllChanges)},c=()=>{const t=r.S(o.navigationType);t&&t.k!==o.value&&(o.value=t.k,o.entries=t.entries,i())},f=t=>{c(),i(!0),a(\"soft-navigation\",t.navigationId,t.interactionId,t.name,t.startTime)},g=(t,e=!1)=>{F(()=>{for(const e of t)\"soft-navigation\"!==e.entryType?r.l(e):f(e);c(),e&&i(!0)})},p=[\"event\",\"first-input\"];b(e)&&p.push(\"soft-navigation\");const v=S(p,g,{...e,durationThreshold:e.durationThreshold??40});i=u(t,o,j,e.reportAllChanges),v&&(n.onHidden(()=>{g(v.takeRecords(),!0)}),d(()=>{a(\"back-forward-cache\",o.navigationId,o.navigationInteractionId,o.navigationURL,l())}))})})(e=>{t((t=>{if(0===t.entries.length){const e=t.navigationStartTime||0,n={processedEventEntries:[],longAnimationFrameEntries:[],inputDelay:0,processingDuration:0,presentationDelay:t.value,loadState:i(e)};return Object.assign(t,{attribution:n})}const e=t.entries[0],o=f.get(e),r=Math.max(o.processingStart,e.startTime),a=Math.max(e.startTime+e.duration,r),s=Math.min(o.processingEnd,a),c=o.entries.sort((t,e)=>t.processingStart-e.processingStart),l=y(e.startTime,s),d=n.v.get(e.interactionId),u={interactionTarget:g.get(d),interactionType:e.name.startsWith(\"key\")?\"keyboard\":\"pointer\",interactionTime:e.startTime,nextPaintTime:a,processedEventEntries:c,longAnimationFrameEntries:l,inputDelay:r-e.startTime,processingDuration:s-r,presentationDelay:a-s,loadState:i(e.startTime),longestScript:void 0,totalScriptDuration:void 0,totalStyleAndLayoutDuration:void 0,totalPaintDuration:void 0,totalUnattributedDuration:void 0};return(t=>{const e=t.interactionTime,n=t.nextPaintTime;if(!t.longAnimationFrameEntries?.length||!e||!n)return;const i=t.inputDelay,o=t.processingDuration;let r,a,s=0,c=0,l=0,d=0;for(const n of t.longAnimationFrameEntries){c=c+n.startTime+n.duration-n.styleAndLayoutStart;for(const t of n.scripts){const n=t.startTime+t.duration;if(n<e)continue;const l=n-Math.max(e,t.startTime),u=t.duration?l/t.duration*t.forcedStyleAndLayoutDuration:0;s+=l-u,c+=u,l>d&&(a=t.startTime<e+i?\"input-delay\":t.startTime>=e+i+o?\"presentation-delay\":\"processing-duration\",r=t,d=l)}}const u=t.longAnimationFrameEntries.at(-1),f=u?u.startTime+u.duration:0;f>=e+i+o&&(l=n-f),r&&a&&(t.longestScript={entry:r,subpart:a,intersectingDuration:d}),t.totalScriptDuration=s,t.totalStyleAndLayoutDuration=c,t.totalPaintDuration=l,t.totalUnattributedDuration=n-e-s-c-l})(u),Object.assign(t,{attribution:u})})(e))},e)},t.onLCP=(t,e={})=>{null!=(e=Object.assign({},e)).resourceBufferSize&&(V=e.resourceBufferSize);const i=s(e,_),o=new WeakMap;b(e)&&(i.u=new Map),i.m=t=>{const n=t.element;if(n){const i=e.generateTarget?.(n)??r(n);o.set(t,i)}else t.id&&o.set(t,`#${t.id}`)},((t,e={})=>{let n=!1;const i=b(e);P(()=>{let o,r=h(),a=T(\"LCP\");const c=s(e,_),p=(i,s,c,l,d)=>{a=T(\"LCP\",-1,i,s,c,l,d),o=u(t,a,H,e.reportAllChanges),n=!1,\"soft-navigation\"===i&&(r=h(!0))},v=t=>{c.u&&t.navigationId&&w(c.u,t),n||o(!0),p(\"soft-navigation\",t.navigationId,t.interactionId,t.name,t.startTime);const e=t.getLargestInteractionContentfulPaint?.();e&&m([e])},m=t=>{e.reportAllChanges||i||(t=t.slice(-1));for(const e of t){if(!e)continue;if(\"soft-navigation\"===e.entryType){v(e);continue}let t=0,n=[],i=e.startTime;if(\"largest-contentful-paint\"===e.entryType)t=Math.max(e.startTime-g(),0),c.l(e),n=[e];else if(\"interaction-contentful-paint\"===e.entryType){const o=e;if(!a.navigationId)continue;if(\"interactionId\"in o&&o.interactionId!=a.navigationInteractionId)continue;i=o.largestContentfulPaint?.renderTime||0,t=Math.max(i-e.startTime,0),o.largestContentfulPaint&&(c.l(o.largestContentfulPaint),n=[o.largestContentfulPaint])}i<r.firstHiddenTime&&(a.value=t,a.entries=n,o())}},y=[\"largest-contentful-paint\"];i&&y.push(\"interaction-contentful-paint\",\"soft-navigation\");const b=S(y,m);if(b){o=u(t,a,H,e.reportAllChanges);const r=[\"keydown\",\"click\",\"visibilitychange\"],s=t=>{if(t.isTrusted&&!n){const t=a.id;F(()=>{if(!n){if(!i){b.disconnect();for(const t of r)removeEventListener(t,s,{capture:!0})}t===a.id&&(n=!0,o(!0))}})}};for(const t of r)addEventListener(t,s,{capture:!0});d(i=>{p(\"back-forward-cache\",a.navigationId,a.navigationInteractionId,a.navigationURL,l()),o=u(t,a,H,e.reportAllChanges),f(()=>{a.value=performance.now()-i.timeStamp,n=!0,o(!0)})})}})})(e=>{t((t=>{let e={timeToFirstByte:0,resourceLoadDelay:0,resourceLoadDuration:0,elementRenderDelay:t.value};if(t.entries.length){const r=t.entries.at(-1),a=r.url&&(U.findLast(t=>t.name===r.url)||performance.getEntriesByType(\"resource\").findLast(t=>t.name===r.url));let s;e.target=o.get(r),e.lcpEntry=r,r.url&&(e.url=r.url),a&&(e.lcpResourceEntry=a);let c=0,l=0;if(\"soft-navigation\"!==t.navigationType?(s=n(),c=s?.activationStart??0,l=s?.responseStart??0):(c=t.navigationStartTime||0,s=i.u?.get(t.navigationId)),s){const n=Math.max(0,l-c),i=Math.max(n,a?(a.requestStart||a.startTime)-c:0),o=Math.min(t.value,Math.max(i,a?a.responseEnd-c:0));e={...e,timeToFirstByte:n,resourceLoadDelay:i-n,resourceLoadDuration:o-i,elementRenderDelay:t.value-o,navigationEntry:s}}}return Object.assign(t,{attribution:e})})(e))},e)},t.onTTFB=(t,e={})=>{((t,e={})=>{const i=b(e);let o=T(\"TTFB\"),r=u(t,o,W,e.reportAllChanges);q(()=>{const a=n();if(a){const n=a.responseStart;o.value=Math.max(n-g(),0),o.entries=[a],r(!0),d(()=>{o=T(\"TTFB\",0,\"back-forward-cache\",o.navigationId,o.navigationInteractionId,o.navigationURL,l()),r=u(t,o,W,e.reportAllChanges),r(!0)}),i&&S([\"soft-navigation\"],n=>{n.forEach(n=>{n.navigationId&&(o=T(\"TTFB\",0,\"soft-navigation\",n.navigationId,n.interactionId,n.name,n.startTime),o.entries=[n],r=u(t,o,W,e.reportAllChanges),r(!0))})},e)}})})(e=>{t((t=>{const e=t.entries[0];let n={waitingDuration:0,cacheDuration:0,dnsDuration:0,connectionDuration:0,requestDuration:0,navigationEntry:e};if(t.entries.length&&e instanceof PerformanceNavigationTiming){const i=e.activationStart||0,o=Math.max((e.workerStart||e.fetchStart||0)-i,0),r=Math.max(e.domainLookupStart-i,0),a=Math.max(e.connectStart-i,0),s=Math.max(e.connectEnd-i,0);n={waitingDuration:o,cacheDuration:r-o,dnsDuration:a-r,connectionDuration:s-a,requestDuration:t.value-s,navigationEntry:e}}return Object.assign(t,{attribution:n})})(e))},e)}}(e)},323:(t,e,n)=>{\"use strict\";Object.defineProperty(e,\"__esModule\",{value:!0}),e.sendObjectBeacon=function(t,e,n,o=!1,r=null){let a=r||`/cdn-cgi/rum?${t}`,s=!0;if(navigator&&\"string\"==typeof navigator.userAgent)try{const t=navigator.userAgent.match(/Chrome\\/([0-9]+)/);t&&t[0].toLowerCase().indexOf(\"chrome\")>-1&&parseInt(t[1])<81&&(s=!1)}catch(t){}if(navigator&&\"function\"==typeof navigator.sendBeacon&&s&&o){e.st=i.SendType.SendBeacon;const t=JSON.stringify(e),n={type:\"application/json\"},o=navigator.sendBeacon&&navigator.sendBeacon.bind(navigator);null==o||o(a,new Blob([t],n))}else{e.st=i.SendType.XHR;const t=JSON.stringify(e),o=new XMLHttpRequest;n&&(o.onreadystatechange=function(){4==this.readyState&&204==this.status&&n()}),o.open(\"POST\",a,!0),o.setRequestHeader(\"content-type\",\"application/json\"),o.send(t)}};const i=n(696)},458:(t,e)=>{\"use strict\";Object.defineProperty(e,\"__esModule\",{value:!0}),e.uuidv4=function(){return crypto.randomUUID?crypto.randomUUID():\"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g,function(t){const e=16*Math.random()|0;return(\"x\"===t?e:3&e|8).toString(16)})}},674:(t,e)=>{\"use strict\";Object.defineProperty(e,\"__esModule\",{value:!0}),e.positiveOnlyFields=e.timingsV2TargetKeys=e.timingsTargetKeys=void 0,e.buildTimingsObject=function(t,n,i,o){if(void 0!==n)for(const r of i){const i=t[r];if(\"number\"==typeof i){if(e.positiveOnlyFields.has(r)&&i<=o)continue;n[r]=Math.ceil(i)}else\"string\"==typeof i&&(n[r]=i)}},e.timingsTargetKeys=[\"navigationStart\",\"domainLookupStart\",\"domainLookupEnd\",\"connectStart\",\"connectEnd\",\"secureConnectionStart\",\"redirectStart\",\"redirectEnd\",\"requestStart\",\"responseStart\",\"responseEnd\",\"domLoading\",\"domComplete\",\"loadEventStart\",\"loadEventEnd\"],e.timingsV2TargetKeys=[\"nextHopProtocol\",\"domainLookupStart\",\"domainLookupEnd\",\"connectStart\",\"connectEnd\",\"secureConnectionStart\",\"redirectStart\",\"redirectEnd\",\"requestStart\",\"responseStart\",\"responseEnd\",\"domInteractive\",\"domComplete\",\"loadEventStart\",\"loadEventEnd\",\"finalResponseHeadersStart\",\"firstInterimResponseStart\",\"transferSize\",\"decodedBodySize\"],e.positiveOnlyFields=new Set([\"secureConnectionStart\",\"redirectStart\",\"redirectEnd\"])},696:(t,e)=>{\"use strict\";var n,i,o,r,a;Object.defineProperty(e,\"__esModule\",{value:!0}),e.NavigationType=e.SpaMonitoringType=e.FetchPriority=e.EventType=e.SendType=void 0,function(t){t[t.SendBeacon=1]=\"SendBeacon\",t[t.XHR=2]=\"XHR\"}(n||(e.SendType=n={})),function(t){t[t.Load=1]=\"Load\",t[t.Additional=2]=\"Additional\",t[t.WebVitalsV2=3]=\"WebVitalsV2\"}(i||(e.EventType=i={})),function(t){t.High=\"high\",t.Low=\"low\",t.Auto=\"auto\"}(o||(e.FetchPriority=o={})),function(t){t[t.None=0]=\"None\",t[t.HistoryAndNavigationAPI=1]=\"HistoryAndNavigationAPI\",t[t.SoftNavigationHeuristics=2]=\"SoftNavigationHeuristics\"}(r||(e.SpaMonitoringType=r={})),function(t){t.Navigate=\"navigate\",t.Reload=\"reload\",t.BackForward=\"back-forward\",t.BackForwardCache=\"back-forward-cache\",t.Prerender=\"prerender\",t.Restore=\"restore\",t.SoftNavigation=\"soft-navigation\",t.RoutingApis=\"routing-apis\"}(a||(e.NavigationType=a={}))},969:()=>{\"use strict\";\"function\"!=typeof Array.prototype.findLast&&Object.defineProperty(Array.prototype,\"findLast\",{value:function(t,e){for(let n=this.length-1;n>=0;n--)if(t.call(e,this[n],n,this))return this[n]},writable:!0,configurable:!0,enumerable:!1}),\"function\"!=typeof Array.prototype.at&&Object.defineProperty(Array.prototype,\"at\",{value:function(t){const e=Math.trunc(t)||0,n=e>=0?e:this.length+e;if(!(n<0||n>=this.length))return this[n]},writable:!0,configurable:!0,enumerable:!1})}},e={};function n(i){var o=e[i];if(void 0!==o)return o.exports;var r=e[i]={exports:{}};return t[i].call(r.exports,r,r.exports,n),r.exports}(()=>{\"use strict\";n(969);const t=n(696),e=n(323),i=n(173),o=n(458),r=n(674),a=n(116);(()=>{function n(t){let e=\"\";if(e=window.location.origin?window.location.origin:`${window.location.protocol}//${window.location.host}`,t&&\"string\"==typeof t)if(0===t.indexOf(\"/\"))e+=t;else try{return new URL(t).href}catch(t){}else{const t=window.location.pathname;t&&t.length>0&&(e+=t),window.location.search&&(e+=window.location.search)}return e}!function(){const s=window.performance||window.webkitPerformance||window.msPerformance||window.mozPerformance,c=\"data-cf-beacon\",l=document.currentScript||(\"function\"==typeof document.querySelector?document.querySelector(`script[${c}]`):void 0),d=[\"lcp\",\"cls\",\"fcp\",\"ttfb\",\"inp\"];let u=(0,o.uuidv4)(),f=[],g=0;const p=(t,e={})=>{var n;const i=null!==(n=e.when)&&void 0!==n?n:Math.ceil(s.now());!e.referrer&&f[f.length-1]&&(e.referrer=f[f.length-1].url),f.push({id:u,url:t,ts:i,referrer:\"\"!==e.referrer?e.referrer:void 0,navigationType:e.navigationType}),f.length>3&&f.shift()};p(document.location.href,{when:0,referrer:document.referrer,navigationType:t.NavigationType.Navigate});let v=window.__cfBeacon?window.__cfBeacon:{};if(v&&\"single\"===v.load)return;if(l){const t=l.getAttribute(c);if(t)try{v=Object.assign(Object.assign({},v),JSON.parse(t))}catch(t){}else{const t=l.getAttribute(\"src\");if(t&&\"function\"==typeof URLSearchParams){const e=new URLSearchParams(t.replace(/^[^\\?]+\\??/,\"\")),n=e.get(\"token\");n&&(v.token=n),v.spa=e.get(\"spa\")}}v&&\"multi\"!==v.load&&(v.load=\"single\"),window.__cfBeacon=v}if(!s||!v||!v.token)return;let m=n();const y=function(e){let n=e;return null==n||\"true\"===n||!0===n?t.SpaMonitoringType.HistoryAndNavigationAPI:\"false\"===n||!1===n?t.SpaMonitoringType.None:(\"string\"==typeof n&&(n=parseInt(n,10)),\"number\"==typeof n&&n>=t.SpaMonitoringType.None&&n<=t.SpaMonitoringType.SoftNavigationHeuristics?n:t.SpaMonitoringType.HistoryAndNavigationAPI)}(v.spa),h=y!==t.SpaMonitoringType.None;let T=null,S=null;const b=v.send&&v.send.to?v.send.to:void 0===v.version?\"https://cloudflareinsights.com/cdn-cgi/rum\":null,w=/Chrome\\/(\\d+)/,E=/Chromium\\/(\\d+)/,I=/Firefox\\/(\\d+)/,P=/Version\\/(\\d+(?:\\.\\d+)?)/,x=/rv:(\\d+(?:\\.\\d+)*)/,L=/AppleWebKit\\/(\\d+(?:\\.\\d+)*)/,C=function(){const t={};if(\"undefined\"==typeof navigator||\"string\"!=typeof navigator.userAgent)return t;const e=navigator.userAgent;if(-1!==e.indexOf(\"Chrome/\")||-1!==e.indexOf(\"Chromium/\")){t.be=\"Blink\";const n=w.exec(e)||E.exec(e);n&&(t.bev=n[1],t.bv=n[1])}else if(-1!==e.indexOf(\"Firefox/\")||-1!==e.indexOf(\"Gecko/\")){t.be=\"Gecko\";const n=x.exec(e);n&&(t.bev=n[1]);const i=I.exec(e);i&&(t.bv=i[1])}else if(-1!==e.indexOf(\"Safari/\")&&-1!==e.indexOf(\"AppleWebKit/\")){t.be=\"WebKit\";const n=L.exec(e);n&&(t.bev=n[1]);const i=P.exec(e);i&&(t.bv=i[1])}return t}();!function(t){try{\"undefined\"!=typeof navigator&&navigator.userAgentData&&\"function\"==typeof navigator.userAgentData.getHighEntropyValues&&navigator.userAgentData.getHighEntropyValues([\"platformVersion\"]).then(function(e){var n;e.platformVersion&&(t.ov=function(t,e){const n=e.split(\".\"),i=parseInt(n[0],10);return\"Windows\"===t?i>=13?\"11\":i>=1?\"10\":n[0]:(\"iOS\"===t||\"macOS\"===t)&&n.length>=2?n[0]+\".\"+n[1]:n[0]}((null===(n=navigator.userAgentData)||void 0===n?void 0:n.platform)||\"\",e.platformVersion))}).catch(function(){})}catch(t){}}(C);let M,A=!1,O=!1;const k={};function N(t){var e,n,i,o,r,a;const s=window.location.pathname;if(!O){const e=\"string\"==typeof(c=t.navigationType)&&q.has(c)?t.navigationType:void 0;e&&function(t,e){const n=V(t);n&&(n.navigationType=e)}(u,e),O=!0}var c;let l;switch(\"INP\"!==t.name&&(k[t.name.toLowerCase()]={value:t.value,path:s}),t.name){case\"CLS\":l=t.attribution,l&&k.cls&&(k.cls.element=l.largestShiftTarget,k.cls.currentRect=null===(e=l.largestShiftSource)||void 0===e?void 0:e.currentRect,k.cls.previousRect=null===(n=l.largestShiftSource)||void 0===n?void 0:n.previousRect);break;case\"LCP\":l=t.attribution,l&&k.lcp&&(k.lcp.element=l.target,k.lcp.size=null===(i=l.lcpEntry)||void 0===i?void 0:i.size,k.lcp.url=l.url,k.lcp.rld=Math.ceil(l.resourceLoadDelay),k.lcp.rlt=Math.ceil(l.resourceLoadDuration),k.lcp.erd=Math.ceil(l.elementRenderDelay),k.lcp.it=null===(o=l.lcpResourceEntry)||void 0===o?void 0:o.initiatorType,k.lcp.fp=null===(a=null===(r=l.lcpEntry)||void 0===r?void 0:r.element)||void 0===a?void 0:a.getAttribute(\"fetchpriority\"));break;case\"INP\":(null==k.inp||Number(k.inp.value)<Number(t.value))&&(k.inp={value:Number(t.value),path:s},l=t.attribution,l&&k.inp&&(k.inp.element=l.interactionTarget,k.inp.name=l.interactionType,k.inp.idy=Math.ceil(l.inputDelay),k.inp.pdn=Math.ceil(l.processingDuration),k.inp.pdy=Math.ceil(l.presentationDelay)))}}\"PerformanceObserver\"in window&&\"function\"==typeof PerformanceObserver&&PerformanceObserver.supportedEntryTypes&&((0,i.onLCP)(N,{reportAllChanges:!0,reportSoftNavs:!0}),(0,i.onFCP)(N),(0,i.onINP)(N,{reportSoftNavs:!0}),(0,i.onTTFB)(N),PerformanceObserver.supportedEntryTypes&&-1!==PerformanceObserver.supportedEntryTypes.indexOf(\"layout-shift\")&&(0,i.onCLS)(N,{reportAllChanges:!0,reportSoftNavs:!0})),document.addEventListener(\"visibilitychange\",()=>{if(\"hidden\"===document.visibilityState){if(h&&F()){const t=n();(null==M?void 0:M.url)==t&&(null==M?void 0:M.triggered)||D(),p(t)}!A&&M&&(A=!0,R())}});const D=i=>{g++;let o=function(e){const i=K(u)===t.NavigationType.RoutingApis||K(u)===t.NavigationType.SoftNavigation,o=!i,a=s.timing,c=e||n(),l=Object.assign(Object.assign({},z(t.EventType.Load,c)),{memory:{},timings:{},firstPaint:0,firstContentfulPaint:0,versions:{fl:v?v.version:\"\",js:\"2026.9.1\",timings:1}});if(o){if(\"function\"==typeof s.getEntriesByType){const t=s.getEntriesByType(\"navigation\");if(t&&Array.isArray(t)&&t.length>0){l.timingsV2={},l.versions.timings=2,delete l.timings,t[0].deliveryType&&(l.dt=t[0].deliveryType);const e=t[0];(0,r.buildTimingsObject)(e,l.timingsV2,r.timingsV2TargetKeys,e.startTime)}}if(1===l.versions.timings){const t=a;l.timings&&(0,r.buildTimingsObject)(t,l.timings,r.timingsTargetKeys,t.navigationStart)}s.memory?function(t,e){for(const n in t){const i=t[n];void 0!==e&&(\"number\"!=typeof i&&\"string\"!=typeof i||(e[n]=i))}}(s.memory,l.memory):delete l.memory,l.firstPaint=J(\"first-paint\"),l.firstContentfulPaint=J(\"first-contentful-paint\")}return v&&(v.icTag&&(l.icTag=v.icTag),l.siteToken=v.token),i&&(delete l.timings,delete l.timingsV2,delete l.memory,delete l.firstPaint,delete l.firstContentfulPaint,delete l.serverTimings),l}(i);o&&v&&v&&((0,e.sendObjectBeacon)(\"\",o,()=>{},!1,b),void 0!==v.forward&&void 0!==v.forward.url&&(0,e.sendObjectBeacon)(\"\",o,()=>{},!1,v.forward.url))},R=n=>{let i=function(e){const n=Object.assign({},z(t.EventType.WebVitalsV2,e));return v&&(v.version&&(n.versions.fl=v.version),v.icTag&&(n.icTag=v.icTag),n.siteToken=v.token),k&&d.forEach(t=>{k[t]&&void 0!==k[t].value&&(n[t]=k[t],n[t]&&n[t].value&&(n[t].value=(0,a.roundWebVitalValue)(t,n[t].value)))}),n}(n);d.forEach(t=>{delete k[t]}),v&&(0,e.sendObjectBeacon)(\"\",i,()=>{},!0,b)},B=()=>{const t=window.__cfRl&&window.__cfRl.done||window.__cfQR&&window.__cfQR.done;t?t.then(D):D(),M={id:u,url:n(),ts:(new Date).getTime(),triggered:!0}};\"complete\"===window.document.readyState?B():window.addEventListener(\"load\",()=>{window.setTimeout(B)});const F=()=>h&&0===f.filter(t=>t.id===u).length;function j(){u=(0,o.uuidv4)()}var _,H;function V(t){for(let e=f.length-1;e>=0;e--)if(f[e].id===t)return f[e]}function U(t){var e;if(t){let n=null===(e=V(t))||void 0===e?void 0:e.ts;if(n)return Math.ceil(s.timeOrigin+n)}return Math.ceil(s.timeOrigin)}function W(t){var e;return null===(e=V(t))||void 0===e?void 0:e.referrer}h&&(y===t.SpaMonitoringType.SoftNavigationHeuristics&&(T=function(){var e,n;if(!(\"PerformanceObserver\"in window)||!PerformanceObserver.supportedEntryTypes||-1===PerformanceObserver.supportedEntryTypes.indexOf(\"soft-navigation\"))return null;if(\"function\"!=typeof(null===(n=null===(e=window.PerformanceSoftNavigation)||void 0===e?void 0:e.prototype)||void 0===n?void 0:n.getLargestInteractionContentfulPaint))return null;const i=new PerformanceObserver(e=>{for(const n of e.getEntries())R(m),j(),m=n.name,p(n.name,{navigationType:t.NavigationType.SoftNavigation,when:n.startTime}),D(n.name)});if(!i||\"function\"!=typeof i.observe)return null;try{i.observe({type:\"soft-navigation\",buffered:!0})}catch(t){return null}return i}()),T||y!==t.SpaMonitoringType.HistoryAndNavigationAPI&&y!==t.SpaMonitoringType.SoftNavigationHeuristics||(S=function(){if(!(\"navigation\"in window)||!window.navigation)return null;let e=function(e){var n,i;e.canIntercept&&(R(m),!e.destination||\"boolean\"!=typeof e.destination.sameDocument||e.destination.sameDocument?(j(),m=null!==(i=null===(n=null==e?void 0:e.destination)||void 0===n?void 0:n.url)&&void 0!==i?i:m,p(m,{navigationType:t.NavigationType.RoutingApis}),D(m)):A=!0)};return window.navigation.addEventListener(\"navigate\",e),e}(),S||(_=window.history,(H=_.pushState)&&(_.pushState=function(e,i,o){const r=n(o);return m!=r&&(R(m),j(),p(r,{navigationType:t.NavigationType.RoutingApis}),D(r),m=r),H.apply(_,[e,i,o])},window.addEventListener(\"popstate\",function(e){m!=n()&&(R(m),j(),m=n(),p(m,{navigationType:t.NavigationType.RoutingApis}),D(m))})))));const q=new Set(Object.keys(t.NavigationType).map(e=>t.NavigationType[e]));function K(t){var e;return null===(e=V(t))||void 0===e?void 0:e.navigationType}function $(){if(!v||!v.serverTiming)return;let t=[];for(const e of[\"navigation\",\"resource\"])for(const n of s.getEntriesByType(e)){const{name:i,serverTiming:o}=n;if(o){if(\"resource\"===e){const t=v.serverTiming.location_startswith;if(!t||!Array.isArray(t))continue;let e=!1;for(const n of t)if(i.startsWith(n)){e=!0;break}if(!e)continue}for(const{name:n,description:r,duration:a}of o)if(v.serverTiming.name&&v.serverTiming.name[n])try{const o=new URL(i);t.push({location:\"resource\"===e?`${o.origin}${o.pathname}`:void 0,name:n,dur:a,desc:r})}catch(t){}}}return t}function z(e,i){const o=K(u),r=o===t.NavigationType.RoutingApis||o===t.NavigationType.SoftNavigation,s={startTime:U(u),pageloadId:u,n:g>1?g:void 0,eventType:e,nt:o,location:(0,a.cleanLocation)(i||n())||\"\",referrer:(0,a.cleanLocation)(W(u)),serverTimings:r?void 0:$(),versions:{js:\"2026.9.1\"},bi:(c=C,c.bv||c.ov||c.be||c.bev?C:void 0)};var c;return S&&s.nt===t.NavigationType.RoutingApis&&(s.ntapi=1),s}function J(t){var e;if(\"first-contentful-paint\"===t&&k.fcp&&k.fcp.value)return Math.ceil(k.fcp.value);if(\"function\"==typeof s.getEntriesByType){const n=null===(e=s.getEntriesByType(\"paint\"))||void 0===e?void 0:e.filter(e=>e.name===t)[0];return n?Math.ceil(n.startTime):0}return 0}}()})()})()})();"}, "entries": ["08c4fd72f9d96a7a_v31edd6df95cf4e85bb4c19e7a9bdb.js"]};
+var urls = {};
+for (var fn in D.sources) {
+  try { urls[fn] = URL.createObjectURL(
+    new Blob([D.sources[fn]], {type:'text/javascript'})); } catch(e){}
+}
+var imports = {};
+for (var fn in urls) {
+  imports[fn] = urls[fn];
+  imports['./' + fn] = urls[fn];
+  imports['assets/' + fn] = urls[fn];
+}
+var im = document.createElement('script');
+im.type = 'importmap';
+im.textContent = JSON.stringify({imports: imports});
+(document.head || document.documentElement).appendChild(im);
+D.entries.forEach(function(e){
+  if (!urls[e]) return;
+  var s = document.createElement('script');
+  s.type = 'module'; s.src = urls[e];
+  (document.head || document.documentElement).appendChild(s);
+});
+})();</script><script data-offline-resolve="1">(function(){
+var ASSET_MAP = {"https://padariaribeiro.com/": "assets/8b37e0ce80f49c0c_file.html", "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Raleway:ital,wght@0,100;0,400;0,500;0,700;0,900;1,400;1,500;1,700&family=Damion&display=swap": "assets/6ac138a3aed0e8a0_css2.css", "https://padariaribeiro.com/css/critical.min.css": "assets/a67f2957e94f785a_critical.min.css", "https://padariaribeiro.com/css/animate.css": "assets/8e613d7638e0d17f_animate.css", "https://padariaribeiro.com/css/style.min.css": "assets/e60aaca7c3e5201a_style.min.css", "https://padariaribeiro.com/css/font-awesome.min.css": "assets/d78c7db0d2fce56a_font-awesome.min.css", "https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2": "assets/441af0def989ebfd_memvYaGs126MiZpBA-UvWbX2vVnXBb.woff2", "https://fonts.gstatic.com/s/damion/v15/hv-XlzJ3KEUe_YZkamw2EzJwVw.woff2": "assets/5a88b076a0d5e241_hv-XlzJ3KEUe_YZkamw2EzJwVw.woff2", "https://fonts.gstatic.com/s/raleway/v37/1Ptug8zYS_SKggPNyC0IT4ttDfA.woff2": "assets/10f1a0ef3f349790_1Ptug8zYS_SKggPNyC0IT4ttDfA.woff2", "https://padariaribeiro.com/images/site_logo.svg": "assets/5f8d09d4feef16a7_site_logo.svg", "https://padariaribeiro.com/css/cookie-consent.css": "assets/57ab8630cdf48b77_cookie-consent.css", "https://padariaribeiro.com/images/16115792820_pq203009.webp": "assets/0441da2ed538c574_16115792820_pq203009.webp", "https://padariaribeiro.com/css/fonts/fontello/font/fontello.woff2?50377139": "assets/3b6bfc4c74c3ea7e_fontello.woff2", "https://padariaribeiro.com/images/16115788450_pq102043.webp": "assets/89d0becddf662da0_16115788450_pq102043.webp", "https://padariaribeiro.com/images/16115918560_pq203215.webp": "assets/52a8c7b8cbe23ce0_16115918560_pq203215.webp", "https://padariaribeiro.com/images/16115788920_pq102016.webp": "assets/88b19b8f408138e2_16115788920_pq102016.webp", "https://padariaribeiro.com/css/default.css?v=1789057964": "assets/5dd9cc9edfc52744_default.css", "https://padariaribeiro.com/js/device.min.js": "assets/95a1c8648438e2b5_device.min.js", "https://padariaribeiro.com/js/jquery.min.js": "assets/fc9a93dd241f6b04_jquery.min.js", "https://padariaribeiro.com/images/16115789100_pq102031.webp": "assets/5e75e628361217e5_16115789100_pq102031.webp", "https://padariaribeiro.com/images/blank.gif": "assets/46d11334d5de0f73_blank.gif", "https://padariaribeiro.com/js/main.min.js": "assets/1d797391b663bd85_main.min.js", "https://padariaribeiro.com/js/jactions.js?v=1789057964": "assets/a5e76862275bc126_jactions.js", "https://padariaribeiro.com/js/owl.carousel.js": "assets/db9d6cf3c1c4b047_owl.carousel.js", "https://cdn.jsdelivr.net/npm/vanilla-lazyload@10.19.0/dist/lazyload.min.js": "assets/adf03f7ab87622fa_lazyload.min.js", "https://padariaribeiro.com/images/16115796770_pq203191.webp": "assets/19674da1beccd962_16115796770_pq203191.webp", "https://padariaribeiro.com/video/padaria_ribeiro_2016_poster.webp": "assets/5da45ae7bc218aba_padaria_ribeiro_2016_poster.webp", "https://padariaribeiro.com/js/cookie-consent.js?v=1789057964": "assets/69e1bf8e3b07e9e5_cookie-consent.js", "https://padariaribeiro.com/css/owl.carousel.css": "assets/aaf08be6ae4ed211_owl.carousel.css", "https://padariaribeiro.com/images/16130662440_cateringcompressed2-01.webp": "assets/7cd0770b3f15223c_16130662440_cateringcompressed.webp", "https://padariaribeiro.com/images/15968105300_icon-home-1.svg": "assets/3b9db26833e0f9ed_15968105300_icon-home-1.svg", "https://padariaribeiro.com/images/15968105760_icon-home-2.svg": "assets/b02177371492706f_15968105760_icon-home-2.svg", "https://padariaribeiro.com/images/15968110400_icon-home-3.svg": "assets/81e0d553d998c3f0_15968110400_icon-home-3.svg", "https://padariaribeiro.com/images/15968127790_icon-home-6.svg": "assets/b6ca8c778cb97709_15968127790_icon-home-6.svg", "https://padariaribeiro.com/images/15968127490_icon-home-5.svg": "assets/2e4828dd04461ed5_15968127490_icon-home-5.svg", "https://padariaribeiro.com/images/15968111950_icon-home-4.svg": "assets/f390c01dbbdc53f7_15968111950_icon-home-4.svg", "https://padariaribeiro.com/images/16116005850_biscoitos2-copy2.webp": "assets/b850d2c08cb2b843_16116005850_biscoitos2-copy2.webp", "https://padariaribeiro.com/images/16142687531_image7.webp": "assets/7ed315afec8dc991_16142687531_image7.webp", "https://padariaribeiro.com/images/16142564201_prod17.webp": "assets/8a902cfc19730fa7_16142564201_prod17.webp", "https://padariaribeiro.com/images/16142559431_prod8.webp": "assets/62e9085b0ee7be5b_16142559431_prod8.webp", "https://padariaribeiro.com/images/16142563741_prod16.webp": "assets/159c20e299f29d7c_16142563741_prod16.webp", "https://padariaribeiro.com/images/16115797490_pq102088.webp": "assets/cab42b931fd4a907_16115797490_pq102088.webp", "https://padariaribeiro.com/images/16142559901_prod9.webp": "assets/0f590f9afe725859_16142559901_prod9.webp", "https://padariaribeiro.com/images/16115797200_pq102063.webp": "assets/989343e5fe2afaeb_16115797200_pq102063.webp", "https://padariaribeiro.com/historia/": "assets/812f0a43a10877f4_file.html", "https://www.toogoodtogo.com/pt/find/porto/padariaribeiro/bakedgoods/pastelariaesalgados-72202507055348352": "assets/7e78dd89faabb60c_pastelariaesalgados-7220250705.html", "https://padariaribeiro.com/images/favicon-dark.ico": "assets/e93ede9fe7f7500e_favicon-dark.ico", "https://www.instagram.com/padaria.ribeiro/": "assets/7bf232567f7b2741_file.html", "https://padariaribeiro.com/images/site.webmanifest": "assets/5f7bab2f8620ad82_site", "https://padariaribeiro.com/images/apple-touch-icon.png": "assets/a8a38cdae48ab1b2_apple-touch-icon.png", "https://padariaribeiro.com/cookies/": "assets/09684a7e930dd0a4_file.html", "https://padariaribeiro.com/produtos/": "assets/40721f08457cd1f1_file.html", "https://googlevideo.com": "assets/8112108567b8093b_file.html", "https://padariaribeiro.com/home/": "assets/df9c42cde1028241_file.html", "https://youtube.com": "assets/5e0d8614d8cc692b_file.html", "https://padariaribeiro.com/produtos/#tartes-e-bolos": "assets/40721f08457cd1f1_file.html", "https://padariaribeiro.com/images/favicon-16x16-dark.png": "assets/ed3c875d19e11836_favicon-16x16-dark.png", "https://padariaribeiro.com/produtos/#biscoitos-tradicionais": "assets/40721f08457cd1f1_file.html", "https://padariaribeiro.com/produtos/#salgados-e-sandwich": "assets/40721f08457cd1f1_file.html", "https://www.livroreclamacoes.pt/inicio": "assets/0b34910a11a9e0df_inicio.html", "https://padariaribeiro.com/video/padaria_ribeiro_2016_web.webm": "assets/7401841c9d7673b1_padaria_ribeiro_2016_web.webm", "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495": "assets/08c4fd72f9d96a7a_v31edd6df95cf4e85bb4c19e7a9bdb.js", "https://padariaribeiro.com/images/favicon.ico": "assets/2083c02f103f5b1d_favicon.ico", "https://padariaribeiro.com/oportunidades/": "assets/d6867e614f3ec2a1_file.html", "https://padariaribeiro.com/produtos/#pastelaria-doce": "assets/40721f08457cd1f1_file.html", "https://padariaribeiro.com/contactos/": "assets/f11e38b960ccdb92_file.html", "https://padariaribeiro.com/canal-denuncias/": "assets/8206666c1a2d6dea_file.html", "https://padariaribeiro.com/produtos/#padaria": "assets/40721f08457cd1f1_file.html", "https://padariaribeiro.com/images/favicon-32x32.png": "assets/de922ea3d33e7fb6_favicon-32x32.png", "https://padariaribeiro.com/video/padaria_ribeiro_2016_web.mp4": "assets/bd9e5b4c45821531_padaria_ribeiro_2016_web.mp4", "https://padariaribeiro.com/images/favicon-16x16.png": "assets/422f41a9be6ec5d2_favicon-16x16.png", "https://padariaribeiro.com/catering/": "assets/f0316f8ea1f0e187_file.html", "https://padariaribeiro.com/images/favicon-32x32-dark.png": "assets/c8505ec68bcdb338_favicon-32x32-dark.png", "https://glovoapp.com/pt/pt/porto/stores/pastelaria-ribeiro-opo": "assets/1bb409243033772a_pastelaria-ribeiro-opo.html", "https://padariaribeiro.com/termos-condicoes/": "assets/8f7a8b4710fd6b0c_file.html", "https://padariaribeiro.com/privacidade/": "assets/0010566a7ba7cb55_file.html", "https://padariaribeiro.com/imprensa/": "assets/9223544014d3ccb6_file.html", "https://padariaribeiro.com/inicio/": "assets/5417192a5e412be7_file.html"};
+// Pre-populate path+query keys: when opened via file://, JS
+// resolves '/foo.js' against file://… so we lose the original
+// origin. Indexing by pathname+search lets the lookup succeed.
+var _add = {};
+for (var _k in ASSET_MAP) {
+  try { var _u = new URL(_k); _add[_u.pathname + _u.search] = ASSET_MAP[_k]; }
+  catch(e){}
+}
+for (var _k in _add) if (!ASSET_MAP[_k]) ASSET_MAP[_k] = _add[_k];
+function resolveLocal(u){
+  if (!u || typeof u !== 'string') return null;
+  if (u.indexOf('data:') === 0 || u.indexOf('blob:') === 0) return null;
+  if (ASSET_MAP[u]) return ASSET_MAP[u];
+  try {
+    var url = new URL(u, location.href);
+    var pq = url.pathname + url.search;
+    if (ASSET_MAP[pq]) return ASSET_MAP[pq];
+    // The snapshot may be opened from a subdirectory, while
+    // ASSET_MAP paths are origin-rooted. Retry with the
+    // document's own directory prefix stripped off.
+    var dir = location.pathname.replace(/[^/]*$/, '');
+    if (dir.length > 1 && pq.indexOf(dir) === 0) {
+      var rel = pq.slice(dir.length - 1);
+      if (ASSET_MAP[rel]) return ASSET_MAP[rel];
+    }
+    // Next.js image optimization wrapper — peel the inner CDN URL
+    if (/_next\/image$/.test(url.pathname)) {
+      var t = url.searchParams.get('url');
+      if (t) {
+        var dec = decodeURIComponent(t);
+        if (ASSET_MAP[dec]) return ASSET_MAP[dec];
+        var bare = dec.split('?')[0];
+        for (var k in ASSET_MAP) {
+          if (k.split('?')[0] === bare) return ASSET_MAP[k];
+        }
+      }
+    }
+  } catch(e){}
+  return null;
+}
+function rewriteSrcset(s){
+  if (!s || typeof s !== 'string') return s;
+  return s.split(',').map(function(it){
+    var p = it.trim().split(/\s+/);
+    var loc = resolveLocal(p[0]);
+    if (loc) p[0] = loc;
+    return p.join(' ');
+  }).join(', ');
+}
+// Patch property setters: el.src = '...' / el.href = '...'
+// IMPORTANT: skip rewrite when the element has crossOrigin set.
+// WebGL textures (UnicornStudio, Three.js, etc.) are loaded via
+//   img.crossOrigin = 'anonymous'; img.src = 'https://cdn/...'
+// and consumed via gl.texImage2D. file:// resources have no CORS
+// headers, so rewriting to local makes WebGL reject the texture
+// (Access blocked by CORS policy → black/missing 3D scene).
+// Better to keep the original URL: works online, fails offline,
+// matches non-patched behaviour.
+function patchSetter(klass, prop, transform){
+  if (!klass || !klass.prototype) return;
+  var desc = Object.getOwnPropertyDescriptor(klass.prototype, prop);
+  if (!desc || !desc.set) return;
+  Object.defineProperty(klass.prototype, prop, {
+    configurable: true,
+    get: desc.get,
+    set: function(v){
+      try {
+        if (transform === 'srcset') {
+          v = rewriteSrcset(v);
+        } else {
+          // Captured runtime resource (UnicornStudio texture,
+          // etc.) → serve as a data: URI. data: never CORS-
+          // taints a WebGL canvas, unlike a file:// texture,
+          // so gl.texImage2D still accepts it offline.
+          var du = window.__offlineDataUri && window.__offlineDataUri(v);
+          if (du) { v = du; }
+          else if (!this.crossOrigin) {
+            var loc = resolveLocal(v); if (loc) v = loc;
+          }
+        }
+      } catch(e){}
+      desc.set.call(this, v);
+    }
+  });
+}
+patchSetter(window.HTMLScriptElement, 'src');
+patchSetter(window.HTMLLinkElement, 'href');
+patchSetter(window.HTMLImageElement, 'src');
+patchSetter(window.HTMLImageElement, 'srcset', 'srcset');
+patchSetter(window.HTMLSourceElement, 'src');
+patchSetter(window.HTMLSourceElement, 'srcset', 'srcset');
+patchSetter(window.HTMLMediaElement, 'src');
+patchSetter(window.HTMLIFrameElement, 'src');
+// Patch setAttribute too — some libs use it instead of property set
+var _setAttr = Element.prototype.setAttribute;
+Element.prototype.setAttribute = function(name, value){
+  try {
+    if (typeof value === 'string') {
+      if (name === 'src' || name === 'href') {
+        var du = window.__offlineDataUri && window.__offlineDataUri(value);
+        if (du) { value = du; }
+        else if (!this.crossOrigin) {
+          var loc = resolveLocal(value); if (loc) value = loc;
+        }
+      } else if (name === 'srcset' && !this.crossOrigin) {
+        value = rewriteSrcset(value);
+      }
+    }
+  } catch(e){}
+  return _setAttr.call(this, name, value);
+};
+// Expose for the late-init script in body
+window.__resolveLocal = resolveLocal;
+window.__rewriteSrcset = rewriteSrcset;
+})();</script>
+<script id="facebook-jssdk" src="https://connect.facebook.net/pt_PT/sdk/xfbml.customerchat.js"></script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-J7BN2BZVDJ&amp;cx=c&amp;gtm=4e6992" type="text/javascript"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-NLWMXQQH"></script><script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){ window.dataLayer.push(arguments); }
+	gtag('consent', 'default', {
+		'ad_storage': 'denied',
+		'analytics_storage': 'denied',
+		'ad_user_data': 'denied',
+		'ad_personalization': 'denied',
+		'wait_for_update': 500
+	});
+</script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NLWMXQQH');</script>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Tradição desde 1878 | Padaria Ribeiro</title>
+<link href="assets/8b37e0ce80f49c0c_file.html" rel="canonical"/>
+<meta content="A Padaria Ribeiro é uma referência no Porto desde 1878. Descubra os nossos clássicos croissants, empadas e biscoitos artesanais. A tradição ainda é o que era..." name="description"/>
+<meta content="padaria ribeiro, padaria ribeiro porto, padaria croissant porto, Padaria Porto, pastelaria tradicional Porto, pão fresco Porto, salgados Porto, Onde comprar empadas de vitela no Porto, biscoitos tradicionais, bolo-rei artesanal Porto, serviço de catering padaria, croissant porto, croissant padaria ribeiro, croissant ribeiro" name="keywords"/>
+<meta content="index, follow" name="robots"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#A46310" name="theme-color"/>
+<meta content="#A46310" name="msapplication-navbutton-color"/>
+<meta content="#A46310" name="apple-mobile-web-app-status-bar-style"/>
+<link href="assets/2083c02f103f5b1d_favicon.ico" media="(prefers-color-scheme: light)" rel="icon" sizes="any"/>
+<link href="assets/de922ea3d33e7fb6_favicon-32x32.png" media="(prefers-color-scheme: light)" rel="icon" sizes="32x32" type="image/png"/>
+<link href="assets/422f41a9be6ec5d2_favicon-16x16.png" media="(prefers-color-scheme: light)" rel="icon" sizes="16x16" type="image/png"/>
+<link href="assets/e93ede9fe7f7500e_favicon-dark.ico" media="(prefers-color-scheme: dark)" rel="icon" sizes="any"/>
+<link href="assets/c8505ec68bcdb338_favicon-32x32-dark.png" media="(prefers-color-scheme: dark)" rel="icon" sizes="32x32" type="image/png"/>
+<link href="assets/ed3c875d19e11836_favicon-16x16-dark.png" media="(prefers-color-scheme: dark)" rel="icon" sizes="16x16" type="image/png"/>
+<link href="assets/a8a38cdae48ab1b2_apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="assets/5f7bab2f8620ad82_site" rel="manifest"/>
+<link href="assets/a67f2957e94f785a_critical.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link href="https://fonts.gstatic.com" rel="preconnect"/> <link as="style" href="assets/5dd9cc9edfc52744_default.css" onload="this.onload=null;this.rel='stylesheet'" rel="stylesheet"/><link as="style" href="assets/e60aaca7c3e5201a_style.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="stylesheet"/><link as="style" href="assets/8e613d7638e0d17f_animate.css" onload="this.onload=null;this.rel='stylesheet'" rel="stylesheet"/><link as="style" href="assets/aaf08be6ae4ed211_owl.carousel.css" onload="this.onload=null;this.rel='stylesheet'" rel="stylesheet"/><link as="style" href="assets/d78c7db0d2fce56a_font-awesome.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="stylesheet"/><link as="style" href="assets/57ab8630cdf48b77_cookie-consent.css" onload="this.onload=null;this.rel='stylesheet'" rel="stylesheet"/><link as="style" href="assets/6ac138a3aed0e8a0_css2.css" onload="this.onload=null;this.rel='stylesheet'" rel="stylesheet"/><noscript><link href="assets/5dd9cc9edfc52744_default.css" rel="stylesheet" type="text/css"/><link href="assets/e60aaca7c3e5201a_style.min.css" rel="stylesheet" type="text/css"/><link href="assets/8e613d7638e0d17f_animate.css" rel="stylesheet" type="text/css"/><link href="assets/aaf08be6ae4ed211_owl.carousel.css" rel="stylesheet" type="text/css"/><link href="assets/d78c7db0d2fce56a_font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="assets/57ab8630cdf48b77_cookie-consent.css" rel="stylesheet" type="text/css"/><link href="assets/6ac138a3aed0e8a0_css2.css" rel="stylesheet" type="text/css"/></noscript>
+<link href="assets/8b37e0ce80f49c0c_file.html" hreflang="pt-PT" rel="alternate"/>
+<link href="assets/df9c42cde1028241_file.html" hreflang="en" rel="alternate"/>
+<link href="assets/8b37e0ce80f49c0c_file.html" hreflang="x-default" rel="alternate"/>
+<meta content="website" property="og:type"/>
+<meta content="https://padariaribeiro.com/images/og-avaliacoes.webp" property="og:image"/>
+<meta content="image/webp" property="og:image:type"/>
+<meta content="Tradição desde 1878 | Padaria Ribeiro" property="og:title"/>
+<meta content="A Padaria Ribeiro é uma referência no Porto desde 1878. Descubra os nossos clássicos croissants, empadas e biscoitos artesanais. A tradição ainda é o que era..." property="og:description"/>
+<meta content="Padaria Ribeiro" property="og:site_name"/>
+<meta content="https://padariaribeiro.com/" property="og:url"/>
+<meta content="Padaria Ribeiro" name="twitter:site"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="https://padariaribeiro.com/images/og-avaliacoes.webp" name="twitter:image"/>
+<meta content="Tradição desde 1878 | Padaria Ribeiro" name="twitter:title"/>
+<meta content="A Padaria Ribeiro é uma referência no Porto desde 1878. Descubra os nossos clássicos croissants, empadas e biscoitos artesanais. A tradição ainda é o que era..." name="twitter:description"/>
+<link href="//googleapis.com" rel="dns-prefetch"/>
+<link href="//gstatic.com" rel="dns-prefetch"/>
+<link href="//google-analytics.com" rel="dns-prefetch"/>
+<link href="//googletagmanager.com" rel="dns-prefetch"/>
+<link href="//facebook.com" rel="dns-prefetch"/>
+<link href="//facebook.net" rel="dns-prefetch"/>
+<link href="//fbcdn.net" rel="dns-prefetch"/>
+<link href="assets/5e0d8614d8cc692b_file.html" rel="dns-prefetch"/>
+<link href="assets/8112108567b8093b_file.html" rel="dns-prefetch"/>
+<script type="application/ld+json">{"@context":"https:\/\/schema.org","@graph":[{"@type":"Bakery","@id":"https:\/\/padariaribeiro.com\/#organization","name":"Padaria Ribeiro","url":"https:\/\/padariaribeiro.com\/","legalName":"SOCOPÃO - Padaria e Confeitaria, Lda.","vatID":"PT501889663","email":"geral@padariaribeiro.com","foundingDate":"1878","logo":"https:\/\/padariaribeiro.com\/images\/site_logo.svg","sameAs":["https:\/\/www.facebook.com\/PadariaRibeiro1878\/","https:\/\/www.instagram.com\/padaria.ribeiro\/"],"address":{"@type":"PostalAddress","addressCountry":"PT","streetAddress":"Praça Guilherme Gomes Fernandes 21","postalCode":"4050-293","addressLocality":"Porto"}},{"@type":"Bakery","name":"Porto (Baixa)","branchOf":{"@id":"https:\/\/padariaribeiro.com\/#organization"},"address":{"@type":"PostalAddress","addressCountry":"PT","streetAddress":"Praça Guilherme Gomes Fernandes, 21","postalCode":"4050-526","addressLocality":"Porto"},"geo":{"@type":"GeoCoordinates","latitude":41.147543,"longitude":-8.614928},"telephone":"+351222005067","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"08:00","closes":"19:00"}},{"@type":"Bakery","name":"Porto (Foz)","branchOf":{"@id":"https:\/\/padariaribeiro.com\/#organization"},"address":{"@type":"PostalAddress","addressCountry":"PT","streetAddress":"Rua João de Barros, 313","postalCode":"4150-416","addressLocality":"Porto"},"geo":{"@type":"GeoCoordinates","latitude":41.1517409,"longitude":-8.6738981},"telephone":"+351226187904","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"08:00","closes":"19:00"}},{"@type":"Bakery","name":"Matosinhos","branchOf":{"@id":"https:\/\/padariaribeiro.com\/#organization"},"address":{"@type":"PostalAddress","addressCountry":"PT","streetAddress":"Rua 1º de Maio, 196","postalCode":"4450-230","addressLocality":"Matosinhos"},"geo":{"@type":"GeoCoordinates","latitude":41.182877,"longitude":-8.682086},"telephone":"+351229382207","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"08:00","closes":"19:00"}},{"@type":"Bakery","name":"Maia","branchOf":{"@id":"https:\/\/padariaribeiro.com\/#organization"},"address":{"@type":"PostalAddress","addressCountry":"PT","streetAddress":"Travessa Padre António, 21","postalCode":"4470-136","addressLocality":"Maia"},"geo":{"@type":"GeoCoordinates","latitude":41.2330623,"longitude":-8.6214349},"telephone":"+351220119585","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"08:00","closes":"19:00"}},{"@type":"Bakery","name":"Time Out Market Porto","branchOf":{"@id":"https:\/\/padariaribeiro.com\/#organization"},"address":{"@type":"PostalAddress","addressCountry":"PT","streetAddress":"Ala Sul da Estação Ferroviária de São Bento, Praça de Almeida Garrett","postalCode":"4000-069","addressLocality":"Porto"},"geo":{"@type":"GeoCoordinates","latitude":41.1450257,"longitude":-8.6098006},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"00:00"}}]}</script>
+<style id="jarallax-clip-0" type="text/css">#jarallax-container-0 {
+           clip: rect(0 1920px 606.953125px 0);
+           clip: rect(0, 1920px, 606.953125px, 0);
+        }</style><style data-offline="1">/* offline: ensure content is visible regardless of JS init state */
+html,body{opacity:1!important;visibility:visible!important}
+.page-loader,.site-loader,[class*='loading-screen'],[id*='loading-screen']{display:none!important}
+</style></head>
+<body class="homepage" data-aos-delay="100" data-aos-duration="450" data-aos-easing="ease-in-out-quad">
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-NLWMXQQH" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<div id="app">
+<header class="top-bar top-bar--style-1 top-bar--logo-esquerda top-bar--menu-direita" id="top-bar">
+<div class="top-bar__bg" style="background:rgba(0,0,0,.85);"></div>
+<div class="container position-relative">
+<div class="row align-items-center justify-content-between no-gutters">
+<a class="top-bar__logo site-logo" href="https://padariaribeiro.com/" title="Homepage">
+<img alt="padaria-ribeiro" class="img-fluid" src="assets/5f8d09d4feef16a7_site_logo.svg"/>
+</a>
+<a class="top-bar__navigation-toggler top-bar__navigation-toggler--light" href="javascript:void(0);" id="top-bar__navigation-toggler" title="Menu"><span></span></a>
+<div class="top-bar__inner" id="top-bar__inner">
+<div>
+<nav class="top-bar__navigation navigation" id="top-bar__navigation" role="navigation">
+<ul>
+<li class="active"><a href="https://padariaribeiro.com/inicio/" title="Home">Home</a></li><li><a href="https://padariaribeiro.com/historia/" title="História">História</a></li><li><a href="https://padariaribeiro.com/produtos/" title="Produtos">Produtos</a></li><li><a href="https://padariaribeiro.com/catering/" title="Catering">Catering</a></li><li><a href="https://padariaribeiro.com/imprensa/" title="Imprensa">Imprensa</a></li><li><a href="https://padariaribeiro.com/oportunidades/" title="Oportunidades">Oportunidades</a></li><li><a href="https://padariaribeiro.com/contactos/" title="Contactos">Contactos</a></li> </ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main role="main">
+<div class="start-screen start-screen--style-2" id="start-screen"><div class="start-screen__bg" id="start-screen__bg" style="background-color:#2a2a2a;"></div><div class="start-screen__content-container" id="start-screen__content-container"><div class="start-screen__content__item is-active align-items-center"><div class="container"><div class="row"><div class="col-12 col-md-5"></div><div class="col-12 col-md-7"><h1 class="__title"><span class="sr-only">Padaria e Pastelaria Tradicional no Porto: </span><p>Tradição<br/>desde 1878</p></h1></div></div></div></div></div></div><section class="section"><div class="container-fluid"><div class="product-promo product-promo--style-2"><div class="__inner"><div class="product-promo__grid"><div class="__item" data-y="2"><figure class="__image"><img alt="pastelaria--doce" height="1298" src="assets/0441da2ed538c574_16115792820_pq203009.webp" width="800"/></figure><div class="__content"><h3 class="__title"><strong>Pastelaria </strong><br/>Doce</h3></div><a class="__link" href="https://padariaribeiro.com/produtos/#pastelaria-doce" title="Pastelaria  Doce"></a></div><div class="__item"><figure class="__image"><img alt="salgados---sandwich-" height="566" src="assets/89d0becddf662da0_16115788450_pq102043.webp" width="850"/></figure><div class="__content"><h3 class="__title"><strong>Salgados </strong><br/>&amp; Sandwich<br/></h3></div><a class="__link" href="https://padariaribeiro.com/produtos/#salgados-e-sandwich" title="Salgados  &amp; Sandwich "></a></div><div class="__item"><figure class="__image"><img alt="biscoitos--tradicionais" height="566" src="assets/52a8c7b8cbe23ce0_16115918560_pq203215.webp" width="850"/></figure><div class="__content"><h3 class="__title"><strong>Biscoitos</strong> <br/>Tradicionais</h3></div><a class="__link" href="https://padariaribeiro.com/produtos/#biscoitos-tradicionais" title="Biscoitos  Tradicionais"></a></div><div class="__item"><figure class="__image"><img alt="padaria-" height="566" src="assets/88b19b8f408138e2_16115788920_pq102016.webp" width="850"/></figure><div class="__content"><h3 class="__title"><strong>Padaria</strong><br/></h3></div><a class="__link" href="https://padariaribeiro.com/produtos/#padaria" title="Padaria "></a></div><div class="__item"><figure class="__image"><img alt="tartes---bolos-" height="566" src="assets/5e75e628361217e5_16115789100_pq102031.webp" width="850"/></figure><div class="__content"><h3 class="__title"><strong>Tartes </strong><br/>&amp; Bolos<br/></h3></div><a class="__link" href="https://padariaribeiro.com/produtos/#tartes-e-bolos" title="Tartes  &amp; Bolos "></a></div></div></div></div></div></section><section class="section"><div class="container"><div class="special-offer special-offer--style-3 aos-init aos-animate" data-aos="fade" data-aos-duration="600" data-aos-offset="70"><div class="row align-items-center"><div class="col-12 col-lg-6"><figure class="image"><img alt="catering-para-diferentes-tipos-de-eventos" class="img-fluid lazy loaded" data-was-processed="true" height="658" src="assets/7cd0770b3f15223c_16130662440_cateringcompressed.webp" width="927"/></figure></div><div class="col-12 my-3 d-lg-none"></div><div class="col-12 col-lg-6"><h2 class="text"><span>Catering para diferentes tipos de eventos!</span></h2></div></div></div></div></section><section class="section section--no-pt"><div class="container"><div class="section-heading section-heading--center aos-init aos-animate" data-aos="fade"><h2 class="__title">Serviço <strong>Catering</strong></h2><p>Oferecemos um serviço de catering no qual procuramos conciliar uma cuidadosa prestação de serviços com a simplicidade, originalidade e qualidade que nos caracterizam.</p></div><div class="feature feature--style-3"><div class="__inner"><div class="row"><div class="col-4 col-sm-4 col-lg-2"><div class="__item text-center aos-init aos-animate" data-aos="fade" data-aos-delay="100" data-aos-offset="100"><i class="__ico"><img alt="congressos" class="img-fluid lazy loaded" data-was-processed="true" src="assets/3b9db26833e0f9ed_15968105300_icon-home-1.svg"/></i><h5 class="__title">Congressos</h5></div></div><div class="col-4 col-sm-4 col-lg-2"><div class="__item text-center aos-init aos-animate" data-aos="fade" data-aos-delay="100" data-aos-offset="100"><i class="__ico"><img alt="eventos-empresariais" class="img-fluid lazy loaded" data-was-processed="true" src="assets/b02177371492706f_15968105760_icon-home-2.svg"/></i><h5 class="__title">Eventos Empresariais</h5></div></div><div class="col-4 col-sm-4 col-lg-2"><div class="__item text-center aos-init aos-animate" data-aos="fade" data-aos-delay="100" data-aos-offset="100"><i class="__ico"><img alt="coffee-breaks" class="img-fluid lazy loaded" data-was-processed="true" src="assets/81e0d553d998c3f0_15968110400_icon-home-3.svg"/></i><h5 class="__title">Coffee Breaks</h5></div></div><div class="col-4 col-sm-4 col-lg-2"><div class="__item text-center aos-init aos-animate" data-aos="fade" data-aos-delay="100" data-aos-offset="100"><i class="__ico"><img alt="almocos-buffet" class="img-fluid lazy loaded" data-was-processed="true" src="assets/f390c01dbbdc53f7_15968111950_icon-home-4.svg"/></i><h5 class="__title">Almoços Buffet</h5></div></div><div class="col-4 col-sm-4 col-lg-2"><div class="__item text-center aos-init aos-animate" data-aos="fade" data-aos-delay="100" data-aos-offset="100"><i class="__ico"><img alt="casamentos" class="img-fluid lazy loaded" data-was-processed="true" src="assets/2e4828dd04461ed5_15968127490_icon-home-5.svg"/></i><h5 class="__title">Casamentos</h5></div></div><div class="col-4 col-sm-4 col-lg-2"><div class="__item text-center aos-init aos-animate" data-aos="fade" data-aos-delay="100" data-aos-offset="100"><i class="__ico"><img alt="batizados" class="img-fluid lazy loaded" data-was-processed="true" src="assets/b6ca8c778cb97709_15968127790_icon-home-6.svg"/></i><h5 class="__title">Batizados</h5></div></div></div><div class="row"><div class="col-12 text-center"><p><a class="custom-btn custom-btn--medium custom-btn--style-1" href="/catering/" title="Peça-nos uma proposta">Peça-nos uma proposta</a></p></div></div></div></div></div></section><section class="section section--dark-bg jarallax" data-img-position="50% 80%" data-speed="0.5"><div class="container"><div class="row"><div class="col-12 col-md-8 col-lg-6"><div class="aos-init aos-animate" data-aos="fade-left" data-aos-duration="700" data-aos-easing="ease-out-quad"><h2 class="text-white"><strong>A nossa tradição</strong><br/>ainda é o que era</h2><div class="rich-content text-white">A história da Padaria Ribeiro começou a ser escrita em 1878, na antiga Praça do Pão, na cidade do Porto. Na altura, os fundadores imprimiram ao estabelecimento a tradição e a qualidade dos produtos - características identitárias que os seus sucessores souberam manter vivas até hoje. Tantos anos depois, a Padaria Ribeiro continua a ser uma referência na pastelaria e padaria portuense.</div><p><a class="custom-btn custom-btn--medium custom-btn--style-4" href="/contactos/" title="Contacte-nos">Contacte-nos</a></p></div></div></div></div><div class="py-4 py-lg-10"></div><div id="jarallax-container-0" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: -20;"><img alt="A nossa tradiçãoainda é o que era" class="jarallax-img" height="1000" src="assets/19674da1beccd962_16115796770_pq203191.webp" style="object-fit: cover; object-position: 50% 80%; max-width: none; position: fixed; top: 0px; left: 0px; width: 1920px; height: 843.477px; overflow: hidden; pointer-events: none; margin-top: 118.262px; transform: translate3d(0px, -336.848px, 0px);" width="1600"/></div></section><section class="section section--no-pb"><div class="container"><div class="section-heading section-heading--center aos-init aos-animate" data-aos="fade"><h2 class="__title"><p>Os nossos <strong>Clássicos</strong></p></h2><p>As receitas que nos definem. Dos croissants acabados de sair do forno às inconfundíveis empadas de vitela, sem esquecer a tradição dos nossos biscoitos artesanais. Os favoritos de quem nos visita há mais de um século.</p></div></div></section><section class="section section--no-pt section--no-pb"><div class="gallery gallery--style-3"><div class="__inner"><div class="row no-gutters js-slick-3 slick-initialized slick-slider"><div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 1920px; transform: translate3d(0px, 0px, 0px);"><div aria-hidden="false" class="slick-slide slick-current slick-active" data-slick-index="0" style="width: 480px;"><div><div class="__item" style="width: 100%; display: inline-block;"><figure class="__image"><img alt="croissants" class="lazy loaded" data-was-processed="true" height="750" src="assets/0f590f9afe725859_16142559901_prod9.webp" width="850"/><div class="__content"><h5 class="__content__title text-center">Croissants</h5></div><a class="__link" data-fancybox="gallery" href="https://padariaribeiro.com/images/16142559901_prod9.webp" tabindex="0" title="Croissants"></a></figure></div></div></div><div aria-hidden="false" class="slick-slide slick-active" data-slick-index="1" style="width: 480px;"><div><div class="__item" style="width: 100%; display: inline-block;"><figure class="__image"><img alt="sortido-de-biscoitos" class="lazy loaded" data-was-processed="true" height="750" src="assets/b850d2c08cb2b843_16116005850_biscoitos2-copy2.webp" width="850"/><div class="__content"><h5 class="__content__title text-center">Sortido de biscoitos</h5></div><a class="__link" data-fancybox="gallery" href="https://padariaribeiro.com/images/16116005850_biscoitos2-copy2.webp" tabindex="0" title="Sortido de biscoitos"></a></figure></div></div></div><div aria-hidden="false" class="slick-slide slick-active" data-slick-index="2" style="width: 480px;"><div><div class="__item" style="width: 100%; display: inline-block;"><figure class="__image"><img alt="bolo-de-massa-folhada-estaladica-com-doce-de-ovos-e-frutos-vermelhos" class="lazy loaded" data-was-processed="true" height="750" src="assets/159c20e299f29d7c_16142563741_prod16.webp" width="850"/><div class="__content"><h5 class="__content__title text-center">Bolo de Massa folhada estaladiça com doce de ovos e frutos vermelhos</h5></div><a class="__link" data-fancybox="gallery" href="https://padariaribeiro.com/images/16142563741_prod16.webp" tabindex="0" title="Bolo de Massa folhada estaladiça com doce de ovos e frutos vermelhos"></a></figure></div></div></div><div aria-hidden="false" class="slick-slide slick-active" data-slick-index="3" style="width: 480px;"><div><div class="__item" style="width: 100%; display: inline-block;"><figure class="__image"><img alt="bola-de-carne-com-os-melhores-enchidos" class="lazy loaded" data-was-processed="true" height="565" src="assets/7ed315afec8dc991_16142687531_image7.webp" width="850"/><div class="__content"><h5 class="__content__title text-center">Bola de Carne com os melhores enchidos</h5></div><a class="__link" data-fancybox="gallery" href="https://padariaribeiro.com/images/16142687531_image7.webp" tabindex="0" title="Bola de Carne com os melhores enchidos"></a></figure></div></div></div></div></div></div></div></div></section><section class="section section--no-pt section--gray-bg"><div class="container"><div class="recipes"><div class="__inner"><div class="row no-gutters js-slick-2"><div class="col-12 col-lg-6 p-0"><div class="__item"><a class="row no-gutters align-items-center" data-caption="&lt;h6 class='text-color-white'&gt;Empadas e Folar&lt;/h6&gt;&lt;p&gt;Tradicionais Empadas de Vitela ou Frango e o Folar Transmontano&lt;/p&gt;" data-fancybox="product" href="https://padariaribeiro.com/images/16142559431_prod8.webp" title="Empadas e Folar"><div class="col-12 col-md-6 align-self-md-stretch"><figure class="__image"><img alt="empadas-e-folar" class="lazy loaded" data-was-processed="true" height="750" src="assets/62e9085b0ee7be5b_16142559431_prod8.webp" width="850"/></figure></div><div class="col-12 col-md-6"><div class="__content"><h3 class="__title h5">Empadas e Folar</h3><p>Tradicionais Empadas de Vitela ou Frango e o Folar Transmontano</p></div></div></a></div></div><div class="col-12 col-lg-6 p-0"><div class="__item"><a class="row no-gutters align-items-center" data-caption="&lt;h6 class='text-color-white'&gt;Bolo de Noz&lt;/h6&gt;&lt;p&gt;Com Noz, Cenoura e Gengibre&lt;/p&gt;" data-fancybox="product" href="https://padariaribeiro.com/images/16142564201_prod17.webp" title="Bolo de Noz"><div class="col-12 col-md-6 align-self-md-stretch"><figure class="__image"><img alt="bolo-de-noz" class="lazy loaded" data-was-processed="true" height="750" src="assets/8a902cfc19730fa7_16142564201_prod17.webp" width="850"/></figure></div><div class="col-12 col-md-6"><div class="__content"><h3 class="__title h5">Bolo de Noz</h3><p>Com Noz, Cenoura e Gengibre</p></div></div></a></div></div><div class="col-12 col-lg-6 p-0"><div class="__item"><a class="row no-gutters align-items-center flex-md-row-reverse" data-caption="&lt;h6 class='text-color-white'&gt;Tarte de amêndoa da Avó&lt;/h6&gt;&lt;p&gt;Com amêndoas tostadas e crocantes.&lt;/p&gt;" data-fancybox="product" href="https://padariaribeiro.com/images/16115797200_pq102063.webp" title="Tarte de amêndoa da Avó"><div class="col-12 col-md-6 align-self-md-stretch"><figure class="__image"><img alt="tarte-de-amendoa-da-avo" class="lazy loaded" data-was-processed="true" height="565" src="assets/989343e5fe2afaeb_16115797200_pq102063.webp" width="850"/></figure></div><div class="col-12 col-md-6"><div class="__content"><h3 class="__title h5">Tarte de amêndoa da Avó</h3><p>Com amêndoas tostadas e crocantes.</p></div></div></a></div></div><div class="col-12 col-lg-6 p-0"><div class="__item"><a class="row no-gutters align-items-center flex-md-row-reverse" data-caption="&lt;h6 class='text-color-white'&gt;Trilogia de chocolates&lt;/h6&gt;&lt;p&gt;3 camadas de chocolate: negro, branco e chocolate de leite.&lt;/p&gt;" data-fancybox="product" href="https://padariaribeiro.com/images/16115797490_pq102088.webp" title="Trilogia de chocolates"><div class="col-12 col-md-6 align-self-md-stretch"><figure class="__image"><img alt="trilogia-de-chocolates" class="lazy loaded" data-was-processed="true" height="565" src="assets/cab42b931fd4a907_16115797490_pq102088.webp" width="850"/></figure></div><div class="col-12 col-md-6"><div class="__content"><h3 class="__title h5">Trilogia de chocolates</h3><p>3 camadas de chocolate: negro, branco e chocolate de leite.</p></div></div></a></div></div></div></div></div></div></section><section class="section section--no-pt section--no-pb player-banner" data-speed="0.4"><video controls="" id="video-banner-40" loop="" muted="" playsinline="" poster="assets/5da45ae7bc218aba_padaria_ribeiro_2016_poster.webp" preload="none"><source src="assets/7401841c9d7673b1_padaria_ribeiro_2016_web.webm" type="video/webm"/><source src="assets/bd9e5b4c45821531_padaria_ribeiro_2016_web.mp4" type="video/mp4"/></video><script>(function(){var v=document.getElementById("video-banner-40");var ehDesktop=window.matchMedia("(min-width: 769px)").matches;var criar=function(){if(v.querySelector("source"))return;v.insertAdjacentHTML("beforeend",'<source src="https://padariaribeiro.com/video/padaria_ribeiro_2016_web.webm" type="video/webm">');v.insertAdjacentHTML("beforeend",'<source src="https://padariaribeiro.com/video/padaria_ribeiro_2016_web.mp4" type="video/mp4">');v.load();if(!ehDesktop)return;var tentativas=0,iv=setInterval(function(){tentativas++;if(v.readyState>=3){v.play().catch(function(){});clearInterval(iv);}else if(tentativas>100){clearInterval(iv);}},300);};if("IntersectionObserver" in window){var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){criar();io.disconnect();}});},{rootMargin:"500px"});io.observe(v);}else{criar();}})();</script></section> <script async="" src="assets/adf03f7ab87622fa_lazyload.min.js" type="text/javascript"></script></main>
+<div id="fb-root"></div>
+<script>
+            window.fbAsyncInit = function() {
+              FB.init({
+                xfbml            : true,
+                version          : 'v9.0'
+              });
+            };
+
+            (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/pt_PT/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+          	}(document, 'script', 'facebook-jssdk'));</script>
+<div attribution="setup_tool" class="fb-customerchat" logged_in_greeting="Olá! Em que podemos ajudar?" logged_out_greeting="Olá! Em que podemos ajudar?" page_id="147137685357051" theme_color="#3b5998">
+</div>
+<style>
+								@media (min-width: 768px) { .footer-block--logo{order:10 !important;}.footer-block--lojas{order:20 !important;}.footer-block--address{order:30 !important;}.footer-block--divider{order:35 !important;}.footer-block--social-lang{order:40 !important;}.footer-block--social-lang{align-self:flex-start !important;margin-top:24px !important;margin-bottom:20px !important;}.footer-block--legal{order:50 !important;}.footer-block--financing{order:60 !important;} }			</style>
+<footer class="footer--style-3" id="footer">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-12 col-md-4 footer-block footer-block--lojas">
+<div class="footer__item">
+<span class="footer__label">Lojas:</span>
+<nav class="navigation toggle-address" id="footer__navigation">
+<ul>
+<li class="active"><a description="Praça Guilherme Gomes Fernandes, 21&lt;br /&gt;
+4050-526 Porto&lt;br /&gt;Telefone: &lt;a href='tel:+351222005067' style='color:inherit;text-decoration:none;'&gt;222 005 067  &lt;/a&gt;" href="javascript:void(0);" title="Porto (Baixa)">Porto (Baixa)</a></li><li><a description="Rua João de Barros, 313&lt;br /&gt;
+4150-416 Porto&lt;br /&gt;Telefone: &lt;a href='tel:+351226187904' style='color:inherit;text-decoration:none;'&gt;226 187 904&lt;/a&gt;" href="javascript:void(0);" title="Porto (Foz)">Porto (Foz)</a></li><li><a description="Rua 1º de Maio, 196&lt;br /&gt;
+4450-230 Matosinhos&lt;br /&gt;Telefone: &lt;a href='tel:+351229382207' style='color:inherit;text-decoration:none;'&gt;229 382 207&lt;/a&gt;" href="javascript:void(0);" title="Matosinhos">Matosinhos</a></li><li><a description="Travessa Padre António, 21&lt;br /&gt;
+4470-136 Maia&lt;br /&gt;Telefone: &lt;a href='tel:+351220119585' style='color:inherit;text-decoration:none;'&gt;220 119 585&lt;/a&gt;" href="javascript:void(0);" title="Maia">Maia</a></li><li><a description="Ala Sul da Estação Ferroviária de São Bento&lt;br /&gt;
+Praça de Almeida Garrett&lt;br /&gt;
+4000-069 Porto" href="javascript:void(0);" title="Time Out Market Porto">Time Out Market Porto</a></li> </ul>
+</nav>
+</div>
+</div>
+<div class="col-12 col-md-4 footer-block footer-block--logo my-4 my-md-0">
+<div class="footer__item">
+<a class="site-logo" href="https://padariaribeiro.com/" title="Homepage">
+<img alt="padaria-ribeiro" class="img-fluid lazy loaded" data-was-processed="true" src="assets/5f8d09d4feef16a7_site_logo.svg"/>
+</a>
+</div>
+</div>
+<div class="col-12 col-md-4 footer-block footer-block--social-lang text-md-end">
+<div class="footer__item">
+<span class="footer__label footer__label--normal">Segue-nos em:</span>
+<div class="social-btns">
+<a href="https://www.facebook.com/PadariaRibeiro1878/" rel="noopener" target="_blank" title="Facebook"><i class="fontello-facebook"></i></a><a href="https://www.instagram.com/padaria.ribeiro/" rel="noopener" target="_blank" title="Instagram"><i class="fontello-instagram"></i></a> </div>
+</div>
+<div class="footer__item">
+<span class="footer__label footer__label--normal">Idioma:</span>
+<div class="lang-switch">
+<a class="active" href="https://padariaribeiro.com/" title="pt">pt</a><a href="https://padariaribeiro.com/home/" title="en">en</a> </div>
+</div>
+<div class="footer__item">
+<span class="footer__label footer__label--normal">Também disponível em:</span>
+<span class="__copy"><a href="https://glovoapp.com/pt/pt/porto/stores/pastelaria-ribeiro-opo" rel="nofollow noopener" target="_blank" title="Glovo">Glovo</a> | <a href="https://www.toogoodtogo.com/pt/find/porto/padariaribeiro/bakedgoods/pastelariaesalgados-72202507055348352" rel="nofollow noopener" target="_blank" title="Too Good To Go">Too Good To Go</a></span>
+</div>
+</div>
+<div class="col-12 footer-block footer-block--divider">
+<hr class="footer-divider"/>
+</div>
+<div class="col-12 col-md-4 footer-block footer-block--address mt-4 mt-md-0">
+<div class="footer__item">
+<address>
+<span class="text-color-primary">Porto (Baixa)</span>
+<p class="m-0">Praça Guilherme Gomes Fernandes, 21<br/>
+4050-526 Porto<br/>Telefone: <a href="tel:+351222005067" style="color:inherit;text-decoration:none;">222 005 067  </a></p>
+</address>
+</div>
+</div>
+<div class="col-12 col-md-4 footer-block footer-block--legal mt-4 mt-md-0">
+<div class="footer__item">
+<span class="__copy"><a href="https://padariaribeiro.com/termos-condicoes/" title="Termos e Condições">Termos e Condições</a><br/><a href="https://padariaribeiro.com/privacidade/" title="Política de Privacidade">Política de Privacidade</a><br/><a href="https://padariaribeiro.com/cookies/" title="Política de Cookies">Política de Cookies</a><br/><a href="https://padariaribeiro.com/canal-denuncias/" title="Canal de Denúncias">Canal de Denúncias</a><br/><a href="https://www.livroreclamacoes.pt/inicio" rel="nofollow noopener" target="_blank" title="Livro de Reclamações">Livro de Reclamações</a></span>
+</div>
+</div>
+<div class="col-12 col-md-4 footer-block footer-block--financing mt-4 mt-md-0">
+<div class="footer__item">
+<span class="__copy">
+								Projeto cofinanciado pelo Programa de financiamento "Porto Tradição".<br/>
+								©2026 Padaria Ribeiro - Marca Registada</span>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div id="btn-to-top-wrap" style="display: none;">
+<a class="circled" data-visible-offset="800" href="javascript:void(0);" id="btn-to-top"></a>
+</div>
+<script src="assets/fc9a93dd241f6b04_jquery.min.js" type="text/javascript"></script>
+<script src="assets/95a1c8648438e2b5_device.min.js" type="text/javascript"></script>
+<script src="assets/1d797391b663bd85_main.min.js" type="text/javascript"></script>
+<script src="assets/db9d6cf3c1c4b047_owl.carousel.js" type="text/javascript"></script>
+<script src="assets/a5e76862275bc126_jactions.js" type="text/javascript"></script>
+<div aria-label="Consentimento de cookies" aria-live="polite" id="cookie-consent" role="dialog" style="display: block;">
+<div class="cookie-consent__inner">
+<p class="cookie-consent__text">
+			Este site utiliza cookies para melhorar a sua experiência e, mediante o seu consentimento, para fins analíticos. Pode aceitar todos os cookies ou recusar os não essenciais.			<a href="https://padariaribeiro.com/cookies/">Saber mais</a>
+</p>
+<div class="cookie-consent__actions">
+<button class="cookie-consent__reject" id="cookie-consent-reject" type="button">Recusar não essenciais</button>
+<button class="cookie-consent__accept" id="cookie-consent-accept" type="button">Aceitar todos</button>
+</div>
+</div>
+</div>
+<script defer="" src="assets/69e1bf8e3b07e9e5_cookie-consent.js"></script>
+
+<script data-offline-fix="1">(function(){
+var IS_CSR = false;
+var resolveLocal = window.__resolveLocal || function(){return null;};
+var rewriteSrcset = window.__rewriteSrcset || function(s){return s;};
+function fixImg(el){
+  if (!el || el.tagName !== 'IMG') return;
+  var src = el.getAttribute('src');
+  var loc = resolveLocal(src);
+  if (loc && src !== loc) el.setAttribute('src', loc);
+  var ss = el.getAttribute('srcset');
+  if (ss) {
+    var nss = rewriteSrcset(ss);
+    if (nss !== ss) el.setAttribute('srcset', nss);
+  }
+}
+function fixAll(){ document.querySelectorAll('img').forEach(fixImg); }
+function hasSlideOffset(t){
+  // True if a transform indicates a 'parked off-screen' starting
+  // state: translation in px (>= 30) or % (>= 5), or a matrix
+  // with non-zero translation. Returns false for crossfade-only
+  // companions like scale(0.9) or pure centering translateX(-50%).
+  if (!t || t === 'none') return false;
+  // matrix(a,b,c,d,tx,ty) — parse tx/ty; matrix3d & friends → assume slide.
+  var matMatch = t.match(/matrix\(([^)]+)\)/);
+  if (matMatch) {
+    var parts = matMatch[1].split(',').map(function(x){return parseFloat(x.trim());});
+    if (parts.length === 6) {
+      if (Math.abs(parts[4]) >= 30 || Math.abs(parts[5]) >= 30) return true;
+    } else { return true; }
+  }
+  if (/matrix3d/i.test(t)) return true;
+  var px = t.match(/(-?\d+\.?\d*)px/g) || [];
+  for (var i = 0; i < px.length; i++) {
+    if (Math.abs(parseFloat(px[i])) >= 30) return true;
+  }
+  var pct = t.match(/(-?\d+\.?\d*)%/g) || [];
+  for (var j = 0; j < pct.length; j++) {
+    if (Math.abs(parseFloat(pct[j])) >= 5) return true;
+  }
+  return false;
+}
+function isHiddenStart(s){
+  // True if the element's inline style is parked at a 'before'
+  // animation state. opacity:0 alone is ambiguous (could be a
+  // crossfade companion); pair it with a slide transform OR an
+  // explicit visibility:hidden (GSAP/SplitType signature) to be
+  // confident it's a scroll-reveal waiting to fire.
+  if (s.opacity !== '0' && s.visibility !== 'hidden') return false;
+  if (s.visibility === 'hidden') return true;
+  return hasSlideOffset(s.transform) || hasSlideOffset(s.translate);
+}
+function revealEl(el){
+  var s = el.style;
+  s.opacity = '1';
+  if (s.visibility === 'hidden') s.visibility = 'visible';
+  if (s.transform) s.transform = 'none';
+  if (s.translate) s.translate = 'none';
+  if (s.rotate)    s.rotate = 'none';
+  if (s.scale)     s.scale = 'none';
+  if (s.pointerEvents === 'none') s.pointerEvents = '';
+}
+function snapReveal(){
+  // Safety net: any 'before-state' element still hidden gets
+  // forced visible. Used as a deadline pass for non-CSR mode
+  // (after GSAP/etc had a chance to play) and as a final guard.
+  // Skip pinned-chain elements — same reason as findScrollAnchor.
+  var n = 0;
+  document.querySelectorAll('[style]').forEach(function(el){
+    if (!isHiddenStart(el.style)) return;
+    if (isInsideFixed(el)) return;
+    revealEl(el); n++;
+  });
+  if (window.console && n) console.log('[offline-fix] snap-revealed', n);
+}
+function isInsideFixed(el){
+  var p = el;
+  while (p && p !== document.documentElement) {
+    if (getComputedStyle(p).position === 'fixed') return true;
+    p = p.parentElement;
+  }
+  return false;
+}
+function findScrollAnchor(el){
+  // Pinned-narrative sections (one position:fixed ancestor wrapping
+  // many sequenced headings the live JS reveals one-by-one across
+  // scroll progress) can't be orchestrated offline — revealing all
+  // of them at once produces an overlapping mess. Skip them: leave
+  // the parked state intact, matching the live site at scroll=0.
+  // For sticky chains, observe the sticky container itself (fires
+  // when the user has scrolled past its stuck threshold).
+  if (isInsideFixed(el)) return null;
+  var p = el;
+  while (p && p !== document.documentElement) {
+    if (getComputedStyle(p).position === 'sticky') return p;
+    p = p.parentElement;
+  }
+  return el;
+}
+function progressiveReveal(){
+  // CSR mode: scripts stripped → no GSAP/IO is going to fire.
+  // Mimic a scroll-driven reveal: each parked element gets a
+  // CSS transition + IntersectionObserver. As it enters viewport
+  // we transition to the 'after' state, with a small stagger by
+  // document order so SplitType chars still feel letter-by-letter.
+  var targets = [];
+  document.querySelectorAll('[style]').forEach(function(el){
+    if (isHiddenStart(el.style)) targets.push(el);
+  });
+  if (!targets.length) return;
+  var EASE = 'cubic-bezier(.16,1,.3,1)';
+  targets.forEach(function(el){
+    el.style.transition =
+      'opacity .6s ' + EASE + ', transform .6s ' + EASE + ', ' +
+      'translate .6s ' + EASE + ', scale .6s ' + EASE + ', ' +
+      'visibility 0s linear';
+  });
+  if (typeof IntersectionObserver === 'undefined') {
+    targets.forEach(revealEl);
+    return;
+  }
+  // Group targets by their scroll anchor. Anchors in sticky
+  // sections share one observation point — when that anchor
+  // intersects, we reveal all its parked descendants.
+  // Targets with null anchor (inside position:fixed) are skipped.
+  var groups = new Map();
+  targets.forEach(function(el){
+    var anchor = findScrollAnchor(el);
+    if (!anchor) return;
+    if (!groups.has(anchor)) groups.set(anchor, []);
+    groups.get(anchor).push(el);
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (!entry.isIntersecting) return;
+      var children = groups.get(entry.target) || [entry.target];
+      children.sort(function(a, b){
+        var pos = a.compareDocumentPosition(b);
+        return (pos & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1;
+      });
+      children.forEach(function(child, i){
+        var delay = Math.min(i * 18, 700);
+        setTimeout(function(){ revealEl(child); }, delay);
+      });
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -8% 0px' });
+  groups.forEach(function(_, anchor){ io.observe(anchor); });
+  // Deadline guard: anything that never intersects still gets revealed.
+  setTimeout(snapReveal, 8000);
+}
+function initUnicornStudio(){
+  // Captured page already has the loaded UMD script + the inline
+  // loader that says `if(!window.UnicornStudio)…`. The loader bails
+  // because UnicornStudio is already defined, so init() never runs.
+  if (window.UnicornStudio && typeof window.UnicornStudio.init === 'function'
+      && !window.UnicornStudio.isInitialized) {
+    try { window.UnicornStudio.init(); window.UnicornStudio.isInitialized = true; }
+    catch(e){ if(window.console) console.warn('[offline-fix] UnicornStudio init failed:', e); }
+  }
+}
+// Initial img sweep + observer for hydration-time updates
+fixAll();
+var obs = new MutationObserver(function(muts){
+  for (var i = 0; i < muts.length; i++) {
+    var m = muts[i];
+    if (m.type === 'attributes' && m.target.tagName === 'IMG') fixImg(m.target);
+    for (var j = 0; j < m.addedNodes.length; j++) {
+      var n = m.addedNodes[j];
+      if (n && n.nodeType === 1) {
+        if (n.tagName === 'IMG') fixImg(n);
+        if (n.querySelectorAll) n.querySelectorAll('img').forEach(fixImg);
+      }
+    }
+  }
+});
+obs.observe(document, {childList:true, subtree:true,
+  attributes:true, attributeFilter:['src','srcset']});
+setTimeout(fixAll, 1000);
+setTimeout(fixAll, 3000);
+var go = function(){
+  // CSR: scripts stripped, so 'before-state' elements stay parked
+  // forever unless we do something. Use IntersectionObserver to
+  // reveal them progressively as the user scrolls — preserves the
+  // scroll-triggered animation feel for SplitType chars, etc.
+  // Non-CSR: GSAP/Framer may still play; let them, then catch any
+  // leftovers with a snap pass at 5 s.
+  if (IS_CSR) progressiveReveal();
+  else setTimeout(snapReveal, 5000);
+  initUnicornStudio();
+  setTimeout(initUnicornStudio, 500);
+  setTimeout(initUnicornStudio, 2000);
+};
+if (document.readyState === 'complete') go();
+else window.addEventListener('load', go);
+})();</script></body></html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System - Bakery Master</title>
+    
+    <!-- Tailwind CSS for rapid prototyping -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Grand Hotel from Copacabana, Open Sans for body, Inter for modern UI elements -->
+    <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Open+Sans:wght@300;400;600;700&family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Iconify for icons -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Grand Hotel"', 'cursive'],
+                        body: ['"Open Sans"', 'sans-serif'],
+                        ui: ['"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fffcf5',
+                            100: '#fff7e3',
+                            200: '#ffeac2',
+                            300: '#ffdb99',
+                            400: '#ffc366',
+                            500: '#ffab33',
+                            600: '#f7a235', // Copacabana Orange
+                            700: '#d97d26',
+                            800: '#9a0e00', // Copacabana Red
+                            900: '#7a0a00',
+                        },
+                        surface: {
+                            light: '#ffffff',
+                            muted: '#f8f9fa',
+                            dark: '#1a1a1a'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'blob': 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '1', filter: 'drop-shadow(0 0 15px rgba(255,255,255,0.6))' },
+                            '50%': { opacity: '.7', filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.2))' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Styling for a White, Luminous Aesthetic */
+        body {
+            background-color: #ffffff;
+            color: #333333;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Transparent Lettering / Outline Text - CRITICAL REQUEST */
+        .text-transparent-outline {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.15);
+            background-clip: text;
+        }
+        
+        .text-transparent-outline-bold {
+            color: transparent;
+            -webkit-text-stroke: 2px rgba(26, 26, 26, 0.9);
+        }
+
+        .text-transparent-outline-white {
+            color: transparent;
+            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.9);
+        }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #d97d26; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #9a0e00; }
+
+        /* Luminous Background effect for First Fold */
+        .hero-luminous-bg {
+            background: radial-gradient(circle at 50% 50%, rgba(255, 247, 227, 1) 0%, rgba(255, 255, 255, 1) 100%);
+            position: relative;
+        }
+
+        /* Button hover FX */
+        .btn-hover-fx {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-hover-fx::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: all 0.6s ease;
+        }
+        .btn-hover-fx:hover::before {
+            left: 100%;
+        }
+        .btn-hover-fx:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(247, 162, 53, 0.5);
+        }
+
+        /* Image Masking for creative display */
+        .mask-blob {
+            mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="black" d="M42.7,-73.4C55.9,-67.6,67.6,-56.9,76.5,-44.5C85.4,-32.1,91.5,-18.1,91.8,-3.9C92.2,10.3,86.8,24.8,78.2,37.3C69.6,49.8,57.7,60.3,44.2,67.9C30.7,75.5,15.3,80.2,0.5,79.4C-14.3,78.6,-28.7,72.4,-41.8,64.3C-54.9,56.1,-66.8,45.9,-75.4,33.1C-84,20.3,-89.4,4.8,-87.3,-9.9C-85.3,-24.5,-75.8,-38.3,-64.3,-48.9C-52.8,-59.5,-39.3,-66.9,-25.9,-72.1C-12.5,-77.3,0.8,-80.4,14.6,-78.9C28.4,-77.5,42.7,-73.4,42.7,-73.4Z" transform="translate(100 100)" /></svg>');
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.3s; }
+        .stagger-3 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body class="font-body antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Ambient Animated Blobs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
+        <div class="absolute top-[-10%] left-[-10%] w-[40rem] h-[40rem] bg-brand-100 rounded-full mix-blend-multiply filter blur-[100px] opacity-70 animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[35rem] h-[35rem] bg-brand-200 rounded-full mix-blend-multiply filter blur-[120px] opacity-60 animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-[45rem] h-[45rem] bg-orange-100 rounded-full mix-blend-multiply filter blur-[130px] opacity-50 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Navigation (Inspired by Copacabana but modernized) -->
+    <nav class="fixed w-full z-50 transition-all duration-300 glass" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer">
+                    <span class="font-display text-4xl text-brand-800 tracking-wide">Copacabana</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center font-ui font-medium text-sm text-gray-700 tracking-wide uppercase">
+                    <a href="#" class="hover:text-brand-600 transition-colors">Início</a>
+                    <a href="#typography" class="hover:text-brand-600 transition-colors">Tipografia</a>
+                    <a href="#components" class="hover:text-brand-600 transition-colors">Componentes</a>
+                    <a href="#colors" class="hover:text-brand-600 transition-colors">Cores</a>
+                </div>
+
+                <!-- CTA -->
+                <div class="hidden md:flex">
+                    <a href="#" class="btn-hover-fx bg-brand-800 text-white px-6 py-3 rounded-full font-ui text-sm font-semibold shadow-lg">
+                        Faça seu Pedido
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Primeira Dobra (Hero Section) - Focus on transparent lettering, white aesthetic, animations -->
+    <section class="relative min-h-screen flex items-center hero-luminous-bg pt-24 overflow-hidden">
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+            
+            <!-- Left Text Content -->
+            <div class="relative z-20">
+                <!-- Decorative Transparent Text in Background -->
+                <div class="absolute -top-20 -left-10 text-[180px] font-display text-transparent-outline leading-none select-none z-[-1] animate-pulse-glow">
+                    Design
+                </div>
+
+                <div class="opacity-0 animate-fade-in-up stagger-1">
+                    <span class="inline-block py-1 px-3 rounded-full bg-brand-100 text-brand-800 font-ui text-xs font-bold tracking-widest uppercase mb-6 border border-brand-200">
+                        Design System V2.0
+                    </span>
+                </div>
+                
+                <h1 class="text-6xl md:text-8xl font-display text-brand-800 leading-tight mb-6 opacity-0 animate-fade-in-up stagger-2">
+                    Tradição & <br>
+                    <span class="text-transparent-outline-bold text-7xl md:text-9xl ml-8 block">Inovação</span>
+                </h1>
+                
+                <p class="text-lg text-gray-600 mb-10 max-w-lg font-light leading-relaxed opacity-0 animate-fade-in-up stagger-3">
+                    Um design system luminoso, criativo e fora da caixa. Inspirado na herança da Padaria Copacabana e na elegância de layouts modernos de grid e glassmorphism.
+                </p>
+                
+                <div class="flex flex-wrap gap-4 opacity-0 animate-fade-in-up stagger-3">
+                    <button class="btn-hover-fx bg-brand-600 text-white px-8 py-4 rounded-full font-ui font-semibold shadow-xl flex items-center gap-2">
+                        Explorar Componentes
+                        <iconify-icon icon="lucide:arrow-right" class="text-xl"></iconify-icon>
+                    </button>
+                    <button class="glass px-8 py-4 rounded-full font-ui font-semibold text-brand-900 hover:bg-brand-50 transition-colors flex items-center gap-2">
+                        <iconify-icon icon="lucide:play-circle" class="text-xl"></iconify-icon>
+                        Ver Animações
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Visual Content (Bento/Collage approach) -->
+            <div class="relative h-[600px] hidden lg:block">
+                <!-- Large Image -->
+                <div class="absolute top-0 right-0 w-[450px] h-[550px] rounded-[40px] overflow-hidden shadow-2xl opacity-0 animate-fade-in-up stagger-2 transform rotate-2 hover:rotate-0 transition-transform duration-700">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1000&auto=format&fit=crop" alt="Bakery" class="w-full h-full object-cover">
+                    <!-- Glass overlay badge -->
+                    <div class="absolute bottom-6 left-6 right-6 glass p-4 rounded-2xl flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-brand-600 text-white flex items-center justify-center">
+                            <iconify-icon icon="lucide:coffee" class="text-2xl"></iconify-icon>
+                        </div>
+                        <div>
+                            <p class="font-ui font-bold text-sm text-brand-900">Qualidade Premium</p>
+                            <p class="font-ui text-xs text-gray-600">Desde 1970</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Element 1 -->
+                <div class="absolute top-20 -left-10 w-48 h-48 rounded-full overflow-hidden shadow-lg border-4 border-white animate-float opacity-0 animate-fade-in-up stagger-3 z-20">
+                    <img src="https://images.unsplash.com/photo-1555507036-ab1f40ce88fbf?q=80&w=500&auto=format&fit=crop" alt="Pastry" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Floating Element 2 -->
+                <div class="absolute bottom-32 -left-4 glass p-4 rounded-2xl shadow-xl animate-float opacity-0 animate-fade-in-up stagger-3 z-20" style="animation-delay: 2s;">
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=1" alt="User">
+                            <img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=2" alt="User">
+                            <img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=3" alt="User">
+                        </div>
+                        <div class="font-ui text-xs">
+                            <span class="font-bold text-brand-900 block">4.9/5 Estrelas</span>
+                            <span class="text-gray-500">Avaliações de Clientes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography Section -->
+    <section id="typography" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            
+            <div class="mb-16">
+                <h2 class="text-5xl font-display text-brand-800 mb-4">Tipografia Escultural</h2>
+                <p class="text-gray-500 font-ui max-w-2xl">Misturamos a elegância cursiva de "Grand Hotel" para títulos impactantes, a legibilidade de "Open Sans" para corpos de texto, e a modernidade de "Inter" para a interface.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16">
+                <!-- Grand Hotel -->
+                <div class="bg-brand-50 p-10 rounded-[30px] border border-brand-100 hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex justify-between items-start mb-10">
+                        <div>
+                            <p class="font-ui text-sm text-brand-600 font-bold uppercase tracking-wider mb-1">Display Font</p>
+                            <h3 class="font-ui text-2xl font-bold text-brand-900">Grand Hotel</h3>
+                        </div>
+                        <span class="text-5xl text-brand-200 font-display">Aa</span>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="border-b border-brand-200 pb-4">
+                            <p class="font-display text-6xl text-brand-800">Pães Quentinhos</p>
+                            <p class="font-ui text-xs text-gray-400 mt-2">Heading 1 - 60px</p>
+                        </div>
+                        <div class="border-b border-brand-200 pb-4">
+                            <p class="font-display text-5xl text-brand-800">Bolos e Doces</p>
+                            <p class="font-ui text-xs text-gray-400 mt-2">Heading 2 - 48px</p>
+                        </div>
+                        <div>
+                            <p class="font-display text-4xl text-brand-800">Faça sua Encomenda</p>
+                            <p class="font-ui text-xs text-gray-400 mt-2">Heading 3 - 36px</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inter & Open Sans -->
+                <div class="space-y-8">
+                    <!-- Open Sans -->
+                    <div class="bg-white p-8 rounded-[30px] shadow-[0_10px_40px_rgba(0,0,0,0.04)] border border-gray-100">
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <p class="font-ui text-sm text-gray-400 font-bold uppercase tracking-wider mb-1">Body Font</p>
+                                <h3 class="font-ui text-xl font-bold text-gray-900">Open Sans</h3>
+                            </div>
+                            <span class="text-3xl text-gray-200 font-body">Aa</span>
+                        </div>
+                        <p class="font-body text-base text-gray-600 leading-relaxed">
+                            A Padaria Copacabana traz o melhor da panificação para sua mesa. Utilizamos ingredientes selecionados e receitas tradicionais que passam de geração em geração.
+                        </p>
+                    </div>
+
+                    <!-- Inter -->
+                    <div class="bg-gray-900 p-8 rounded-[30px] shadow-2xl relative overflow-hidden">
+                        <!-- Decorative background text -->
+                        <div class="absolute -right-4 -bottom-4 text-[100px] font-ui font-black text-transparent-outline-white opacity-20 select-none">
+                            UI
+                        </div>
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <p class="font-ui text-sm text-gray-400 font-bold uppercase tracking-wider mb-1">Interface Font</p>
+                                    <h3 class="font-ui text-xl font-bold text-white">Inter</h3>
+                                </div>
+                                <span class="text-3xl text-gray-700 font-ui font-bold">Aa</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <button class="bg-white text-gray-900 font-ui font-semibold px-6 py-2 rounded-full text-sm">Botão Primário</button>
+                                <button class="border border-gray-600 text-white font-ui font-medium px-6 py-2 rounded-full text-sm">Secundário</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Colors Section with Bento Grid -->
+    <section id="colors" class="py-24 bg-brand-50 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="mb-16 text-center">
+                <h2 class="text-5xl font-display text-brand-800 mb-4">Paleta de Cores</h2>
+                <p class="text-gray-500 font-ui max-w-2xl mx-auto">Tons quentes e convidativos que remetem ao pão assado, ao café fresco e à tradição, contrastados com brancos luminosos.</p>
+            </div>
+
+            <!-- Bento Grid Color Palette -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[150px]">
+                
+                <!-- Primary Red (Copacabana) -->
+                <div class="col-span-2 row-span-2 rounded-[32px] bg-brand-800 p-8 flex flex-col justify-between text-white shadow-lg relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <p class="font-ui text-sm uppercase tracking-widest opacity-80">Primary Brand</p>
+                        <h3 class="font-display text-5xl mt-2">Copacabana Red</h3>
+                    </div>
+                    <div class="font-ui flex justify-between items-end relative z-10">
+                        <span class="text-2xl font-bold">#9A0E00</span>
+                        <div class="flex gap-2">
+                            <span class="w-8 h-8 rounded-full bg-brand-900 border-2 border-white/20"></span>
+                            <span class="w-8 h-8 rounded-full bg-[#cc1300] border-2 border-white/20"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Primary Orange -->
+                <div class="col-span-2 md:col-span-1 row-span-2 rounded-[32px] bg-brand-600 p-6 flex flex-col justify-between text-white shadow-lg">
+                    <div>
+                        <p class="font-ui text-xs uppercase tracking-widest opacity-80">Secondary</p>
+                        <h3 class="font-ui font-bold text-xl mt-1">Warm Orange</h3>
+                    </div>
+                    <span class="font-ui font-bold text-xl">#F7A235</span>
+                </div>
+
+                <!-- Light Accent -->
+                <div class="rounded-[32px] bg-brand-200 p-6 flex flex-col justify-between text-brand-900">
+                    <p class="font-ui font-bold">Soft Wheat</p>
+                    <span class="font-ui font-medium text-sm opacity-70">#FFEAC2</span>
+                </div>
+
+                <!-- Background Base -->
+                <div class="rounded-[32px] bg-brand-100 p-6 flex flex-col justify-between text-brand-900 border border-brand-200">
+                    <p class="font-ui font-bold">Cream</p>
+                    <span class="font-ui font-medium text-sm opacity-70">#FFF7E3</span>
+                </div>
+
+                <!-- Dark UI -->
+                <div class="col-span-2 rounded-[32px] bg-gray-900 p-6 flex flex-col justify-between text-white">
+                    <div class="flex justify-between items-center">
+                        <p class="font-ui font-bold">Dark Surface</p>
+                        <span class="font-ui font-medium opacity-70">#1A1A1A</span>
+                    </div>
+                    <p class="font-ui text-sm text-gray-400 mt-4">Usado para textos de alto contraste e elementos de UI premium.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Components & Interactions (Creative Details) -->
+    <section id="components" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="mb-16">
+                <h2 class="text-5xl font-display text-brand-800 mb-4">Componentes Dinâmicos</h2>
+                <p class="text-gray-500 font-ui max-w-2xl">Foco em interações suaves, glassmorphism e detalhes "fora da caixa".</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-12">
+                
+                <!-- Card Component -->
+                <div class="lg:col-span-1 space-y-8">
+                    <h3 class="font-ui font-bold text-lg text-gray-900 border-b pb-2">Product Card</h3>
+                    
+                    <div class="bg-white rounded-[32px] p-4 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-100 group hover:shadow-[0_20px_50px_rgba(247,162,53,0.15)] transition-all duration-500">
+                        <div class="relative h-48 rounded-[24px] overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?q=80&w=500&auto=format&fit=crop" alt="Cupcake" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <!-- Floating Tag -->
+                            <div class="absolute top-3 right-3 glass px-3 py-1 rounded-full font-ui text-xs font-bold text-brand-900">
+                                Mais Vendido
+                            </div>
+                        </div>
+                        <div class="px-2">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-display text-3xl text-brand-800">Cupcake Red Velvet</h4>
+                                <span class="font-ui font-bold text-lg text-brand-600">R$ 12</span>
+                            </div>
+                            <p class="font-body text-sm text-gray-500 mb-6">Massa fofinha com cobertura de cream cheese tradicional.</p>
+                            
+                            <button class="w-full py-3 rounded-full border-2 border-brand-600 text-brand-600 font-ui font-semibold group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300 flex justify-center items-center gap-2">
+                                Adicionar
+                                <iconify-icon icon="lucide:shopping-bag" class="text-lg"></iconify-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forms & Inputs -->
+                <div class="lg:col-span-2 space-y-8">
+                    <h3 class="font-ui font-bold text-lg text-gray-900 border-b pb-2">Interactions & Inputs</h3>
+                    
+                    <div class="bg-brand-50 p-10 rounded-[32px] h-full flex flex-col justify-center gap-8 border border-brand-100 relative overflow-hidden">
+                        <!-- Abstract shape -->
+                        <div class="absolute -right-20 -bottom-20 text-[200px] text-brand-200 opacity-50 z-0">
+                            <iconify-icon icon="lucide:croissant"></iconify-icon>
+                        </div>
+
+                        <div class="relative z-10 w-full max-w-md">
+                            <label class="font-ui text-sm font-semibold text-brand-900 mb-2 block">Assine nossa Newsletter</label>
+                            <div class="relative group">
+                                <input type="email" placeholder="seu@email.com" class="w-full bg-white px-6 py-4 rounded-full font-ui text-gray-700 outline-none border-2 border-transparent focus:border-brand-300 shadow-sm transition-all pr-32">
+                                <button class="absolute right-2 top-2 bottom-2 bg-brand-800 text-white px-6 rounded-full font-ui font-semibold text-sm hover:bg-brand-700 transition-colors">
+                                    Assinar
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10 w-full max-w-md">
+                            <p class="font-ui text-sm font-semibold text-brand-900 mb-4">Avisos Toast (Clique para testar)</p>
+                            <button onclick="showToast()" class="bg-white border border-gray-200 shadow-sm px-6 py-3 rounded-xl font-ui font-medium text-gray-700 hover:border-brand-400 hover:text-brand-600 transition-all flex items-center gap-2">
+                                <iconify-icon icon="lucide:bell"></iconify-icon>
+                                Disparar Notificação
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Out of the Box detail -->
+    <footer class="bg-brand-900 py-20 relative overflow-hidden">
+        <!-- Giant transparent lettering in footer -->
+        <div class="absolute inset-0 flex justify-center items-center overflow-hidden z-0 pointer-events-none opacity-20">
+            <span class="text-[250px] font-display text-transparent-outline-white whitespace-nowrap">
+                Copacabana
+            </span>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center text-center">
+            <h2 class="text-6xl font-display text-white mb-6">Venha nos visitar</h2>
+            <p class="font-ui text-brand-100 max-w-md mx-auto mb-10">
+                Criado como um Design System conceito, unindo a tradição de marcas reais com a vanguarda do web design.
+            </p>
+            <div class="flex gap-4">
+                <a href="#" class="w-12 h-12 rounded-full glass-dark flex justify-center items-center text-white hover:bg-white hover:text-brand-900 transition-colors">
+                    <iconify-icon icon="lucide:instagram" class="text-xl"></iconify-icon>
+                </a>
+                <a href="#" class="w-12 h-12 rounded-full glass-dark flex justify-center items-center text-white hover:bg-white hover:text-brand-900 transition-colors">
+                    <iconify-icon icon="lucide:facebook" class="text-xl"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[100] flex flex-col gap-3"></div>
+
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-sm', 'bg-white/80');
+                nav.classList.remove('glass');
+            } else {
+                nav.classList.remove('shadow-sm', 'bg-white/80');
+                nav.classList.add('glass');
+            }
+        });
+
+        // Toast Notification Logic
+        function showToast() {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            toast.className = 'bg-gray-900 text-white px-6 py-4 rounded-2xl shadow-2xl font-ui text-sm font-medium flex items-center gap-3 transform translate-y-10 opacity-0 transition-all duration-300';
+            toast.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center">
+                    <iconify-icon icon="lucide:check-circle" class="text-lg"></iconify-icon>
+                </div>
+                Design System Atualizado com Sucesso!
+            `;
+            
+            container.appendChild(toast);
+            
+            // Animate In
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            }, 10);
+
+            // Remove after 3s
+            setTimeout(() => {
+                toast.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

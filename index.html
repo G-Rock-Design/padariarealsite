@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!--
+    DADOS PENDENTES:
+    1. Número oficial do WhatsApp
+    2. Telefone
+    3. Link do cardápio
+    4. Perfil oficial do Instagram
+    5. Link do Google Maps
+    6. Horários de funcionamento
+    7. Horário do almoço
+    8. Dias e horários do happy hour
+    9. Formas de pagamento
+    10. História completa da padaria
+    11. Produtos, descrições e preços reais
+    12. Avaliações reais do Google
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padaria Real Primavera | Padaria em Jardim Primavera, Duque de Caxias</title>
+    <meta name="description" content="Café da manhã, almoço, pães, bolos, doces, lanches, encomendas e delivery na Padaria Real Primavera, em Jardim Primavera, Duque de Caxias.">
+    
+    <!-- Open Graph & Canonical -->
+    <meta property="og:title" content="Padaria Real Primavera | Padaria em Jardim Primavera, Duque de Caxias">
+    <meta property="og:description" content="Café da manhã, almoço, pães, bolos, doces, lanches, encomendas e delivery na Padaria Real Primavera, em Jardim Primavera, Duque de Caxias.">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="#">
+
+    <!-- Schema.org for Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Bakery",
+      "name": "Padaria Real Primavera",
+      "image": "ref/613028179_18206209966317150_7528608955892791486_n.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Primavera, 1220",
+        "addressLocality": "Jardim Primavera, Duque de Caxias",
+        "addressRegion": "RJ",
+        "addressCountry": "BR"
+      },
+      "slogan": "Bonito é ser Real."
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <!-- GSAP & Lenis via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Cormorant Garamond"', 'serif'],
+                        body: ['"Manrope"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#FBF6EC',  // cream
+                            100: '#F5E9D0',
+                            200: '#EAD4A8',
+                            300: '#DFBE80',
+                            400: '#D4A94F',  // gold
+                            500: '#C39A3E',
+                            600: '#A87F2E',
+                            700: '#6B4226',  // brown-medium
+                            800: '#4A3226',
+                            900: '#3D2317',  // brown-dark
+                        },
+                        surface: {
+                            light: '#FFFFFF',
+                            muted: '#FBF6EC',
+                            dark: '#3D2317'
+                        },
+                        textBase: '#4A3B32'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --real-brown-dark: #3D2317;
+            --real-gold: #D4A94F;
+            --real-brown-medium: #6B4226;
+            --real-cream: #FBF6EC;
+            --real-text: #4A3B32;
+            --real-white: #FFFFFF;
+            
+            --real-gold-soft: rgba(212, 169, 79, 0.16);
+            --real-gold-border: rgba(212, 169, 79, 0.38);
+            --real-brown-overlay: rgba(61, 35, 23, 0.78);
+            --real-shadow: rgba(61, 35, 23, 0.16);
+        }
+
+        body {
+            background-color: var(--real-cream);
+            color: var(--real-text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Utility Classes */
+        .text-transparent-outline {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--real-brown-dark);
+        }
+        .glass-dark {
+            background: rgba(61, 35, 23, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--real-gold-soft);
+        }
+        
+        .btn-primary {
+            background-color: var(--real-gold);
+            color: var(--real-brown-dark);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: var(--real-brown-medium);
+            color: var(--real-white);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--real-gold);
+            color: var(--real-brown-dark);
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: var(--real-gold-soft);
+        }
+
+        /* Section Title Styling */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--real-gold);
+        }
+
+        /* Filter Tabs */
+        .filter-btn.active {
+            background-color: var(--real-brown-dark);
+            color: var(--real-white);
+            border-color: var(--real-brown-dark);
+        }
+
+        /* Hide Scrollbar for carousels */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Custom Hover Cards */
+        .card-hover {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px var(--real-shadow);
+        }
+        
+        /* Floating animations for GSAP to target */
+        .reveal-up { opacity: 0; transform: translateY(40px); }
+        .reveal-scale { opacity: 0; transform: scale(0.95); }
+    </style>
+</head>
+<body class="font-body">
+
+    <!-- 1ª Dobra - Header -->
+    <header id="header" class="fixed top-0 w-full z-50 transition-all duration-300 bg-brand-900 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex-shrink-0 flex items-center gap-3">
+                    <img src="ref/613028179_18206209966317150_7528608955892791486_n.jpg" alt="Padaria Real Primavera" class="h-14 w-14 rounded-full shadow-md object-cover border border-brand-400/30" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span class="hidden lg:block font-display text-2xl text-brand-400">Real Primavera</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden lg:flex space-x-8 items-center font-body font-medium text-sm text-brand-50 tracking-wide uppercase">
+                    <a href="#hero" class="relative group py-1 text-brand-50/90 hover:text-white transition-colors">
+                        Início
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#momentos" class="relative group py-1 text-brand-50/90 hover:text-white transition-colors">
+                        Experiências
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#cardapio" class="relative group py-1 text-brand-50/90 hover:text-white transition-colors">
+                        Cardápio
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#encomendas" class="relative group py-1 text-brand-50/90 hover:text-white transition-colors">
+                        Encomendas
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#historia" class="relative group py-1 text-brand-50/90 hover:text-white transition-colors">
+                        História
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#localizacao" class="relative group py-1 text-brand-50/90 hover:text-white transition-colors">
+                        Localização
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </nav>
+
+                <!-- CTA & Mobile Toggle -->
+                <div class="flex items-center gap-4">
+                    <a href="#whatsapp" class="hidden md:flex btn-primary px-6 py-2.5 rounded-full font-bold text-sm items-center gap-2">
+                        <iconify-icon icon="lucide:message-circle" class="text-lg"></iconify-icon>
+                        Peça pelo WhatsApp
+                    </a>
+                    <button id="mobile-menu-btn" class="lg:hidden text-brand-400 text-3xl focus:outline-none" aria-label="Abrir menu" aria-expanded="false">
+                        <iconify-icon icon="lucide:menu"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-brand-900/95 backdrop-blur-md absolute top-20 left-0 w-full border-b border-brand-400/20" aria-hidden="true">
+            <div class="flex flex-col px-6 py-6 space-y-4 font-body text-brand-50 uppercase text-sm font-semibold">
+                <a href="#hero" class="mobile-link hover:text-brand-400">Início</a>
+                <a href="#momentos" class="mobile-link hover:text-brand-400">Experiências</a>
+                <a href="#cardapio" class="mobile-link hover:text-brand-400">Cardápio</a>
+                <a href="#encomendas" class="mobile-link hover:text-brand-400">Encomendas</a>
+                <a href="#historia" class="mobile-link hover:text-brand-400">Nossa História</a>
+                <a href="#localizacao" class="mobile-link hover:text-brand-400">Localização</a>
+                <a href="#whatsapp" class="mobile-link text-brand-400 flex items-center gap-2 mt-4">
+                    <iconify-icon icon="lucide:message-circle"></iconify-icon> Peça pelo WhatsApp
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1ª Dobra - Hero -->
+    <section id="hero" class="relative h-[100vh] min-h-[600px] max-h-[850px] pt-20 pb-8 flex items-center overflow-hidden">
+        <!-- Blobs decorativos sutis -->
+        <div class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-brand-200/40 rounded-full blur-[100px] -z-10 translate-x-1/3 -translate-y-1/3"></div>
+        <div class="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-brand-300/20 rounded-full blur-[80px] -z-10 -translate-x-1/3 translate-y-1/3"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full grid lg:grid-cols-2 gap-12 items-center">
+            
+            <!-- Left: Typography -->
+            <div class="relative z-10 hero-reveal-left">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-400/50 bg-white/50 text-brand-900 text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-6">
+                    <iconify-icon icon="lucide:crown" class="text-brand-400"></iconify-icon>
+                    Padaria • Confeitaria • Restaurante
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl lg:text-[4.5rem] leading-[1.05] font-display text-brand-900 mb-4">
+                    POR UMA VIDA <br>
+                    <span class="text-transparent-outline block mt-1 italic pr-2">MAIS</span>
+                    <span class="text-brand-400 block mt-1">SABOROSA.</span>
+                </h1>
+
+                <p class="text-lg textBase font-body mb-2 italic font-medium">Bonito é ser Real.</p>
+                
+                <p class="textBase font-body max-w-md mb-6 leading-relaxed opacity-90 text-sm md:text-base">
+                    Do pão quentinho ao almoço, dos doces às comemorações: sabores preparados para acompanhar todos os momentos do seu dia.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 mb-4">
+                    <a href="#whatsapp" class="btn-primary px-8 py-4 rounded-full font-bold text-sm flex justify-center items-center gap-2">
+                        <iconify-icon icon="lucide:message-circle" class="text-xl"></iconify-icon>
+                        PEDIR PELO WHATSAPP
+                    </a>
+                    <a href="#cardapio" class="btn-secondary px-8 py-4 rounded-full font-bold text-sm flex justify-center items-center gap-2 bg-white/40 backdrop-blur-sm">
+                        <iconify-icon icon="lucide:coffee" class="text-xl"></iconify-icon>
+                        VER CARDÁPIO
+                    </a>
+                </div>
+                
+                <p class="text-xs text-brand-700 font-semibold tracking-wide uppercase opacity-80">
+                    Café da manhã • Almoço • Encomendas • Delivery
+                </p>
+            </div>
+
+            <!-- Right: Visual Composition -->
+            <div class="relative h-[400px] lg:h-[500px] hidden lg:block hero-reveal-right">
+                <!-- Imagem Principal -->
+                <div class="absolute top-1/2 right-12 -translate-y-1/2 w-[85%] h-[90%] rounded-[40px] overflow-hidden shadow-2xl">
+                    <img src="ref/Captura%20de%20tela%202026-09-15%20210757.png" alt="Mesa farta padaria" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop'">
+                    <!-- Overlay shadow quente -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-brand-900/40 to-transparent mix-blend-multiply"></div>
+                </div>
+
+                <!-- Floating Card 1 -->
+                <div class="absolute top-16 left-0 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-brand-100 gs-float-1">
+                    <p class="font-display font-bold text-xl text-brand-900 leading-tight">PÃES FRESCOS</p>
+                    <p class="font-body text-xs text-brand-700 uppercase tracking-wide mt-1">Produção diária</p>
+                </div>
+
+                <!-- Floating Card 2 -->
+                <div class="absolute bottom-24 -left-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-brand-100 gs-float-2">
+                    <p class="font-display font-bold text-xl text-brand-900 leading-tight">ACEITAMOS ENCOMENDAS</p>
+                    <p class="font-body text-xs text-brand-700 uppercase tracking-wide mt-1">Bolos, tortas e celebrações</p>
+                </div>
+
+                <!-- Info Lateral Direita -->
+                <div class="absolute top-1/2 -right-8 -translate-y-1/2 flex flex-col items-center gap-6">
+                    <p class="writing-vertical font-body text-xs tracking-[0.2em] text-brand-700 uppercase" style="writing-mode: vertical-rl; transform: rotate(180deg);">
+                        Jardim Primavera
+                    </p>
+                    <div class="w-[1px] h-12 bg-brand-400/50"></div>
+                    <p class="writing-vertical font-display italic text-lg text-brand-900" style="writing-mode: vertical-rl; transform: rotate(180deg);">
+                        01 — Real Primavera
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2ª Dobra - Momentos Real -->
+    <section id="momentos" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="text-4xl md:text-5xl font-display text-brand-900 mb-4 section-title">UM SABOR PARA CADA MOMENTO</h2>
+                <p class="textBase font-body max-w-2xl mx-auto mt-4 text-lg">
+                    Da primeira refeição do dia ao encontro no fim da tarde, a Real Primavera está presente na rotina do bairro.
+                </p>
+            </div>
+
+            <!-- Mobile: Scroll Horizontal / Desktop: Grid -->
+            <div class="flex overflow-x-auto lg:grid lg:grid-cols-3 gap-6 hide-scrollbar pb-8 snap-x snap-mandatory">
+                
+                <!-- Card 1 -->
+                <a href="#cafe" class="snap-start min-w-[280px] lg:min-w-0 group bg-brand-50 rounded-[32px] overflow-hidden border border-brand-200 card-hover reveal-up">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="ref/Captura%20de%20tela%202026-09-15%20211330.png" alt="Café da manhã" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=500&auto=format&fit=crop'">
+                    </div>
+                    <div class="p-6">
+                        <iconify-icon icon="lucide:coffee" class="text-3xl text-brand-400 mb-3"></iconify-icon>
+                        <h3 class="font-display text-2xl font-bold text-brand-900 mb-2">Café da manhã</h3>
+                        <p class="font-body text-sm textBase">Café fresquinho, pães e sabores para começar bem.</p>
+                    </div>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="#almoco" class="snap-start min-w-[280px] lg:min-w-0 group bg-brand-50 rounded-[32px] overflow-hidden border border-brand-200 card-hover reveal-up" style="transition-delay: 0.1s">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="ref/Captura%20de%20tela%202026-09-15%20211511.png" alt="Almoço" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=500&auto=format&fit=crop'">
+                    </div>
+                    <div class="p-6">
+                        <iconify-icon icon="lucide:utensils-crossed" class="text-3xl text-brand-400 mb-3"></iconify-icon>
+                        <h3 class="font-display text-2xl font-bold text-brand-900 mb-2">Almoço</h3>
+                        <p class="font-body text-sm textBase">Pratos e refeições para deixar seu dia mais completo.</p>
+                    </div>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="#padaria" class="snap-start min-w-[280px] lg:min-w-0 group bg-brand-50 rounded-[32px] overflow-hidden border border-brand-200 card-hover reveal-up" style="transition-delay: 0.2s">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="ref/Captura%20de%20tela%202026-09-15%20211652.png" alt="Padaria" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=500&auto=format&fit=crop'">
+                    </div>
+                    <div class="p-6">
+                        <iconify-icon icon="lucide:croissant" class="text-3xl text-brand-400 mb-3"></iconify-icon>
+                        <h3 class="font-display text-2xl font-bold text-brand-900 mb-2">Padaria</h3>
+                        <p class="font-body text-sm textBase">Pães preparados para chegar fresquinhos à sua mesa.</p>
+                    </div>
+                </a>
+
+                <!-- Card 4 -->
+                <a href="#confeitaria" class="snap-start min-w-[280px] lg:min-w-0 group bg-brand-50 rounded-[32px] overflow-hidden border border-brand-200 card-hover reveal-up">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="ref/Captura%20de%20tela%202026-09-15%20212128.png" alt="Confeitaria" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=500&auto=format&fit=crop'">
+                    </div>
+                    <div class="p-6">
+                        <iconify-icon icon="lucide:cake" class="text-3xl text-brand-400 mb-3"></iconify-icon>
+                        <h3 class="font-display text-2xl font-bold text-brand-900 mb-2">Confeitaria</h3>
+                        <p class="font-body text-sm textBase">Bolos, tortas e doces que transformam momentos.</p>
+                    </div>
+                </a>
+
+                <!-- Card 5 -->
+                <a href="#lanches" class="snap-start min-w-[280px] lg:min-w-0 group bg-brand-50 rounded-[32px] overflow-hidden border border-brand-200 card-hover reveal-up" style="transition-delay: 0.1s">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="ref/Captura%20de%20tela%202026-09-15%20212746.png" alt="Lanches" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=500&auto=format&fit=crop'">
+                    </div>
+                    <div class="p-6">
+                        <iconify-icon icon="lucide:sandwich" class="text-3xl text-brand-400 mb-3"></iconify-icon>
+                        <h3 class="font-display text-2xl font-bold text-brand-900 mb-2">Lanches</h3>
+                        <p class="font-body text-sm textBase">Opções caprichadas para qualquer tamanho de fome.</p>
+                    </div>
+                </a>
+
+                <!-- Card 6 -->
+                <a href="#happy-hour" class="snap-start min-w-[280px] lg:min-w-0 group bg-brand-50 rounded-[32px] overflow-hidden border border-brand-200 card-hover reveal-up" style="transition-delay: 0.2s">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="ref/Captura%20de%20tela%202026-09-15%20210538.png" alt="Happy hour" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=500&auto=format&fit=crop'">
+                    </div>
+                    <div class="p-6">
+                        <iconify-icon icon="lucide:beer" class="text-3xl text-brand-400 mb-3"></iconify-icon>
+                        <h3 class="font-display text-2xl font-bold text-brand-900 mb-2">Happy hour</h3>
+                        <p class="font-body text-sm textBase">Bebidas, petiscos e bons encontros no fim do dia.</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3ª Dobra - Destaques do Cardápio (JS Filtros) -->
+    <section id="cardapio" class="py-24 bg-brand-50 relative border-t border-brand-200">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-12 reveal-up">
+                <h2 class="text-4xl md:text-5xl font-display text-brand-900 mb-4 section-title">O MELHOR DA REAL</h2>
+                <p class="textBase font-body text-lg mt-4">Escolha o momento, descubra os sabores e faça seu pedido.</p>
+            </div>
+
+            <!-- Filtros -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12 reveal-up">
+                <button class="filter-btn active px-5 py-2 rounded-full border border-brand-300 font-body text-sm font-semibold text-brand-900 transition-colors" data-filter="all">Todos</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-brand-300 font-body text-sm font-semibold text-brand-900 hover:bg-brand-100 transition-colors" data-filter="cafe">Café da manhã</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-brand-300 font-body text-sm font-semibold text-brand-900 hover:bg-brand-100 transition-colors" data-filter="almoco">Almoço</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-brand-300 font-body text-sm font-semibold text-brand-900 hover:bg-brand-100 transition-colors" data-filter="padaria">Padaria</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-brand-300 font-body text-sm font-semibold text-brand-900 hover:bg-brand-100 transition-colors" data-filter="confeitaria">Confeitaria</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-brand-300 font-body text-sm font-semibold text-brand-900 hover:bg-brand-100 transition-colors" data-filter="lanches">Lanches</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-brand-300 font-body text-sm font-semibold text-brand-900 hover:bg-brand-100 transition-colors" data-filter="bebidas">Bebidas</button>
+            </div>
+
+            <!-- Grade de Produtos -->
+            <div id="menu-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Item Exemplo -->
+                <div class="menu-item bg-white rounded-3xl p-4 shadow-sm hover:shadow-lg border border-brand-400/30 card-hover reveal-up" data-category="padaria">
+                    <div class="h-48 rounded-2xl overflow-hidden mb-4 relative">
+                        <img src="ref/fotos/Captura%20de%20tela%202026-09-15%20213517.png" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-white/90 backdrop-blur text-brand-900 font-body font-bold text-[10px] px-2 py-1 rounded-full uppercase tracking-wider">
+                            Pães Especiais
+                        </div>
+                    </div>
+                    <div class="px-2">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-display text-2xl font-bold text-brand-900 leading-tight">[NOME REAL DO PRODUTO]</h3>
+                            <span class="font-body font-bold text-brand-600 text-lg">[PREÇO]</span>
+                        </div>
+                        <p class="font-body text-sm textBase mb-6 line-clamp-2">[DESCRIÇÃO DO PRODUTO]</p>
+                        <a href="#whatsapp" class="w-full py-2.5 rounded-full border border-brand-400 text-brand-900 font-body font-semibold text-sm hover:bg-brand-400 hover:text-white transition-colors flex justify-center items-center gap-2">
+                            <iconify-icon icon="lucide:message-circle"></iconify-icon> Pedir pelo WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Duplicating items to simulate content -->
+                <div class="menu-item bg-white rounded-3xl p-4 shadow-sm border border-brand-400/30 card-hover reveal-up" data-category="confeitaria">
+                    <div class="h-48 rounded-2xl overflow-hidden mb-4 relative">
+                        <img src="ref/fotos/Captura%20de%20tela%202026-09-15%20213440.png" class="w-full h-full object-cover">
+                    </div>
+                    <div class="px-2">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-display text-2xl font-bold text-brand-900 leading-tight">[BOLO REAL]</h3>
+                            <span class="font-body font-bold text-brand-600 text-lg">[PREÇO]</span>
+                        </div>
+                        <p class="font-body text-sm textBase mb-6 line-clamp-2">[DESCRIÇÃO DO BOLO]</p>
+                        <a href="#whatsapp" class="w-full py-2.5 rounded-full border border-brand-400 text-brand-900 font-body font-semibold text-sm hover:bg-brand-400 hover:text-white transition-colors flex justify-center items-center gap-2">
+                            <iconify-icon icon="lucide:message-circle"></iconify-icon> Pedir pelo WhatsApp
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="menu-item bg-white rounded-3xl p-4 shadow-sm border border-brand-400/30 card-hover reveal-up" data-category="almoco">
+                    <div class="h-48 rounded-2xl overflow-hidden mb-4 relative">
+                        <img src="ref/fotos/Captura%20de%20tela%202026-09-15%20213354.png" class="w-full h-full object-cover">
+                    </div>
+                    <div class="px-2">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-display text-2xl font-bold text-brand-900 leading-tight">[PRATO EXECUTIVO]</h3>
+                            <span class="font-body font-bold text-brand-600 text-lg">[PREÇO]</span>
+                        </div>
+                        <p class="font-body text-sm textBase mb-6 line-clamp-2">[DESCRIÇÃO DO PRATO]</p>
+                        <a href="#whatsapp" class="w-full py-2.5 rounded-full border border-brand-400 text-brand-900 font-body font-semibold text-sm hover:bg-brand-400 hover:text-white transition-colors flex justify-center items-center gap-2">
+                            <iconify-icon icon="lucide:message-circle"></iconify-icon> Pedir pelo WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center reveal-up">
+                <a href="#cardapio-full" class="inline-flex items-center gap-2 px-8 py-4 rounded-full font-body font-bold text-sm bg-brand-900 text-white hover:bg-brand-800 transition-colors">
+                    VER CARDÁPIO COMPLETO
+                    <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4ª Dobra - Café da manhã e Padaria -->
+    <section id="cafe" class="py-24 bg-brand-100 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="order-2 lg:order-1 relative reveal-scale">
+                    <!-- Overlay Badge -->
+                    <div class="absolute -top-6 -left-6 lg:-left-10 bg-white p-4 rounded-full shadow-lg border border-brand-200 z-10 w-32 h-32 flex flex-col justify-center items-center text-center">
+                        <iconify-icon icon="lucide:sun" class="text-3xl text-brand-400 mb-1"></iconify-icon>
+                        <span class="font-display font-bold text-sm text-brand-900 leading-none">Produção<br>diária</span>
+                    </div>
+                    <div class="rounded-[40px] overflow-hidden shadow-2xl h-[500px]">
+                        <img src="ref/fotos/Captura%20de%20tela%202026-09-15%20213517.png" alt="Mesa de café da manhã" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=800&auto=format&fit=crop'">
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 reveal-up">
+                    <h2 class="text-4xl md:text-5xl font-display text-brand-900 mb-6 section-title">COMECE O DIA COM SABOR DE VERDADE</h2>
+                    <p class="font-body text-lg textBase mb-8">Café passado na hora, pães frescos e uma variedade preparada para tornar suas manhãs mais gostosas.</p>
+                    
+                    <ul class="grid grid-cols-2 gap-4 font-body font-medium text-brand-800 mb-10">
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check" class="text-brand-400"></iconify-icon> Pães frescos</li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check" class="text-brand-400"></iconify-icon> Café</li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check" class="text-brand-400"></iconify-icon> Salgados</li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check" class="text-brand-400"></iconify-icon> Sanduíches</li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check" class="text-brand-400"></iconify-icon> Bolos</li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check" class="text-brand-400"></iconify-icon> Opções para levar</li>
+                    </ul>
+
+                    <a href="#cardapio" class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-full font-body font-bold text-sm">
+                        VER OPÇÕES DE CAFÉ DA MANHÃ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5ª Dobra - Almoço -->
+    <section id="almoco" class="py-24 bg-brand-900 text-white relative">
+        <!-- Background element -->
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-brand-800/50 skew-x-12 -z-0 hidden lg:block"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-400/30 bg-white/10 text-brand-400 text-xs font-bold uppercase tracking-widest mb-6">
+                        Almoço
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-display mb-6 section-title text-white">ALMOÇO COM SABOR DE CASA</h2>
+                    <p class="font-body text-lg text-brand-100 mb-8 font-light">Refeições para quem precisa de praticidade sem abrir mão de uma comida bem preparada.</p>
+                    
+                    <div class="grid grid-cols-2 gap-y-4 gap-x-8 font-body font-medium text-white mb-10">
+                        <div class="flex items-center gap-3 border-b border-brand-700 pb-2"><iconify-icon icon="lucide:utensils" class="text-brand-400"></iconify-icon> Marmitas</div>
+                        <div class="flex items-center gap-3 border-b border-brand-700 pb-2"><iconify-icon icon="lucide:utensils" class="text-brand-400"></iconify-icon> Pratos Feitos</div>
+                        <div class="flex items-center gap-3 border-b border-brand-700 pb-2"><iconify-icon icon="lucide:utensils" class="text-brand-400"></iconify-icon> Pratos Executivos</div>
+                        <div class="flex items-center gap-3 border-b border-brand-700 pb-2"><iconify-icon icon="lucide:utensils" class="text-brand-400"></iconify-icon> Acompanhamentos</div>
+                        <div class="flex items-center gap-3 border-b border-brand-700 pb-2"><iconify-icon icon="lucide:glass-water" class="text-brand-400"></iconify-icon> Bebidas</div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-6">
+                        <a href="#whatsapp" class="btn-primary px-8 py-4 rounded-full font-body font-bold text-sm text-center w-full sm:w-auto">
+                            CONSULTAR CARDÁPIO DO DIA
+                        </a>
+                        <p class="font-body text-sm text-brand-200 flex items-center gap-2">
+                            <iconify-icon icon="lucide:clock" class="text-brand-400"></iconify-icon>
+                            [HORÁRIO DO ALMOÇO]
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="relative reveal-scale">
+                    <div class="rounded-[40px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] h-[550px] border border-brand-700">
+                        <img src="ref/fotos/Captura%20de%20tela%202026-09-15%20213354.png" alt="Prato de almoço" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6ª Dobra - Confeitaria e Encomendas -->
+    <section id="encomendas" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-up">
+                <h2 class="text-4xl md:text-5xl font-display text-brand-900 mb-6 section-title">CELEBRE COM UM TOQUE REAL</h2>
+                <p class="font-body text-lg textBase">Bolos, tortas, doces e encomendas preparados para tornar cada comemoração ainda mais especial.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-16">
+                <div class="h-64 rounded-3xl overflow-hidden reveal-up">
+                    <img src="ref/fotos/Captura%20de%20tela%202026-09-15%20210602.png" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=500&auto=format&fit=crop'">
+                </div>
+                <div class="h-64 rounded-3xl overflow-hidden mt-0 md:mt-8 reveal-up" style="transition-delay: 0.1s">
+                    <img src="ref/fotos/Captura%20de%20tela%202026-09-15%20213440.png" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=500&auto=format&fit=crop'">
+                </div>
+                <div class="h-64 rounded-3xl overflow-hidden reveal-up" style="transition-delay: 0.2s">
+                    <img src="ref/Captura%20de%20tela%202026-09-15%20212128.png" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?q=80&w=500&auto=format&fit=crop'">
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center bg-brand-50 rounded-[40px] p-8 md:p-12 border border-brand-200 reveal-up">
+                <div>
+                    <div class="flex gap-3 mb-6">
+                        <span class="bg-brand-900 text-white font-body text-[10px] font-bold uppercase px-3 py-1 rounded-full">Aceitamos encomendas</span>
+                        <span class="bg-brand-400 text-brand-900 font-body text-[10px] font-bold uppercase px-3 py-1 rounded-full">Personalize seu pedido</span>
+                    </div>
+                    <ul class="grid grid-cols-2 gap-4 font-body text-brand-800 font-medium mb-8">
+                        <li>• Aniversários</li>
+                        <li>• Dia das Mães</li>
+                        <li>• Confraternizações</li>
+                        <li>• Datas especiais</li>
+                        <li>• Bolos personalizados</li>
+                        <li>• Tortas e doces</li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-right">
+                    <a href="https://wa.me/SEUNUMEROAQUI?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20encomendas%20da%20Padaria%20Real%20Primavera." target="_blank" class="btn-primary px-8 py-4 rounded-full font-body font-bold text-sm inline-flex justify-center items-center gap-2 w-full md:w-auto shadow-lg hover:shadow-xl">
+                        <iconify-icon icon="lucide:gift" class="text-xl"></iconify-icon>
+                        FAZER UMA ENCOMENDA
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7ª Dobra - Lanches e Happy Hour -->
+    <section id="lanches" class="py-32 relative overflow-hidden bg-brand-900">
+        <!-- Imagem Ampla de fundo com overlay marrom para textura -->
+        <div class="absolute inset-0 z-0">
+            <img src="ref/fotos/Captura%20de%20tela%202026-09-15%20213326.png" class="w-full h-full object-cover opacity-30" onerror="this.src='https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1920&auto=format&fit=crop'">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-900 via-brand-900/90 to-transparent"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="max-w-2xl reveal-up">
+                <h2 class="text-4xl md:text-6xl font-display text-white mb-6 section-title">QUANDO A TARDE PEDE MAIS SABOR</h2>
+                <p class="font-body text-xl text-brand-100 mb-8 font-light">Lanches caprichados, bebidas e bons encontros para encerrar o dia do melhor jeito.</p>
+                
+                <div class="flex flex-wrap gap-4 font-body font-bold text-sm text-brand-300 mb-10">
+                    <span class="px-4 py-2 border border-brand-600 rounded-full bg-brand-900/50 backdrop-blur-sm">Lanches</span>
+                    <span class="px-4 py-2 border border-brand-600 rounded-full bg-brand-900/50 backdrop-blur-sm">Hambúrgueres</span>
+                    <span class="px-4 py-2 border border-brand-600 rounded-full bg-brand-900/50 backdrop-blur-sm">Porções</span>
+                    <span class="px-4 py-2 border border-brand-600 rounded-full bg-brand-900/50 backdrop-blur-sm">Bebidas & Drinks</span>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-6">
+                    <a href="#cardapio" class="btn-primary px-8 py-4 rounded-full font-body font-bold text-sm text-center w-full sm:w-auto">
+                        VER LANCHES E BEBIDAS
+                    </a>
+                    <p class="font-body text-sm text-brand-200 flex items-center gap-2 bg-brand-900/50 px-4 py-2 rounded-full backdrop-blur-sm">
+                        <iconify-icon icon="lucide:clock" class="text-brand-400"></iconify-icon>
+                        [DIAS E HORÁRIOS DO HAPPY HOUR]
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8ª Dobra - Nossa História -->
+    <section id="historia" class="py-24 bg-brand-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal-up">
+                    <h2 class="text-4xl md:text-5xl font-display text-brand-900 mb-8 section-title">BONITO É SER REAL</h2>
+                    <p class="font-body text-lg textBase leading-relaxed mb-6">
+                        A Padaria Real Primavera faz parte da rotina de Jardim Primavera, reunindo sabores, encontros e momentos especiais em um só lugar. Da primeira fornada do dia às encomendas para comemorações, cada detalhe é preparado para receber bem.
+                    </p>
+                    
+                    <!-- Bloco Reservado para história real -->
+                    <div class="p-6 bg-white border-l-4 border-brand-400 rounded-r-xl italic font-body textBase text-sm mb-10 shadow-sm opacity-80">
+                        [ESPAÇO RESERVADO PARA A HISTÓRIA REAL DA PADARIA: Fundadores, ano de fundação, evolução e relação com o bairro.]
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <iconify-icon icon="lucide:medal" class="text-4xl text-brand-400 mb-2"></iconify-icon>
+                            <p class="font-display font-bold text-xl text-brand-900">Qualidade</p>
+                        </div>
+                        <div class="text-center">
+                            <iconify-icon icon="lucide:layout-grid" class="text-4xl text-brand-400 mb-2"></iconify-icon>
+                            <p class="font-display font-bold text-xl text-brand-900">Variedade</p>
+                        </div>
+                        <div class="text-center">
+                            <iconify-icon icon="lucide:heart-handshake" class="text-4xl text-brand-400 mb-2"></iconify-icon>
+                            <p class="font-display font-bold text-xl text-brand-900">Proximidade</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative reveal-scale">
+                    <div class="rounded-[40px] overflow-hidden shadow-2xl h-[600px] border-8 border-white">
+                        <img src="ref/fotos/Captura%20de%20tela%202026-09-15%20210451.png" alt="Ambiente da padaria" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1555507036-ab1f40ce88fbf?q=80&w=800&auto=format&fit=crop'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9ª Dobra - Depoimentos -->
+    <section class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="text-4xl md:text-5xl font-display text-brand-900 mb-4 section-title">QUEM CONHECE, RECOMENDA</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Depoimento Placeholder -->
+                <div class="bg-brand-50 p-8 rounded-[32px] border border-brand-100 shadow-sm card-hover reveal-up">
+                    <div class="flex text-brand-400 text-xl mb-4">
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                    </div>
+                    <p class="font-body text-base textBase mb-6 italic">"[AVALIAÇÃO REAL DO GOOGLE]"</p>
+                    <div class="flex items-center gap-3 border-t border-brand-200 pt-4">
+                        <div class="w-10 h-10 rounded-full bg-brand-200 flex items-center justify-center font-display font-bold text-brand-800">C</div>
+                        <div>
+                            <p class="font-body font-bold text-brand-900 text-sm">[NOME DO CLIENTE]</p>
+                            <p class="font-body text-xs text-brand-600">[NOTA REAL]</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-brand-50 p-8 rounded-[32px] border border-brand-100 shadow-sm card-hover reveal-up" style="transition-delay: 0.1s">
+                    <div class="flex text-brand-400 text-xl mb-4">
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                    </div>
+                    <p class="font-body text-base textBase mb-6 italic">"[AVALIAÇÃO REAL DO GOOGLE]"</p>
+                    <div class="flex items-center gap-3 border-t border-brand-200 pt-4">
+                        <div class="w-10 h-10 rounded-full bg-brand-200 flex items-center justify-center font-display font-bold text-brand-800">C</div>
+                        <div>
+                            <p class="font-body font-bold text-brand-900 text-sm">[NOME DO CLIENTE]</p>
+                            <p class="font-body text-xs text-brand-600">[NOTA REAL]</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-brand-50 p-8 rounded-[32px] border border-brand-100 shadow-sm card-hover reveal-up" style="transition-delay: 0.2s">
+                    <div class="flex text-brand-400 text-xl mb-4">
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                        <iconify-icon icon="material-symbols:star-rounded"></iconify-icon>
+                    </div>
+                    <p class="font-body text-base textBase mb-6 italic">"[AVALIAÇÃO REAL DO GOOGLE]"</p>
+                    <div class="flex items-center gap-3 border-t border-brand-200 pt-4">
+                        <div class="w-10 h-10 rounded-full bg-brand-200 flex items-center justify-center font-display font-bold text-brand-800">C</div>
+                        <div>
+                            <p class="font-body font-bold text-brand-900 text-sm">[NOME DO CLIENTE]</p>
+                            <p class="font-body text-xs text-brand-600">[NOTA REAL]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center reveal-up">
+                <a href="#" target="_blank" class="btn-secondary inline-flex items-center gap-2 px-8 py-3 rounded-full font-body font-bold text-sm">
+                    VER AVALIAÇÕES NO GOOGLE
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10ª Dobra - Instagram -->
+    <section class="py-24 bg-brand-900 text-white text-center">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="mb-12 reveal-up">
+                <h2 class="text-4xl md:text-5xl font-display mb-4 section-title text-white">O DIA A DIA DA REAL</h2>
+                <p class="font-body text-brand-200 mt-4">Novidades, sabores e momentos que fazem parte da nossa rotina.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+                <!-- Insta Grid Placeholder Images -->
+                <a href="#" target="_blank" class="aspect-square relative group overflow-hidden rounded-2xl reveal-up" aria-label="Ver postagem no Instagram">
+                    <img src="ref/fotos/Captura%20de%20tela%202026-09-15%20210524.png" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-brand-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <iconify-icon icon="lucide:instagram" class="text-3xl text-brand-400"></iconify-icon>
+                    </div>
+                </a>
+                <a href="#" target="_blank" class="aspect-square relative group overflow-hidden rounded-2xl reveal-up" style="transition-delay:0.1s" aria-label="Ver postagem no Instagram">
+                    <img src="ref/fotos/Captura%20de%20tela%202026-09-15%20212448.png" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1555507036-ab1f40ce88fbf?q=80&w=400&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-brand-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <iconify-icon icon="lucide:instagram" class="text-3xl text-brand-400"></iconify-icon>
+                    </div>
+                </a>
+                <a href="#" target="_blank" class="aspect-square relative group overflow-hidden rounded-2xl reveal-up" style="transition-delay:0.2s" aria-label="Ver postagem no Instagram">
+                    <img src="ref/Captura%20de%20tela%202026-09-15%20211330.png" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-brand-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <iconify-icon icon="lucide:instagram" class="text-3xl text-brand-400"></iconify-icon>
+                    </div>
+                </a>
+                <a href="#" target="_blank" class="aspect-square relative group overflow-hidden rounded-2xl reveal-up hidden md:block" style="transition-delay:0.3s" aria-label="Ver postagem no Instagram">
+                    <img src="ref/Captura%20de%20tela%202026-09-15%20211511.png" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=400&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-brand-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <iconify-icon icon="lucide:instagram" class="text-3xl text-brand-400"></iconify-icon>
+                    </div>
+                </a>
+                <a href="#" target="_blank" class="aspect-square relative group overflow-hidden rounded-2xl reveal-up hidden lg:block" style="transition-delay:0.4s" aria-label="Ver postagem no Instagram">
+                    <img src="ref/Captura%20de%20tela%202026-09-15%20211652.png" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-brand-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <iconify-icon icon="lucide:instagram" class="text-3xl text-brand-400"></iconify-icon>
+                    </div>
+                </a>
+                <a href="#" target="_blank" class="aspect-square relative group overflow-hidden rounded-2xl reveal-up hidden lg:block" style="transition-delay:0.5s" aria-label="Ver postagem no Instagram">
+                    <img src="ref/Captura%20de%20tela%202026-09-15%20212746.png" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=400&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-brand-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <iconify-icon icon="lucide:instagram" class="text-3xl text-brand-400"></iconify-icon>
+                    </div>
+                </a>
+            </div>
+
+            <a href="#" target="_blank" class="btn-primary inline-flex items-center gap-2 px-8 py-3 rounded-full font-body font-bold text-sm reveal-up">
+                <iconify-icon icon="lucide:instagram" class="text-lg"></iconify-icon>
+                SIGA A PADARIA REAL PRIMAVERA
+            </a>
+        </div>
+    </section>
+
+    <!-- 11ª Dobra - Localização e Funcionamento -->
+    <section id="localizacao" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="text-4xl md:text-5xl font-display text-brand-900 mb-4 section-title">VENHA VIVER ESSA EXPERIÊNCIA</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 bg-brand-50 rounded-[40px] overflow-hidden border border-brand-200 shadow-xl reveal-up">
+                
+                <!-- Informações -->
+                <div class="p-8 md:p-12">
+                    <h3 class="font-display text-3xl text-brand-900 mb-2">Padaria Real Primavera</h3>
+                    <p class="font-body textBase mb-8 flex items-start gap-2">
+                        <iconify-icon icon="lucide:map-pin" class="text-brand-400 mt-1 flex-shrink-0"></iconify-icon>
+                        Av. Primavera, 1220 — Jardim Primavera, Duque de Caxias — RJ
+                    </p>
+
+                    <div class="space-y-6 mb-10">
+                        <div class="flex items-center gap-3 font-body textBase">
+                            <div class="w-10 h-10 rounded-full bg-brand-200 flex items-center justify-center text-brand-800">
+                                <iconify-icon icon="lucide:phone"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm text-brand-900">Telefone</p>
+                                <p class="text-sm">[TELEFONE PENDENTE]</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 font-body textBase">
+                            <div class="w-10 h-10 rounded-full bg-brand-200 flex items-center justify-center text-brand-800">
+                                <iconify-icon icon="lucide:clock"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm text-brand-900">Horário</p>
+                                <p class="text-sm text-brand-600 font-semibold italic">Consulte o funcionamento de hoje</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 font-body textBase">
+                            <div class="w-10 h-10 rounded-full bg-brand-200 flex items-center justify-center text-brand-800">
+                                <iconify-icon icon="lucide:truck"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm text-brand-900">Delivery & Pagamento</p>
+                                <p class="text-sm">[INFOS DE DELIVERY/PAGAMENTO]</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#" target="_blank" class="btn-primary w-full text-center px-6 py-3 rounded-full font-body font-bold text-sm flex justify-center items-center gap-2">
+                            <iconify-icon icon="lucide:map-pin"></iconify-icon> COMO CHEGAR
+                        </a>
+                        <a href="#whatsapp" class="btn-secondary w-full text-center px-6 py-3 rounded-full font-body font-bold text-sm flex justify-center items-center gap-2">
+                            <iconify-icon icon="lucide:message-circle"></iconify-icon> CHAMAR NO WHATSAPP
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Google Maps Embed -->
+                <div class="h-80 lg:h-auto w-full bg-gray-200">
+                    <!-- Substituir URL do src pelo link do embed oficial do maps -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14704.997230485642!2d-43.2751515!3d-22.6805828!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x990bfd4c22a7f5%3A0xc3f9829775f0a0d9!2sJardim%20Primavera%2C%20Duque%20de%20Caxias%20-%20RJ!5e0!3m2!1spt-BR!2sbr!4v1717618239019!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12ª Dobra - CTA Final -->
+    <section class="py-32 relative bg-brand-900 flex items-center justify-center text-center overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="assets/hero-real-primavera.webp" class="w-full h-full object-cover opacity-20" onerror="this.src='https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1920&auto=format&fit=crop'">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-900 via-brand-900/80 to-brand-900"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-6 reveal-up">
+            <h2 class="text-5xl md:text-7xl font-display text-brand-400 mb-6">SEU PRÓXIMO MOMENTO SABOROSO COMEÇA AQUI.</h2>
+            <p class="font-body text-xl text-white mb-10 font-light">Escolha seus favoritos, faça seu pedido ou venha nos visitar em Jardim Primavera.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+                <a href="#whatsapp" class="btn-primary px-8 py-4 rounded-full font-body font-bold text-sm flex justify-center items-center gap-2">
+                    <iconify-icon icon="lucide:message-circle" class="text-xl"></iconify-icon>
+                    PEDIR PELO WHATSAPP
+                </a>
+                <a href="#" class="btn-secondary text-white border-white hover:bg-white/10 px-8 py-4 rounded-full font-body font-bold text-sm flex justify-center items-center gap-2">
+                    <iconify-icon icon="lucide:map-pin" class="text-xl"></iconify-icon>
+                    COMO CHEGAR
+                </a>
+            </div>
+            <p class="font-display italic text-brand-400 text-2xl">Por uma vida mais saborosa.</p>
+        </div>
+    </section>
+
+    <!-- 13ª Dobra - Rodapé -->
+    <footer class="bg-brand-900 border-t border-brand-800 pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Branding -->
+                <div>
+                    <h2 class="font-display text-3xl text-brand-400 mb-2">Real Primavera</h2>
+                    <p class="font-body text-sm text-brand-200 mb-6 font-light">Bonito é ser Real.</p>
+                    <p class="font-body text-sm text-white opacity-80 mb-6">Tradição, qualidade e variedade acompanhando todos os momentos do seu dia no Jardim Primavera.</p>
+                    <div class="flex gap-4">
+                        <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full bg-brand-800 text-brand-400 flex items-center justify-center hover:bg-brand-400 hover:text-brand-900 transition-colors">
+                            <iconify-icon icon="lucide:instagram" class="text-xl"></iconify-icon>
+                        </a>
+                        <a href="#whatsapp" aria-label="WhatsApp" class="w-10 h-10 rounded-full bg-brand-800 text-brand-400 flex items-center justify-center hover:bg-brand-400 hover:text-brand-900 transition-colors">
+                            <iconify-icon icon="lucide:message-circle" class="text-xl"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Links Rápidos -->
+                <div>
+                    <h3 class="font-body font-bold text-white mb-6 uppercase tracking-wider text-sm">A Padaria</h3>
+                    <ul class="space-y-3 font-body text-sm text-brand-200">
+                        <li><a href="#hero" class="hover:text-brand-400 transition-colors">Início</a></li>
+                        <li><a href="#momentos" class="hover:text-brand-400 transition-colors">Momentos</a></li>
+                        <li><a href="#historia" class="hover:text-brand-400 transition-colors">Nossa História</a></li>
+                        <li><a href="#encomendas" class="hover:text-brand-400 transition-colors flex items-center gap-2">Encomendas <iconify-icon icon="lucide:arrow-right" class="text-[10px]"></iconify-icon></a></li>
+                        <li><a href="#localizacao" class="hover:text-brand-400 transition-colors">Localização</a></li>
+                    </ul>
+                </div>
+
+                <!-- Cardápio -->
+                <div>
+                    <h3 class="font-body font-bold text-white mb-6 uppercase tracking-wider text-sm">Cardápio</h3>
+                    <ul class="space-y-3 font-body text-sm text-brand-200">
+                        <li><a href="#cardapio" class="hover:text-brand-400 transition-colors">Café da manhã</a></li>
+                        <li><a href="#cardapio" class="hover:text-brand-400 transition-colors">Almoço</a></li>
+                        <li><a href="#cardapio" class="hover:text-brand-400 transition-colors">Padaria</a></li>
+                        <li><a href="#cardapio" class="hover:text-brand-400 transition-colors">Confeitaria</a></li>
+                        <li><a href="#cardapio" class="hover:text-brand-400 transition-colors">Lanches & Bebidas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contato -->
+                <div>
+                    <h3 class="font-body font-bold text-white mb-6 uppercase tracking-wider text-sm">Contato</h3>
+                    <ul class="space-y-4 font-body text-sm text-brand-200">
+                        <li class="flex items-start gap-3">
+                            <iconify-icon icon="lucide:map-pin" class="text-brand-400 mt-1"></iconify-icon>
+                            <span>Av. Primavera, 1220 <br>Jardim Primavera<br>Duque de Caxias — RJ</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <iconify-icon icon="lucide:phone" class="text-brand-400"></iconify-icon>
+                            <span>[TELEFONE]</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <iconify-icon icon="lucide:clock" class="text-brand-400 mt-1"></iconify-icon>
+                            <span>Consulte os horários de funcionamento</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="border-t border-brand-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="font-body text-xs text-brand-200/60">
+                    &copy; 2024 Padaria Real Primavera. Todos os direitos reservados.
+                </p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="font-body text-xs text-brand-200/60 hover:text-brand-400 transition-colors">Política de Privacidade</a>
+                    <button onclick="window.scrollTo(0,0)" class="w-8 h-8 rounded-full bg-brand-800 text-brand-400 flex items-center justify-center hover:bg-brand-400 hover:text-brand-900 transition-colors" aria-label="Voltar ao topo">
+                        <iconify-icon icon="lucide:arrow-up"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp FAB -->
+    <a href="#whatsapp" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_8px_24px_rgba(37,211,102,0.4)] hover:bg-[#1ebe57] transition-all duration-300 hover:scale-110 flex items-center gap-0 lg:gap-3 group focus:ring-4 focus:ring-[#25D366]/50 focus:outline-none" aria-label="Peça pelo WhatsApp">
+        <iconify-icon icon="lucide:message-circle" class="text-2xl"></iconify-icon>
+        <span class="hidden lg:block font-body font-bold text-sm w-0 overflow-hidden whitespace-nowrap group-hover:w-[130px] transition-all duration-300 ease-in-out">
+            Peça pelo WhatsApp
+        </span>
+    </a>
+
+    <!-- Lógica JavaScript (Interações e Scroll) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            // 1. Lenis Smooth Scroll Setup
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                direction: 'vertical',
+                gestureDirection: 'vertical',
+                smooth: true,
+                mouseMultiplier: 1,
+                smoothTouch: false,
+                touchMultiplier: 2,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            // Connect GSAP ScrollTrigger to Lenis
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // 2. Mobile Menu Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileBtn.addEventListener('click', () => {
+                const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+                mobileBtn.setAttribute('aria-expanded', !isExpanded);
+                if (!isExpanded) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileBtn.innerHTML = '<iconify-icon icon="lucide:x"></iconify-icon>';
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    mobileBtn.innerHTML = '<iconify-icon icon="lucide:menu"></iconify-icon>';
+                }
+            });
+
+            // Fechar menu mobile ao clicar num link
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileBtn.setAttribute('aria-expanded', 'false');
+                    mobileBtn.innerHTML = '<iconify-icon icon="lucide:menu"></iconify-icon>';
+                });
+            });
+
+            // 3. Header Styling on Scroll
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('bg-brand-900/90', 'backdrop-blur-md', 'shadow-md');
+                    header.classList.remove('bg-brand-900');
+                } else {
+                    header.classList.remove('bg-brand-900/90', 'backdrop-blur-md', 'shadow-md');
+                    header.classList.add('bg-brand-900');
+                }
+            });
+
+            // 4. GSAP Animations
+            // Otimização: Só animar se o usuário não tiver preferência por reduced motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            if (!prefersReducedMotion) {
+                // Hero Animation
+                const heroTl = gsap.timeline();
+                heroTl.from(".hero-reveal-left > *", {
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "power3.out",
+                    delay: 0.2
+                })
+                .from(".hero-reveal-right", {
+                    opacity: 0,
+                    scale: 0.95,
+                    duration: 1,
+                    ease: "power3.out"
+                }, "-=0.5")
+                .from(".gs-float-1", { y: -20, opacity: 0, duration: 0.8 }, "-=0.4")
+                .from(".gs-float-2", { y: 20, opacity: 0, duration: 0.8 }, "-=0.6");
+
+                // Parallax suave nos cards do hero
+                gsap.to(".gs-float-1", {
+                    y: 15,
+                    ease: "sine.inOut",
+                    repeat: -1,
+                    yoyo: true,
+                    duration: 2.5
+                });
+                gsap.to(".gs-float-2", {
+                    y: -15,
+                    ease: "sine.inOut",
+                    repeat: -1,
+                    yoyo: true,
+                    duration: 3
+                });
+
+                // Scroll Revelations (fade up standard)
+                gsap.utils.toArray('.reveal-up').forEach(element => {
+                    gsap.to(element, {
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 85%", // Trigger quando o topo do elemento atinge 85% da tela
+                        },
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
+                });
+
+                // Image Scales (reveal scale)
+                gsap.utils.toArray('.reveal-scale').forEach(element => {
+                    gsap.to(element, {
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 85%",
+                        },
+                        opacity: 1,
+                        scale: 1,
+                        duration: 1,
+                        ease: "power2.out"
+                    });
+                });
+            } else {
+                // Remove initial states se reduced motion ativado para não ficarem invisíveis
+                gsap.set(".reveal-up, .reveal-scale, .hero-reveal-left > *, .hero-reveal-right, .gs-float-1, .gs-float-2", { 
+                    opacity: 1, y: 0, scale: 1 
+                });
+            }
+
+            // 5. Cardápio JS Filters
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active de todos
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active');
+                        b.classList.replace('bg-brand-900', 'bg-transparent');
+                        b.classList.replace('text-white', 'text-brand-900');
+                    });
+                    
+                    // Add active no clicado
+                    btn.classList.add('active');
+                    
+                    const filter = btn.getAttribute('data-filter');
+                    
+                    menuItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                            // Restart animation for smooth appearance
+                            if(!prefersReducedMotion) {
+                                gsap.fromTo(item, {opacity: 0, scale: 0.95}, {opacity: 1, scale: 1, duration: 0.4});
+                            }
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
